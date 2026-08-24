@@ -364,6 +364,33 @@
 
   window.PiApp.modulos.push(iniciarModal);
 
+  // --- Menú móvil (abre/cierra y se cierra al tocar un enlace) -----------
+
+  function iniciarMenuMovil() {
+    var boton = document.getElementById('mobileMenuBtn');
+    var menu = document.getElementById('mobileMenu');
+    if (!boton || !menu) return;
+
+    boton.setAttribute('aria-expanded', 'false');
+    boton.setAttribute('aria-controls', 'mobileMenu');
+    boton.setAttribute('aria-label', 'Abrir menú de navegación');
+
+    boton.addEventListener('click', function () {
+      var abierto = !menu.classList.contains('hidden');
+      menu.classList.toggle('hidden', abierto);
+      boton.setAttribute('aria-expanded', abierto ? 'false' : 'true');
+    });
+
+    menu.querySelectorAll('a').forEach(function (enlace) {
+      enlace.addEventListener('click', function () {
+        menu.classList.add('hidden');
+        boton.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  window.PiApp.modulos.push(iniciarMenuMovil);
+
   // --- Arranque ----------------------------------------------------------
 
   document.addEventListener('DOMContentLoaded', function () {
