@@ -307,6 +307,63 @@
 
   window.PiApp.modulos.push(iniciarFaq);
 
+  // --- Modal de inscripción (formulario conectado a datos.js) -------------
+
+  function iniciarModal(datos) {
+    var modal = document.getElementById('enrollModal');
+    var formulario = document.getElementById('enrollForm');
+    if (!modal || !formulario) return;
+
+    var ultimoFoco = null;
+
+    function abrir(origen) {
+      document.getElementById('modalOrigin').value = origen || 'General';
+      ultimoFoco = document.activeElement;
+      modal.classList.remove('hidden');
+      document.getElementById('studentName').focus();
+    }
+
+    function cerrar() {
+      modal.classList.add('hidden');
+      if (ultimoFoco) ultimoFoco.focus();
+    }
+
+    modal.querySelectorAll('[data-cerrar-modal]').forEach(function (boton) {
+      boton.addEventListener('click', cerrar);
+    });
+
+    modal.addEventListener('click', function (evento) {
+      if (evento.target === modal) cerrar();
+    });
+
+    document.addEventListener('keydown', function (evento) {
+      if (evento.key === 'Escape' && !modal.classList.contains('hidden')) cerrar();
+    });
+
+    formulario.addEventListener('submit', function (evento) {
+      evento.preventDefault();
+      var turno = formulario.querySelector('input[name="turno"]:checked');
+
+      window.PiApp.abrirWhatsApp('inscripcion', {
+        nombre: document.getElementById('studentName').value.trim(),
+        telefono: document.getElementById('studentPhone').value.trim(),
+        modalidad: document.getElementById('studentTarget').value,
+        turno: turno ? turno.value : '',
+        origen: document.getElementById('modalOrigin').value,
+      });
+
+      cerrar();
+      formulario.reset();
+    });
+
+    var primerTurno = formulario.querySelector('input[name="turno"]');
+    if (primerTurno) primerTurno.checked = true;
+
+    window.abrirInscripcion = abrir;
+  }
+
+  window.PiApp.modulos.push(iniciarModal);
+
   // --- Arranque ----------------------------------------------------------
 
   document.addEventListener('DOMContentLoaded', function () {
