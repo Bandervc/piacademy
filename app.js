@@ -170,6 +170,21 @@
 
   window.PiApp.modulos.push(iniciarContador);
 
+  // --- Acento de color en las tarjetas de audiencia (morado / ámbar) ------
+
+  function iniciarAcentosAudiencia() {
+    document.querySelectorAll('#audiencia [data-acento="ambar"]').forEach(function (tarjeta) {
+      var blur = tarjeta.querySelector('.js-acento-blur');
+      var icono = tarjeta.querySelector('.js-acento-icono');
+      var etiqueta = tarjeta.querySelector('.js-acento-etiqueta');
+      if (blur) { blur.classList.remove('bg-purple-200/40'); blur.classList.add('bg-amber-200/40'); }
+      if (icono) { icono.classList.remove('bg-brand-purple', 'text-white'); icono.classList.add('bg-brand-amber', 'text-slate-950'); }
+      if (etiqueta) { etiqueta.classList.remove('text-brand-purple'); etiqueta.classList.add('text-brand-amber'); }
+    });
+  }
+
+  window.PiApp.modulos.push(iniciarAcentosAudiencia);
+
   // --- Pestañas del temario (cursos) --------------------------------------
 
   function iniciarPestanasCursos() {

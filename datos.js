@@ -72,11 +72,13 @@ window.DATOS = {
   ],
 
   // ═══ 7. A QUIÉN ESTÁ DIRIGIDO (las 2 tarjetas moradas) ═══
+  // acento: color de la tarjeta ("morado" o "ambar")
   audiencia: [
     {
       etiqueta: "Modalidad 01",
       titulo: "Postulantes PUCP",
       icono: "fa-solid fa-university",
+      acento: "morado",
       descripcion: "Dirigido a alumnos que buscan ingresar a la Pontificia Universidad Católica del Perú en sus diversas modalidades (Evaluación del Talento, ITS, POP, Bachillerato).",
       puntos: [
         "Dominio completo de <strong>Lectura Crítica</strong> y <strong>Redacción</strong> según las guías oficiales PUCP.",
@@ -90,6 +92,7 @@ window.DATOS = {
       etiqueta: "Modalidad 02",
       titulo: "Beca 18 (PRONABEC)",
       icono: "fa-solid fa-award",
+      acento: "ambar",
       descripcion: "Diseñado para estudiantes de secundaria y egresados que rendirán el <strong>Examen Nacional de Preselección (ENP)</strong> para asegurar su vacante becada integral.",
       puntos: [
         "Estrategias de resolución veloz para <strong>Razonamiento Matemático</strong>.",
