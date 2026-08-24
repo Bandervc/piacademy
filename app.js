@@ -215,6 +215,78 @@
 
   window.PiApp.modulos.push(iniciarPestanasCursos);
 
+  // --- Test de nivel (preguntas generadas desde datos.js) -----------------
+
+  function iniciarTest(datos) {
+    var contenedor = document.getElementById('preguntaTest');
+    if (!contenedor) return;
+
+    var preguntas = datos.test.preguntas;
+    var total = preguntas.length;
+    var paso = 0;
+    var aciertos = 0;
+
+    var progreso = document.getElementById('quizStepText');
+    var resultado = document.getElementById('quizResult');
+    var botonAsesoria = document.getElementById('btnAsesoriaTest');
+    var letras = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+    function pintarPregunta() {
+      var pregunta = preguntas[paso];
+      progreso.textContent = 'Pregunta ' + (paso + 1) + ' de ' + total;
+      contenedor.innerHTML = '';
+
+      var titulo = document.createElement('h3');
+      titulo.className = 'text-lg font-bold text-white mb-4';
+      titulo.textContent = (paso + 1) + '. ' + pregunta.enunciado;
+      contenedor.appendChild(titulo);
+
+      var lista = document.createElement('div');
+      lista.className = 'space-y-3';
+
+      pregunta.alternativas.forEach(function (texto, indice) {
+        var boton = document.createElement('button');
+        boton.type = 'button';
+        boton.className = 'w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm';
+        boton.textContent = letras[indice] + ') ' + texto;
+        boton.addEventListener('click', function () { responder(indice === pregunta.correcta); });
+        lista.appendChild(boton);
+      });
+
+      contenedor.appendChild(lista);
+    }
+
+    function responder(esCorrecta) {
+      if (esCorrecta) aciertos++;
+      paso++;
+      if (paso < total) { pintarPregunta(); return; }
+      terminar();
+    }
+
+    function terminar() {
+      contenedor.innerHTML = '';
+      progreso.textContent = 'Resultado final';
+      document.getElementById('correctCount').textContent = aciertos;
+      document.getElementById('totalCount').textContent = total;
+      botonAsesoria.setAttribute('href', N.urlWhatsApp(
+        datos.contacto.whatsapp,
+        window.PiApp.mensajeWhatsApp('testCompletado', { aciertos: aciertos, total: total })
+      ));
+      resultado.classList.remove('hidden');
+    }
+
+    document.getElementById('btnRepetirTest').addEventListener('click', function () {
+      paso = 0;
+      aciertos = 0;
+      resultado.classList.add('hidden');
+      pintarPregunta();
+    });
+
+    pintarPregunta();
+  }
+
+  window.PiApp.modulos.push(iniciarTest);
+
   // --- Arranque ----------------------------------------------------------
 
   document.addEventListener('DOMContentLoaded', function () {
