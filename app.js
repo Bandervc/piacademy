@@ -287,6 +287,26 @@
 
   window.PiApp.modulos.push(iniciarTest);
 
+  // --- Acordeón de preguntas frecuentes (FAQ generadas desde datos.js) ----
+
+  function iniciarFaq() {
+    document.querySelectorAll('.faq-boton').forEach(function (boton) {
+      boton.addEventListener('click', function () {
+        var tarjeta = boton.parentElement;
+        var respuesta = tarjeta.querySelector('.faq-respuesta');
+        var icono = tarjeta.querySelector('.faq-icono');
+        var abierta = !respuesta.classList.contains('hidden');
+
+        respuesta.classList.toggle('hidden', abierta);
+        boton.setAttribute('aria-expanded', abierta ? 'false' : 'true');
+        icono.classList.toggle('fa-plus', abierta);
+        icono.classList.toggle('fa-minus', !abierta);
+      });
+    });
+  }
+
+  window.PiApp.modulos.push(iniciarFaq);
+
   // --- Arranque ----------------------------------------------------------
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -303,6 +323,8 @@
     bindLista(datos, document);
     datos.contacto.enlaceTelefono = N.enlaceTelefono(datos.contacto.whatsapp);
     bindTexto(datos, document);
+    var ahorro = document.getElementById('ahorro');
+    if (ahorro) ahorro.textContent = datos.precio.normal - datos.precio.promocional;
     bindAtributo(datos, document);
     bindWhatsApp(datos, document);
 

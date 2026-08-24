@@ -496,15 +496,15 @@
 
                         <!-- Price display -->
                         <div class="mt-6 flex items-center justify-center gap-3">
-                            <span class="text-slate-400 line-through text-lg font-bold">S/ 380</span>
+                            <span class="text-slate-400 line-through text-lg font-bold">S/ <span data-dato="precio.normal"></span></span>
                             <div class="flex items-baseline gap-1">
                                 <span class="text-xs font-bold text-amber-400">S/</span>
-                                <span class="text-5xl font-black text-amber-400">220</span>
-                                <span class="text-xs text-slate-300 font-medium">/ pago único</span>
+                                <span class="text-5xl font-black text-amber-400" data-dato="precio.promocional"></span>
+                                <span class="text-xs text-slate-300 font-medium">/ <span data-dato="precio.nota"></span></span>
                             </div>
                         </div>
                         <p class="text-xs text-emerald-400 font-bold mt-2">
-                            <i class="fa-solid fa-tags"></i> ¡Ahorras S/ 160 inscribiéndote hoy!
+                            <i class="fa-solid fa-tags" aria-hidden="true"></i> ¡Ahorras S/ <span id="ahorro"></span> inscribiéndote hoy!
                         </p>
                     </div>
 
@@ -537,15 +537,13 @@
                         <h4 class="text-xs font-bold uppercase text-amber-400 mb-2">
                             <i class="fa-solid fa-clock mr-1"></i> Turnos Disponibles:
                         </h4>
-                        <div class="grid grid-cols-2 gap-3 text-xs text-slate-300">
+                        <div class="grid grid-cols-2 gap-3 text-xs text-slate-300" data-lista="horarios">
+                          <template>
                             <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
-                                <span class="font-bold text-white block">Turno Mañana:</span>
-                                <span>8:00 am - 1:00 pm</span>
+                              <span class="font-bold text-white block" data-campo="nombre"></span>
+                              <span data-campo="rango"></span>
                             </div>
-                            <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
-                                <span class="font-bold text-white block">Turno Tarde/Noche:</span>
-                                <span>4:00 pm - 8:30 pm</span>
-                            </div>
+                          </template>
                         </div>
                     </div>
 
@@ -556,7 +554,7 @@
                     </button>
 
                     <div class="mt-4 text-center">
-                        <a href="https://wa.me/51934894501?text=Hola%20PiAcademy,%20deseo%20consultar%20por%20los%20medios%20de%20pago%20(Yape/Plin/Transferencia)%20para%20el%20Ciclo%20Integral" target="_blank" class="text-xs text-slate-400 hover:text-amber-300 underline font-medium">
+                        <a data-wa="mediosDePago" class="text-xs text-slate-400 hover:text-amber-300 underline font-medium">
                             ¿Preguntas sobre Yape, Plin o transferencias bancarias? Escríbenos aquí.
                         </a>
                     </div>
@@ -566,7 +564,7 @@
     </section>
 
     <!-- Section: Student Testimonials -->
-    <section class="py-16 sm:py-24 bg-white">
+    <section class="py-16 sm:py-24 bg-white" data-si="testimonios.mostrar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="text-brand-purple font-bold text-xs tracking-widest uppercase bg-purple-100 px-3 py-1 rounded-full">
@@ -580,69 +578,24 @@
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
+            <div class="grid md:grid-cols-3 gap-8" data-lista="testimonios.items">
+              <template>
                 <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm relative flex flex-col justify-between">
+                  <div>
+                    <div class="flex text-amber-400 text-sm mb-3" aria-hidden="true">
+                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-700 text-sm italic mb-6" data-campo="texto"></p>
+                  </div>
+                  <div class="flex items-center gap-3 border-t border-slate-200 pt-4">
+                    <div class="w-10 h-10 bg-brand-purple text-white font-bold rounded-full flex items-center justify-center text-sm" data-campo="iniciales"></div>
                     <div>
-                        <div class="flex text-amber-400 text-sm mb-3">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-slate-700 text-sm italic mb-6">
-                            "Gracias a los trucos en Razonamiento Matemático y a las guías de Lectura Crítica logré mi ingreso a la PUCP a la primera. Las clases grabadas me ayudaron muchísimo a repasar."
-                        </p>
+                      <h4 class="font-bold text-slate-900 text-sm" data-campo="nombre"></h4>
+                      <span class="text-xs text-brand-purple font-semibold" data-campo="detalle"></span>
                     </div>
-                    <div class="flex items-center gap-3 border-t border-slate-200 pt-4">
-                        <div class="w-10 h-10 bg-brand-purple text-white font-bold rounded-full flex items-center justify-center text-sm">
-                            AR
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 text-sm">Andrea Ramírez</h4>
-                            <span class="text-xs text-brand-purple font-semibold">Ingresante PUCP - Ingeniería</span>
-                        </div>
-                    </div>
+                  </div>
                 </div>
-
-                <!-- Testimonial 2 -->
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm relative flex flex-col justify-between">
-                    <div>
-                        <div class="flex text-amber-400 text-sm mb-3">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-slate-700 text-sm italic mb-6">
-                            "Postulé al Examen Nacional de Preselección de Beca 18 con mucho miedo, pero en PiAcademy me dieron la seguridad y la velocidad para resolver cada pregunta. ¡Gané la Beca!"
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3 border-t border-slate-200 pt-4">
-                        <div class="w-10 h-10 bg-brand-amber text-slate-950 font-bold rounded-full flex items-center justify-center text-sm">
-                            MC
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 text-sm">Mateo Castillo</h4>
-                            <span class="text-xs text-amber-600 font-bold">Ganador Beca 18 PRONABEC</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Testimonial 3 -->
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm relative flex flex-col justify-between">
-                    <div>
-                        <div class="flex text-amber-400 text-sm mb-3">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-slate-700 text-sm italic mb-6">
-                            "Los simulacros semanales son idénticos al examen real. La atención por WhatsApp cuando tenía dudas de ejercicios siempre fue rápida y amable."
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3 border-t border-slate-200 pt-4">
-                        <div class="w-10 h-10 bg-brand-purple text-white font-bold rounded-full flex items-center justify-center text-sm">
-                            SV
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 text-sm">Sofia Vargas</h4>
-                            <span class="text-xs text-brand-purple font-semibold">Ingresante PUCP - Gestión</span>
-                        </div>
-                    </div>
-                </div>
+              </template>
             </div>
         </div>
     </section>
@@ -659,50 +612,16 @@
                 </h2>
             </div>
 
-            <div class="space-y-4">
-                <!-- FAQ Item 1 -->
+            <div class="space-y-4" data-lista="faq">
+              <template>
                 <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                    <button onclick="toggleFaq(1)" class="w-full text-left p-5 font-bold text-slate-900 flex justify-between items-center hover:text-brand-purple transition-colors">
-                        <span>¿Cómo es la modalidad de clases en el Ciclo Integral?</span>
-                        <i id="faq-icon-1" class="fa-solid fa-plus text-brand-purple"></i>
-                    </button>
-                    <div id="faq-ans-1" class="hidden px-5 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-3">
-                        Las clases son 100% en vivo a través de Zoom HD. Interactúas con los profesores en tiempo real. Además, todas las sesiones quedan grabadas y subidas a la plataforma virtual 24/7 para repasar cuando desees.
-                    </div>
+                  <button type="button" class="faq-boton w-full text-left p-5 font-bold text-slate-900 flex justify-between items-center hover:text-brand-purple transition-colors" aria-expanded="false">
+                    <span data-campo="pregunta"></span>
+                    <i class="faq-icono fa-solid fa-plus text-brand-purple" aria-hidden="true"></i>
+                  </button>
+                  <div class="faq-respuesta hidden px-5 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-3" data-campo="respuesta"></div>
                 </div>
-
-                <!-- FAQ Item 2 -->
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                    <button onclick="toggleFaq(2)" class="w-full text-left p-5 font-bold text-slate-900 flex justify-between items-center hover:text-brand-purple transition-colors">
-                        <span>¿El ciclo sirve tanto para PUCP como para Beca 18 al mismo tiempo?</span>
-                        <i id="faq-icon-2" class="fa-solid fa-plus text-brand-purple"></i>
-                    </button>
-                    <div id="faq-ans-2" class="hidden px-5 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-3">
-                        ¡Sí! El temario del Ciclo Integral abarca la intersección perfecta entre las preguntas del examen PUCP (Lectura Crítica, Redacción, Matemática) y la prueba ENP de Beca 18 (Razonamiento Lógico-Matemático y Verbal).
-                    </div>
-                </div>
-
-                <!-- FAQ Item 3 -->
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                    <button onclick="toggleFaq(3)" class="w-full text-left p-5 font-bold text-slate-900 flex justify-between items-center hover:text-brand-purple transition-colors">
-                        <span>¿Cuáles son los medios de pago disponibles?</span>
-                        <i id="faq-icon-3" class="fa-solid fa-plus text-brand-purple"></i>
-                    </button>
-                    <div id="faq-ans-3" class="hidden px-5 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-3">
-                        Aceptamos transferencias bancarias (BCP, Interbank, BBVA), Yape, Plin y tarjetas de débito/crédito. Escríbenos a nuestro WhatsApp <strong>+51 934894501</strong> para facilitarte las cuentas.
-                    </div>
-                </div>
-
-                <!-- FAQ Item 4 -->
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                    <button onclick="toggleFaq(4)" class="w-full text-left p-5 font-bold text-slate-900 flex justify-between items-center hover:text-brand-purple transition-colors">
-                        <span>¿Incluye materiales y simulacros?</span>
-                        <i id="faq-icon-4" class="fa-solid fa-plus text-brand-purple"></i>
-                    </button>
-                    <div id="faq-ans-4" class="hidden px-5 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-3">
-                        Sí, incluye todos los PDF digitales de teoría, listas de ejercicios, simulacros semanales calificados y sus respectivos solucionarios explicados.
-                    </div>
-                </div>
+              </template>
             </div>
         </div>
     </section>
