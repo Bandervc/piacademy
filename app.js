@@ -170,6 +170,36 @@
 
   window.PiApp.modulos.push(iniciarContador);
 
+  // --- Pestañas del temario (cursos) --------------------------------------
+
+  function iniciarPestanasCursos() {
+    var pestanas = Array.prototype.slice.call(document.querySelectorAll('.pestana-curso'));
+    var paneles = Array.prototype.slice.call(document.querySelectorAll('.panel-curso'));
+    if (!pestanas.length) return;
+
+    function activar(clave) {
+      pestanas.forEach(function (boton) {
+        var activa = boton.dataset.clave === clave;
+        boton.classList.toggle('bg-brand-purple', activa);
+        boton.classList.toggle('text-white', activa);
+        boton.classList.toggle('bg-slate-100', !activa);
+        boton.classList.toggle('text-slate-700', !activa);
+        boton.setAttribute('aria-selected', activa ? 'true' : 'false');
+      });
+      paneles.forEach(function (panel) {
+        panel.classList.toggle('hidden', panel.dataset.clave !== clave);
+      });
+    }
+
+    pestanas.forEach(function (boton) {
+      boton.addEventListener('click', function () { activar(boton.dataset.clave); });
+    });
+
+    activar(pestanas[0].dataset.clave);
+  }
+
+  window.PiApp.modulos.push(iniciarPestanasCursos);
+
   // --- Arranque ----------------------------------------------------------
 
   document.addEventListener('DOMContentLoaded', function () {
