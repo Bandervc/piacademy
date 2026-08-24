@@ -82,10 +82,9 @@
         <span class="inline-flex items-center bg-brand-amber text-slate-950 text-xs font-bold px-2.5 py-0.5 rounded-full uppercase">
             <i class="fa-solid fa-fire mr-1"></i> ¡Inicios Confirmados!
         </span>
-        <span>Ciclo Integral PUCP & Beca 18 — Vacantes Limitadas.</span>
-        <a href="https://wa.me/51934894501?text=Hola%20PiAcademy,%20deseo%20inscribirme%20al%20Ciclo%20Integral" target="_blank" class="underline text-amber-300 font-bold hover:text-white transition-colors">
-            ¡Reserva tu cupo con descuento aquí!
-        </a>
+        <span data-dato="promocion.avisoBanner"></span>
+        <a data-wa="bannerSuperior" class="underline text-amber-300 font-bold hover:text-white transition-colors"
+           data-dato="promocion.enlaceBanner"></a>
     </div>
 
     <!-- Navigation Header -->
@@ -98,8 +97,10 @@
                     <span class="text-white font-serif font-black text-2xl tracking-tighter">π</span>
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-xl md:text-2xl font-black text-brand-purple tracking-tight leading-none uppercase">PI ACADEMY</span>
-                    <span class="text-[10px] text-slate-500 tracking-wider font-semibold uppercase">Academia Virtual de Alto Rendimiento</span>
+                    <span class="text-xl md:text-2xl font-black text-brand-purple tracking-tight leading-none uppercase"
+                          data-dato="marca.nombre"></span>
+                    <span class="text-[10px] text-slate-500 tracking-wider font-semibold uppercase"
+                          data-dato="marca.lema"></span>
                 </div>
             </a>
 
@@ -115,8 +116,9 @@
 
             <!-- CTA Call & Social Button -->
             <div class="hidden sm:flex items-center gap-3">
-                <a href="tel:+51934894501" class="flex items-center gap-2 text-slate-700 hover:text-brand-purple font-semibold text-sm px-3 py-2">
-                    <i class="fa-solid fa-phone text-brand-purple"></i> +51 934894501
+                <a data-attr="href:contacto.enlaceTelefono" class="flex items-center gap-2 text-slate-700 hover:text-brand-purple font-semibold text-sm px-3 py-2">
+                    <i class="fa-solid fa-phone text-brand-purple" aria-hidden="true"></i>
+                    <span data-dato="contacto.telefonoVisible"></span>
                 </a>
                 <button onclick="openEnrollModal('General Header')" class="bg-brand-purple hover:bg-brand-darkPurple text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-purple-600/30 transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2">
                     <i class="fa-solid fa-graduation-cap"></i> Inscripción
@@ -138,8 +140,8 @@
             <a href="#inversion" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Inversión y Horarios</a>
             <a href="#faq" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Preguntas Frecuentes</a>
             <div class="pt-2 flex flex-col gap-2">
-                <a href="tel:+5193489450" class="flex items-center justify-center gap-2 bg-slate-100 text-slate-800 font-semibold py-2.5 rounded-xl text-sm">
-                    <i class="fa-solid fa-phone text-brand-purple"></i> Llamar al +51 934894501
+                <a data-attr="href:contacto.enlaceTelefono" class="flex items-center justify-center gap-2 bg-slate-100 text-slate-800 font-semibold py-2.5 rounded-xl text-sm">
+                    <i class="fa-solid fa-phone text-brand-purple" aria-hidden="true"></i> Llamar al <span data-dato="contacto.telefonoVisible"></span>
                 </a>
                 <button onclick="openEnrollModal('Mobile Header')" class="bg-brand-purple text-white font-bold py-3 rounded-xl text-center shadow-md">
                     ¡Inscribirme Ahora!
@@ -933,21 +935,19 @@
                         <div class="w-10 h-11 bg-gradient-to-br from-brand-purple to-brand-darkPurple rounded-lg flex items-center justify-center shadow-md">
                             <span class="text-white font-serif font-black text-xl">π</span>
                         </div>
-                        <span class="text-2xl font-black tracking-tight uppercase">PI ACADEMY</span>
+                        <span class="text-2xl font-black tracking-tight uppercase" data-dato="marca.nombre"></span>
                     </div>
-                    <p class="text-slate-400 text-sm leading-relaxed max-w-sm">
-                        Academia virtual de alto rendimiento especializada en la preparación exclusiva para postulantes a la Pontificia Universidad Católica del Perú (PUCP) y becarios Beca 18 (PRONABEC).
-                    </p>
+                    <p class="text-slate-400 text-sm leading-relaxed max-w-sm" data-dato="marca.descripcionPie"></p>
 
                     <!-- Contact Details -->
                     <div class="pt-2 space-y-2 text-sm text-slate-300 font-medium">
                         <p class="flex items-center gap-3">
-                            <i class="fa-solid fa-phone text-brand-amber"></i>
-                            <span>Teléfono / WhatsApp: <a href="tel:+51934894501" class="hover:text-amber-300 font-bold">+51 934894501</a></span>
+                            <i class="fa-solid fa-phone text-brand-amber" aria-hidden="true"></i>
+                            <span>Teléfono / WhatsApp: <a data-attr="href:contacto.enlaceTelefono" class="hover:text-amber-300 font-bold" data-dato="contacto.telefonoVisible"></a></span>
                         </p>
                         <p class="flex items-center gap-3">
-                            <i class="fa-solid fa-envelope text-brand-amber"></i>
-                            <span>Contacto: informe@piacademy.edu.pe</span>
+                            <i class="fa-solid fa-envelope text-brand-amber" aria-hidden="true"></i>
+                            <span>Contacto: <span data-dato="contacto.correo"></span></span>
                         </p>
                     </div>
                 </div>
@@ -974,28 +974,28 @@
                     <!-- Social Icons Row -->
                     <div class="flex items-center gap-3 pt-2">
                         <!-- Facebook -->
-                        <a href="https://facebook.com" target="_blank" title="Página de Facebook PiAcademy" class="w-11 h-11 bg-slate-800 hover:bg-blue-600 text-white rounded-xl flex items-center justify-center text-lg transition-colors shadow-md">
-                            <i class="fa-brands fa-facebook-f"></i>
+                        <a data-si="redes.facebook" data-attr="href:redes.facebook" target="_blank" rel="noopener" title="Facebook de PiAcademy" class="w-11 h-11 bg-slate-800 hover:bg-blue-600 text-white rounded-xl flex items-center justify-center text-lg transition-colors shadow-md">
+                            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
                         </a>
 
                         <!-- YouTube -->
-                        <a href="https://youtube.com" target="_blank" title="Canal de YouTube PiAcademy" class="w-11 h-11 bg-slate-800 hover:bg-red-600 text-white rounded-xl flex items-center justify-center text-lg transition-colors shadow-md">
-                            <i class="fa-brands fa-youtube"></i>
+                        <a data-si="redes.youtube" data-attr="href:redes.youtube" target="_blank" rel="noopener" title="YouTube de PiAcademy" class="w-11 h-11 bg-slate-800 hover:bg-red-600 text-white rounded-xl flex items-center justify-center text-lg transition-colors shadow-md">
+                            <i class="fa-brands fa-youtube" aria-hidden="true"></i>
                         </a>
 
                         <!-- TikTok -->
-                        <a href="https://tiktok.com" target="_blank" title="Cuenta de TikTok PiAcademy" class="w-11 h-11 bg-slate-800 hover:bg-slate-950 text-white rounded-xl flex items-center justify-center text-lg transition-colors shadow-md border border-slate-700">
-                            <i class="fa-brands fa-tiktok"></i>
+                        <a data-si="redes.tiktok" data-attr="href:redes.tiktok" target="_blank" rel="noopener" title="TikTok de PiAcademy" class="w-11 h-11 bg-slate-800 hover:bg-slate-950 text-white rounded-xl flex items-center justify-center text-lg transition-colors shadow-md border border-slate-700">
+                            <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
                         </a>
 
                         <!-- Instagram -->
-                        <a href="https://instagram.com" target="_blank" title="Cuenta de Instagram PiAcademy" class="w-11 h-11 bg-slate-800 hover:bg-pink-600 text-white rounded-xl flex items-center justify-center text-lg transition-colors shadow-md">
-                            <i class="fa-brands fa-instagram"></i>
+                        <a data-si="redes.instagram" data-attr="href:redes.instagram" target="_blank" rel="noopener" title="Instagram de PiAcademy" class="w-11 h-11 bg-slate-800 hover:bg-pink-600 text-white rounded-xl flex items-center justify-center text-lg transition-colors shadow-md">
+                            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
                         </a>
 
                         <!-- WhatsApp Direct -->
-                        <a href="https://wa.me/51934894501?text=Hola%20PiAcademy,%20vengo%20desde%20la%20pagina%20web" target="_blank" title="WhatsApp PiAcademy" class="w-11 h-11 bg-slate-800 hover:bg-emerald-600 text-white rounded-xl flex items-center justify-center text-lg transition-colors shadow-md">
-                            <i class="fa-brands fa-whatsapp"></i>
+                        <a data-wa="footer" title="WhatsApp PiAcademy" class="w-11 h-11 bg-slate-800 hover:bg-emerald-600 text-white rounded-xl flex items-center justify-center text-lg transition-colors shadow-md">
+                            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
@@ -1004,17 +1004,16 @@
 
             <!-- Copyright Notice -->
             <div class="pt-8 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p>© 2026 PiAcademy Virtual. Todos los derechos reservados.</p>
+                <p>© <span data-dato="marca.anioCopyright"></span> <span data-dato="marca.nombre"></span> Virtual. Todos los derechos reservados.</p>
                 <p class="text-slate-600">Preparación de alto nivel para el Examen de Admisión PUCP y Preselección Beca 18.</p>
             </div>
         </div>
     </footer>
 
     <!-- Floating Sticky WhatsApp Button -->
-    <a href="https://wa.me/51934894501?text=Hola%20PiAcademy,%20quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20Ciclo%20Integral%20PUCP%20y%20Beca%2018" 
-       target="_blank" 
+    <a data-wa="botonFlotante"
        class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 flex items-center gap-3 border-2 border-white">
-        <i class="fa-brands fa-whatsapp text-3xl"></i>
+        <i class="fa-brands fa-whatsapp text-3xl" aria-hidden="true"></i>
         <span class="hidden md:inline font-bold text-sm pr-2">¿Consultas? Escríbenos</span>
     </a>
 
@@ -1078,124 +1077,8 @@
         </div>
     </div>
 
-    <!-- JavaScript Logic -->
-    <script>
-        // Mobile Navigation Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Subject Tabs Navigation
-        function switchTab(tabKey) {
-            // Hide all content blocks
-            document.querySelectorAll('.subject-content').forEach(el => el.classList.add('hidden'));
-            // Reset all tab button styles
-            document.querySelectorAll('.subject-tab-btn').forEach(btn => {
-                btn.classList.remove('bg-brand-purple', 'text-white', 'active');
-                btn.classList.add('bg-slate-100', 'text-slate-700');
-            });
-
-            // Show selected content
-            document.getElementById(`content-${tabKey}`).classList.remove('hidden');
-            // Active current tab button
-            const activeBtn = document.getElementById(`tab-${tabKey}`);
-            activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
-            activeBtn.classList.add('bg-brand-purple', 'text-white', 'active');
-        }
-
-        // FAQ Toggle
-        function toggleFaq(index) {
-            const ans = document.getElementById(`faq-ans-${index}`);
-            const icon = document.getElementById(`faq-icon-${index}`);
-
-            if (ans.classList.contains('hidden')) {
-                ans.classList.remove('hidden');
-                icon.classList.remove('fa-plus');
-                icon.classList.add('fa-minus');
-            } else {
-                ans.classList.add('hidden');
-                icon.classList.remove('fa-minus');
-                icon.classList.add('fa-plus');
-            }
-        }
-
-        // Interactive Diagnostic Quiz Handler
-        let currentStep = 1;
-        let correctAnswers = 0;
-
-        function answerQuiz(step, isCorrect) {
-            if (isCorrect) correctAnswers++;
-
-            document.getElementById(`q${step}`).classList.add('hidden');
-            
-            if (step < 3) {
-                const nextStep = step + 1;
-                document.getElementById(`q${nextStep}`).classList.remove('hidden');
-                document.getElementById('quizStepText').innerText = `Pregunta ${nextStep} de 3`;
-            } else {
-                document.getElementById('quizStepText').innerText = 'Resultado Final';
-                document.getElementById('quizResult').classList.remove('hidden');
-                document.getElementById('correctCount').innerText = correctAnswers;
-            }
-        }
-
-        // Enrollment Modal Controls
-        function openEnrollModal(origin) {
-            document.getElementById('modalOrigin').value = origin;
-            document.getElementById('enrollModal').classList.remove('hidden');
-        }
-
-        function closeEnrollModal() {
-            document.getElementById('enrollModal').classList.add('hidden');
-        }
-
-        // Handle Form Submission -> WhatsApp Link
-        function submitEnrollForm(event) {
-            event.preventDefault();
-            const name = document.getElementById('studentName').value;
-            const phone = document.getElementById('studentPhone').value;
-            const target = document.getElementById('studentTarget').value;
-            const origin = document.getElementById('modalOrigin').value;
-            const turno = document.querySelector('input[name="turno"]:checked').value;
-
-            const message = `Hola PiAcademy (+51 934894501), deseo inscribirme al *Ciclo Integral*.
-            
-*Mis Datos:*
-• Nombre: ${name}
-• Teléfono: ${phone}
-• Modalidad: ${target}
-• Turno deseado: ${turno}
-• Origen: ${origin}`;
-
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/51934894501?text=${encodedMessage}`;
-
-            window.open(whatsappUrl, '_blank');
-            closeEnrollModal();
-        }
-
-        // Countdown Timer
-        let totalSeconds = (3 * 24 * 3600) + (14 * 3600) + (28 * 60) + 45;
-
-        function updateCountdown() {
-            if (totalSeconds <= 0) return;
-            totalSeconds--;
-
-            const days = Math.floor(totalSeconds / (3600 * 24));
-            const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-            const minutes = Math.floor((totalSeconds % 3600) / 60);
-            const seconds = Math.floor(totalSeconds % 60);
-
-            document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
-            document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
-            document.getElementById('cd-mins').innerText = String(minutes).padStart(2, '0');
-            document.getElementById('cd-secs').innerText = String(seconds).padStart(2, '0');
-        }
-
-        setInterval(updateCountdown, 1000);
-    </script>
+    <script src="nucleo.js"></script>
+    <script src="datos.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
