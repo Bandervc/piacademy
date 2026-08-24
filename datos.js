@@ -35,7 +35,6 @@ window.DATOS = {
     heroConsulta: "Hola PiAcademy 👋 Estoy interesado(a) en el Ciclo Integral. ¿Me pueden enviar el prospecto y los horarios disponibles?",
     interesPUCP: "Hola PiAcademy 👋 Quiero postular a la PUCP. ¿Cómo es la preparación del Ciclo Integral y cuándo inicia el próximo grupo?",
     interesBeca18: "Hola PiAcademy 👋 Voy a rendir el Examen Nacional de Preselección de Beca 18. ¿Cómo me prepara el Ciclo Integral?",
-    planPrecio: "Hola PiAcademy 👋 Quiero inscribirme al Ciclo Integral. ¿Cuál es el precio vigente y cómo hago el pago?",
     mediosDePago: "Hola PiAcademy 👋 ¿Qué medios de pago aceptan para el Ciclo Integral? (Yape, Plin o transferencia)",
     // {aciertos} y {total} se reemplazan solos con el puntaje del alumno.
     testCompletado: "Hola PiAcademy 👋 Acabo de hacer el test de nivel de su página y obtuve {aciertos} de {total}. ¿Me ayudan a saber qué debo reforzar?",

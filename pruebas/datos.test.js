@@ -26,7 +26,7 @@ test('estan todas las claves de primer nivel', () => {
 
 test('cada mensaje de whatsapp existe y no esta vacio', () => {
   const esperados = ['bannerSuperior', 'heroConsulta', 'interesPUCP', 'interesBeca18',
-    'planPrecio', 'mediosDePago', 'testCompletado', 'botonFlotante', 'footer', 'inscripcion'];
+    'mediosDePago', 'testCompletado', 'botonFlotante', 'footer', 'inscripcion'];
   esperados.forEach((clave) => {
     assert.ok(D.mensajes[clave], `falta el mensaje "${clave}"`);
     assert.ok(D.mensajes[clave].trim().length > 10, `el mensaje "${clave}" es demasiado corto`);
