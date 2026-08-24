@@ -53,6 +53,7 @@ window.DATOS = {
     // Cuando llegue a cero, el contador desaparece solo.
     fechaLimite: "2026-09-15T23:59",
     textoContador: "El descuento especial vence en:",
+    mensajeVencido: "¡La promoción cerró! Escríbenos por WhatsApp para consultar el próximo grupo.",
     avisoBanner: "Ciclo Integral PUCP & Beca 18 — Vacantes Limitadas.",
     enlaceBanner: "¡Reserva tu cupo con descuento aquí!",
   },

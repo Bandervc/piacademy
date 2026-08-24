@@ -197,7 +197,7 @@
                             <span>INSCRIBIRME AL CICLO INTEGRAL</span>
                         </button>
 
-                        <a href="https://wa.me/51934894501?text=Hola%20PiAcademy,%20quisiera%20recibir%20el%20prospecto%20del%20Ciclo%20Integral%20PUCP%20y%20Beca%2018" target="_blank" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base px-6 py-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-3">
+                        <a data-wa="heroConsulta" target="_blank" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base px-6 py-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-3">
                             <i class="fa-brands fa-whatsapp text-xl"></i>
                             <span>Consultar por WhatsApp</span>
                         </a>
@@ -206,7 +206,9 @@
                     <!-- Direct Phone Info -->
                     <div class="text-xs text-slate-300 flex items-center justify-center lg:justify-start gap-2 pt-1">
                         <i class="fa-solid fa-shield-halved text-amber-400"></i>
-                        <span>Asesores disponibles hoy. Llámanos directo al: <strong class="text-white">+51 93489450</strong></span>
+                        <span>Asesores disponibles hoy. Llámanos directo al:
+                          <strong class="text-white" data-dato="contacto.telefonoVisible"></strong>
+                        </span>
                     </div>
                 </div>
 
@@ -224,9 +226,9 @@
                         </div>
 
                         <!-- Live Countdown Timer -->
-                        <div class="my-6 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <div class="my-6 bg-slate-50 p-4 rounded-2xl border border-slate-200" id="bloqueContador">
                             <p class="text-xs font-bold text-slate-500 uppercase text-center mb-3">
-                                <i class="fa-regular fa-clock text-brand-purple mr-1"></i> El descuento especial vence en:
+                                <i class="fa-regular fa-clock text-brand-purple mr-1"></i> <span data-dato="promocion.textoContador"></span>
                             </p>
                             <div class="grid grid-cols-4 gap-2 text-center" id="countdown">
                                 <div class="bg-white p-2 rounded-xl shadow-sm border border-slate-100">
@@ -247,6 +249,7 @@
                                 </div>
                             </div>
                         </div>
+                        <p id="contadorVencido" class="hidden my-6 text-center text-sm font-bold text-brand-purple bg-purple-50 border border-purple-200 p-4 rounded-2xl"></p>
 
                         <!-- Highlights List -->
                         <ul class="space-y-3 text-sm text-slate-700 font-medium mb-6">

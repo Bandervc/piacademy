@@ -131,6 +131,45 @@
     modulos: [],
   };
 
+  // --- Cuenta regresiva real ----------------------------------------------
+
+  function iniciarContador(datos) {
+    var bloque = document.getElementById('bloqueContador');
+    var vencido = document.getElementById('contadorVencido');
+    if (!bloque) return;
+
+    if (!datos.promocion.mostrarContador) { bloque.remove(); return; }
+
+    var campos = {
+      dias: document.getElementById('cd-days'),
+      horas: document.getElementById('cd-hours'),
+      minutos: document.getElementById('cd-mins'),
+      segundos: document.getElementById('cd-secs'),
+    };
+
+    function terminar() {
+      bloque.remove();
+      if (vencido) {
+        vencido.textContent = datos.promocion.mensajeVencido;
+        vencido.classList.remove('hidden');
+      }
+    }
+
+    function actualizar() {
+      var t = N.tiempoRestante(datos.promocion.fechaLimite, new Date());
+      if (t.vencido) { clearInterval(temporizador); terminar(); return; }
+      campos.dias.textContent = N.dosDigitos(t.dias);
+      campos.horas.textContent = N.dosDigitos(t.horas);
+      campos.minutos.textContent = N.dosDigitos(t.minutos);
+      campos.segundos.textContent = N.dosDigitos(t.segundos);
+    }
+
+    actualizar();
+    var temporizador = setInterval(actualizar, 1000);
+  }
+
+  window.PiApp.modulos.push(iniciarContador);
+
   // --- Arranque ----------------------------------------------------------
 
   document.addEventListener('DOMContentLoaded', function () {
