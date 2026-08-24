@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiAcademy | Ciclo Integral PUCP & Beca 18</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            purple: '#5B21B6',
+                            darkPurple: '#4C1D95',
+                            navy: '#0F172A',
+                            lightGray: '#F3F4F6',
+                            amber: '#F59E0B',
+                            amberHover: '#D97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FAFAFA;
+            color: #0F172A;
+        }
+        .text-extra-bold {
+            font-weight: 800;
+        }
+        .text-medium {
+            font-weight: 500;
+        }
+        .gradient-purple-bg {
+            background: linear-gradient(135deg, #5B21B6 0%, #4C1D95 100%);
+        }
+        .gradient-accent-bg {
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .badge-hexagon {
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .pulse-subtle {
+            animation: pulseSubtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulseSubtle {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.03); opacity: 0.95; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased selection:bg-brand-amber selection:text-white">
+
+    <!-- Announcement Top Banner -->
+    <div class="bg-brand-navy text-white text-xs md:text-sm py-2 px-4 text-center font-medium flex flex-wrap items-center justify-center gap-2 border-b border-purple-900/40">
+        <span class="inline-flex items-center bg-brand-amber text-slate-950 text-xs font-bold px-2.5 py-0.5 rounded-full uppercase">
+            <i class="fa-solid fa-fire mr-1"></i> ¡Inicios Confirmados!
+        </span>
+        <span>Ciclo Integral PUCP & Beca 18 — Vacantes Limitadas.</span>
+        <a href="https://wa.me/51934894501?text=Hola%20PiAcademy,%20deseo%20inscribirme%20al%20Ciclo%20Integral" target="_blank" class="underline text-amber-300 font-bold hover:text-white transition-colors">
+            ¡Reserva tu cupo con descuento aquí!
+        </a>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <!-- Hexagon Logo Icon -->
+                <div class="w-11 h-12 bg-gradient-to-br from-brand-purple to-brand-darkPurple rounded-lg flex items-center justify-center shadow-md shadow-purple-900/20 transition-transform group-hover:scale-105">
+                    <span class="text-white font-serif font-black text-2xl tracking-tighter">π</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl md:text-2xl font-black text-brand-purple tracking-tight leading-none uppercase">PI ACADEMY</span>
+                    <span class="text-[10px] text-slate-500 tracking-wider font-semibold uppercase">Academia Virtual de Alto Rendimiento</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-slate-700 text-sm">
+                <a href="#beneficios" class="hover:text-brand-purple transition-colors">¿Por qué PiAcademy?</a>
+                <a href="#audiencia" class="hover:text-brand-purple transition-colors">Dirigido A</a>
+                <a href="#temario" class="hover:text-brand-purple transition-colors">Cursos</a>
+                <a href="#diagnostico" class="hover:text-brand-purple transition-colors">Test de Nivel</a>
+                <a href="#inversion" class="hover:text-brand-purple transition-colors">Inversión</a>
+                <a href="#faq" class="hover:text-brand-purple transition-colors">Preguntas</a>
+            </nav>
+
+            <!-- CTA Call & Social Button -->
+            <div class="hidden sm:flex items-center gap-3">
+                <a href="tel:+51934894501" class="flex items-center gap-2 text-slate-700 hover:text-brand-purple font-semibold text-sm px-3 py-2">
+                    <i class="fa-solid fa-phone text-brand-purple"></i> +51 934894501
+                </a>
+                <button onclick="openEnrollModal('General Header')" class="bg-brand-purple hover:bg-brand-darkPurple text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-purple-600/30 transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap"></i> Inscripción
+                </button>
+            </div>
+
+            <!-- Mobile menu button -->
+            <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-700 hover:text-brand-purple focus:outline-none">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3">
+            <a href="#beneficios" class="block py-2 text-slate-700 font-medium border-b border-slate-100">¿Por qué PiAcademy?</a>
+            <a href="#audiencia" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Dirigido A (PUCP & Beca 18)</a>
+            <a href="#temario" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Plan de Cursos</a>
+            <a href="#diagnostico" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Test Diagnóstico</a>
+            <a href="#inversion" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Inversión y Horarios</a>
+            <a href="#faq" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Preguntas Frecuentes</a>
+            <div class="pt-2 flex flex-col gap-2">
+                <a href="tel:+5193489450" class="flex items-center justify-center gap-2 bg-slate-100 text-slate-800 font-semibold py-2.5 rounded-xl text-sm">
+                    <i class="fa-solid fa-phone text-brand-purple"></i> Llamar al +51 934894501
+                </a>
+                <button onclick="openEnrollModal('Mobile Header')" class="bg-brand-purple text-white font-bold py-3 rounded-xl text-center shadow-md">
+                    ¡Inscribirme Ahora!
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden gradient-purple-bg text-white pt-12 pb-20 lg:pt-20 lg:pb-28">
+        <!-- Background decorative elements -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Column Text Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold text-amber-300">
+                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                        Aprende con especialistas en ingreso directo
+                    </div>
+
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight uppercase">
+                        Asegura tu Ingreso a la <span class="text-amber-400 underline decoration-amber-400/50">PUCP</span> y tu Beca en <span class="text-amber-400 underline decoration-amber-400/50">Beca 18</span>
+                    </h1>
+
+                    <p class="text-slate-200 text-base sm:text-lg font-normal max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Prepara tu camino al éxito con nuestro exclusivo <strong class="text-white font-bold">Ciclo Integral</strong>. La metodología virtual más sólida de Perú con clases en vivo, simulacros tipo examen real y acompañamiento personalizado continuo.
+                    </p>
+
+                    <!-- Key Badges -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 text-xs sm:text-sm font-medium">
+                        <div class="bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/10 flex items-center gap-2">
+                            <i class="fa-solid fa-video text-amber-400 text-lg"></i>
+                            <span>Clases En Vivo + Grabadas 24/7</span>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/10 flex items-center gap-2">
+                            <i class="fa-solid fa-file-pen text-amber-400 text-lg"></i>
+                            <span>Simulacros Semanales con Calificación</span>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/10 flex items-center gap-2 col-span-2 sm:col-span-1">
+                            <i class="fa-solid fa-user-graduate text-amber-400 text-lg"></i>
+                            <span>Exclusivo PUCP & Beca 18</span>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <button onclick="openEnrollModal('Hero Principal')" class="w-full sm:w-auto bg-brand-amber hover:bg-brand-amberHover text-slate-950 font-black text-base px-8 py-4 rounded-xl shadow-xl shadow-amber-500/20 transition-all transform hover:-translate-y-1 active:translate-y-0 flex items-center justify-center gap-3 pulse-subtle">
+                            <i class="fa-solid fa-bolt text-lg"></i>
+                            <span>INSCRIBIRME AL CICLO INTEGRAL</span>
+                        </button>
+
+                        <a href="https://wa.me/51934894501?text=Hola%20PiAcademy,%20quisiera%20recibir%20el%20prospecto%20del%20Ciclo%20Integral%20PUCP%20y%20Beca%2018" target="_blank" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base px-6 py-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-xl"></i>
+                            <span>Consultar por WhatsApp</span>
+                        </a>
+                    </div>
+
+                    <!-- Direct Phone Info -->
+                    <div class="text-xs text-slate-300 flex items-center justify-center lg:justify-start gap-2 pt-1">
+                        <i class="fa-solid fa-shield-halved text-amber-400"></i>
+                        <span>Asesores disponibles hoy. Llámanos directo al: <strong class="text-white">+51 93489450</strong></span>
+                    </div>
+                </div>
+
+                <!-- Right Column Interactive Hero Card -->
+                <div class="lg:col-span-5">
+                    <div class="bg-white text-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl border border-purple-200 relative">
+                        <div class="absolute -top-4 -right-4 bg-brand-amber text-slate-950 font-black text-xs px-4 py-2 rounded-full shadow-lg uppercase tracking-wider flex items-center gap-1">
+                            <i class="fa-solid fa-crown"></i> 100% Exclusivo
+                        </div>
+
+                        <div class="text-center pb-6 border-b border-slate-100">
+                            <span class="text-brand-purple font-black text-xs tracking-wider uppercase bg-purple-50 px-3 py-1 rounded-full">Próximo Grupo</span>
+                            <h3 class="text-2xl font-black text-slate-900 mt-2">CICLO INTEGRAL 2026</h3>
+                            <p class="text-slate-500 text-xs mt-1">Preparación Intensiva Especializada PUCP + ENP Beca 18</p>
+                        </div>
+
+                        <!-- Live Countdown Timer -->
+                        <div class="my-6 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                            <p class="text-xs font-bold text-slate-500 uppercase text-center mb-3">
+                                <i class="fa-regular fa-clock text-brand-purple mr-1"></i> El descuento especial vence en:
+                            </p>
+                            <div class="grid grid-cols-4 gap-2 text-center" id="countdown">
+                                <div class="bg-white p-2 rounded-xl shadow-sm border border-slate-100">
+                                    <span id="cd-days" class="block text-2xl font-black text-brand-purple">03</span>
+                                    <span class="text-[10px] text-slate-400 font-semibold uppercase">Días</span>
+                                </div>
+                                <div class="bg-white p-2 rounded-xl shadow-sm border border-slate-100">
+                                    <span id="cd-hours" class="block text-2xl font-black text-brand-purple">14</span>
+                                    <span class="text-[10px] text-slate-400 font-semibold uppercase">Horas</span>
+                                </div>
+                                <div class="bg-white p-2 rounded-xl shadow-sm border border-slate-100">
+                                    <span id="cd-mins" class="block text-2xl font-black text-brand-purple">28</span>
+                                    <span class="text-[10px] text-slate-400 font-semibold uppercase">Min</span>
+                                </div>
+                                <div class="bg-white p-2 rounded-xl shadow-sm border border-slate-100">
+                                    <span id="cd-secs" class="block text-2xl font-black text-brand-purple">45</span>
+                                    <span class="text-[10px] text-slate-400 font-semibold uppercase">Seg</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Highlights List -->
+                        <ul class="space-y-3 text-sm text-slate-700 font-medium mb-6">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-500 text-lg mt-0.5"></i>
+                                <span><strong>Plataforma 24/7:</strong> Grabaciones e insumos teóricos inmediatamente post-clase.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-500 text-lg mt-0.5"></i>
+                                <span><strong>Simulacros Tipo PUCP & PRONABEC:</strong> Banco de preguntas con solucionario detallado.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-500 text-lg mt-0.5"></i>
+                                <span><strong>Tutoría y Control de Asistencia:</strong> Monitoreo de progreso académico.</span>
+                            </li>
+                        </ul>
+
+                        <button onclick="openEnrollModal('Hero Card')" class="w-full bg-brand-purple hover:bg-brand-darkPurple text-white font-extrabold text-sm py-3.5 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2">
+                            <span>Asegurar mi Vacante Ahora</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Targeted Audience (PUCP & Beca 18) -->
+    <section id="audiencia" class="py-16 sm:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-purple font-bold text-xs tracking-widest uppercase bg-purple-100 px-3 py-1 rounded-full">
+                    Enfoque Totalmente Especializado
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-3 tracking-tight">
+                    ¿A quién está dirigido el Ciclo Integral de PiAcademy?
+                </h2>
+                <p class="text-slate-600 text-base mt-3">
+                    Nuestro plan de estudios está estructurado quirúrgicamente para dominar las exigencias tanto del Examen de Admisión PUCP como de la evaluación nacional Beca 18.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Target 1: Postulantes a la PUCP -->
+                <div class="bg-slate-50 border-2 border-purple-100 rounded-3xl p-8 hover:border-brand-purple transition-all shadow-sm hover:shadow-xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-purple-200/40 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
+                    
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-brand-purple text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-md">
+                            <i class="fa-solid fa-university"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-brand-purple uppercase tracking-wider">Modalidad 01</span>
+                            <h3 class="text-2xl font-black text-slate-900">Postulantes PUCP</h3>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                        Dirigido a alumnos que buscan ingresar a la Pontificia Universidad Católica del Perú en sus diversas modalidades (Evaluación del Talento, ITS, POP, Bachillerato).
+                    </p>
+
+                    <div class="space-y-3 border-t border-slate-200 pt-6">
+                        <h4 class="font-bold text-slate-800 text-sm uppercase text-brand-purple">Énfasis del Aprendizaje:</h4>
+                        <div class="flex items-start gap-3 text-sm text-slate-700">
+                            <i class="fa-solid fa-check text-amber-500 font-bold mt-1"></i>
+                            <span>Dominio completo de <strong>Lectura Crítica</strong> y <strong>Redacción</strong> según las guías oficiales PUCP.</span>
+                        </div>
+                        <div class="flex items-start gap-3 text-sm text-slate-700">
+                            <i class="fa-solid fa-check text-amber-500 font-bold mt-1"></i>
+                            <span>Resolución rápida de <strong>Matemática PUCP</strong> (Álgebra, Geometría, Trigonometría, Aritmética).</span>
+                        </div>
+                        <div class="flex items-start gap-3 text-sm text-slate-700">
+                            <i class="fa-solid fa-check text-amber-500 font-bold mt-1"></i>
+                            <span>Simulacros ajustados a los tiempos y nivel de dificultad del Examen de Admisión.</span>
+                        </div>
+                    </div>
+
+                    <button onclick="openEnrollModal('Interés PUCP')" class="mt-8 w-full bg-white hover:bg-brand-purple text-brand-purple hover:text-white font-extrabold py-3 rounded-xl border border-purple-300 transition-colors shadow-sm flex items-center justify-center gap-2">
+                        <span>Ver Vacantes PUCP</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Target 2: Beca 18 PRONABEC -->
+                <div class="bg-slate-50 border-2 border-purple-100 rounded-3xl p-8 hover:border-brand-purple transition-all shadow-sm hover:shadow-xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-amber-200/40 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
+
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-brand-amber text-slate-950 rounded-2xl flex items-center justify-center text-2xl font-bold shadow-md">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-brand-amber uppercase tracking-wider">Modalidad 02</span>
+                            <h3 class="text-2xl font-black text-slate-900">Beca 18 (PRONABEC)</h3>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                        Diseñado para estudiantes de secundaria y egresados que rendirán el <strong>Examen Nacional de Preselección (ENP)</strong> para asegurar su vacante becada integral.
+                    </p>
+
+                    <div class="space-y-3 border-t border-slate-200 pt-6">
+                        <h4 class="font-bold text-slate-800 text-sm uppercase text-brand-purple">Énfasis del Aprendizaje:</h4>
+                        <div class="flex items-start gap-3 text-sm text-slate-700">
+                            <i class="fa-solid fa-check text-amber-500 font-bold mt-1"></i>
+                            <span>Estrategias de resolución veloz para <strong>Razonamiento Matemático</strong>.</span>
+                        </div>
+                        <div class="flex items-start gap-3 text-sm text-slate-700">
+                            <i class="fa-solid fa-check text-amber-500 font-bold mt-1"></i>
+                            <span>Comprensión lectora avanzada y <strong>Razonamiento Verbal</strong> directo.</span>
+                        </div>
+                        <div class="flex items-start gap-3 text-sm text-slate-700">
+                            <i class="fa-solid fa-check text-amber-500 font-bold mt-1"></i>
+                            <span>Estrategias de control de estrés y optimización de puntaje por pregunta.</span>
+                        </div>
+                    </div>
+
+                    <button onclick="openEnrollModal('Interés Beca 18')" class="mt-8 w-full bg-white hover:bg-brand-purple text-brand-purple hover:text-white font-extrabold py-3 rounded-xl border border-purple-300 transition-colors shadow-sm flex items-center justify-center gap-2">
+                        <span>Ver Vacantes Beca 18</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Why Choose PiAcademy (Benefits & Methodology) -->
+    <section id="beneficios" class="py-16 sm:py-24 bg-slate-100 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-purple font-bold text-xs tracking-widest uppercase bg-purple-200/60 px-3 py-1 rounded-full">
+                    Metodología Proprobada
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-3 tracking-tight">
+                    ¿Por qué PiAcademy es tu mejor alternativa virtual?
+                </h2>
+                <p class="text-slate-600 text-base mt-2">
+                    Ofrecemos una experiencia pedagógica interactiva que reemplaza la memorización por la verdadera comprensión estratégica.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Benefit Card 1 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-purple-100 text-brand-purple rounded-xl flex items-center justify-center text-xl font-bold mb-5">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-slate-900 mb-2">Clases En Vivo en HD</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Interactúa en tiempo real con docentes especialistas. Haz preguntas en vivo y resuelve ejercicios en directo con la pizarra digital HD.
+                    </p>
+                </div>
+
+                <!-- Benefit Card 2 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-purple-100 text-brand-purple rounded-xl flex items-center justify-center text-xl font-bold mb-5">
+                        <i class="fa-solid fa-photo-film"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-slate-900 mb-2">Grabaciones 24/7</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        ¿No pudiste asistir a una sesión? Todas las clases quedan ordenadas en tu aula virtual para que las repases a tu propio ritmo cuantas veces quieras.
+                    </p>
+                </div>
+
+                <!-- Benefit Card 3 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-purple-100 text-brand-purple rounded-xl flex items-center justify-center text-xl font-bold mb-5">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-slate-900 mb-2">Simulacros Evaluativos</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Mide tu nivel semanalmente. Recibe estadísticas de rendimiento por materia para identificar y reforzar tus puntos débiles.
+                    </p>
+                </div>
+
+                <!-- Benefit Card 4 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-purple-100 text-brand-purple rounded-xl flex items-center justify-center text-xl font-bold mb-5">
+                        <i class="fa-solid fa-file-pdf"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-slate-900 mb-2">Material Didáctico Exclusivo</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Descarga compendios teóricos, boletines de práctica guiada y claves resueltas paso a paso elaboradas por nuestro equipo pedagógico.
+                    </p>
+                </div>
+
+                <!-- Benefit Card 5 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-purple-100 text-brand-purple rounded-xl flex items-center justify-center text-xl font-bold mb-5">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-slate-900 mb-2">Asesoría Permanente</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Acceso a grupos de consultas académicas continuas. Ninguna duda queda sin resolver durante tu preparación.
+                    </p>
+                </div>
+
+                <!-- Benefit Card 6 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-purple-100 text-brand-purple rounded-xl flex items-center justify-center text-xl font-bold mb-5">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-slate-900 mb-2">Plana Docente Selecta</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Profesores con amplia trayectoria en la preparación de alumnos ingresantes a la PUCP y seleccionados de Beca 18.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Interactive Diagnostic Quiz for Students -->
+    <section id="diagnostico" class="py-16 bg-gradient-to-br from-brand-navy to-slate-950 text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-10">
+                <span class="text-amber-400 font-bold text-xs tracking-widest uppercase bg-amber-400/10 border border-amber-400/30 px-3 py-1 rounded-full">
+                    Herramienta Interactiva
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-black mt-3">Mide tu nivel en 1 minuto</h2>
+                <p class="text-slate-300 text-sm mt-1">Responde este rápido mini-test para comprobar qué tanto dominas el tipo de preguntas PUCP & Beca 18.</p>
+            </div>
+
+            <!-- Quiz Box Container -->
+            <div class="bg-slate-900 border border-purple-800/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative">
+                <div id="quizContainer">
+                    <div class="flex justify-between items-center text-xs text-slate-400 border-b border-slate-800 pb-3 mb-6">
+                        <span id="quizStepText">Pregunta 1 de 3</span>
+                        <span class="text-amber-400 font-bold"><i class="fa-solid fa-star mr-1"></i> Tipo Examen PUCP / Beca 18</span>
+                    </div>
+
+                    <!-- Question 1 -->
+                    <div id="q1" class="quiz-step">
+                        <h3 class="text-lg font-bold text-white mb-4">1. En un examen de preselección, si el 20% del 30% de un número N es igual a 18, ¿cuál es el valor del 50% de N?</h3>
+                        <div class="space-y-3">
+                            <button onclick="answerQuiz(1, false)" class="w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm">A) 120</button>
+                            <button onclick="answerQuiz(1, true)" class="w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm">B) 150</button>
+                            <button onclick="answerQuiz(1, false)" class="w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm">C) 180</button>
+                            <button onclick="answerQuiz(1, false)" class="w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm">D) 200</button>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div id="q2" class="quiz-step hidden">
+                        <h3 class="text-lg font-bold text-white mb-4">2. Indique cuál es la opción que presenta adecuada puntuación para la Redacción PUCP:</h3>
+                        <div class="space-y-3">
+                            <button onclick="answerQuiz(2, false)" class="w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm">A) Aunque estudió mucho sin embargo, no obtuvo el resultado esperado.</button>
+                            <button onclick="answerQuiz(2, true)" class="w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm">B) Aunque estudió mucho, no obtuvo el resultado esperado.</button>
+                            <button onclick="answerQuiz(2, false)" class="w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm">C) Aunque, estudió mucho no obtuvo, el resultado esperado.</button>
+                            <button onclick="answerQuiz(2, false)" class="w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm">D) Aunque estudió mucho; no obtuvo el resultado esperado.</button>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div id="q3" class="quiz-step hidden">
+                        <h3 class="text-lg font-bold text-white mb-4">3. En un texto de Lectura Crítica, la "tesis principal" se define mejor como:</h3>
+                        <div class="space-y-3">
+                            <button onclick="answerQuiz(3, false)" class="w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm">A) Un ejemplo específico presentado al inicio del texto.</button>
+                            <button onclick="answerQuiz(3, true)" class="w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm">B) La postura o postura central que defiende el autor sustentada en argumentos.</button>
+                            <button onclick="answerQuiz(3, false)" class="w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm">C) Una cita textual tomada de un autor famoso.</button>
+                            <button onclick="answerQuiz(3, false)" class="w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm">D) La conclusión que refuta la idea del autor.</button>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Results Box -->
+                    <div id="quizResult" class="hidden text-center py-6 space-y-4">
+                        <div class="w-16 h-16 bg-brand-amber text-slate-950 rounded-full flex items-center justify-center text-3xl font-black mx-auto">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <h3 class="text-2xl font-black text-white">¡Test Completado!</h3>
+                        <p id="quizScoreText" class="text-slate-300 text-sm max-w-md mx-auto">Obtuviste <span id="correctCount" class="text-amber-400 font-bold">0</span> de 3 respuestas correctas.</p>
+                        
+                        <p class="text-xs text-slate-400 bg-slate-800/80 p-4 rounded-xl max-w-lg mx-auto">
+                            ¡El Ciclo Integral de PiAcademy te dará el método de resolución rápida exacto para asegurar tu puntaje máximo!
+                        </p>
+
+                        <div class="pt-2">
+                            <button onclick="openEnrollModal('Quiz Diagnostic Completed')" class="bg-brand-amber hover:bg-brand-amberHover text-slate-950 font-black px-8 py-3.5 rounded-xl shadow-lg transition-transform hover:scale-105">
+                                Recibir Asesoría Académica Personalizada por WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Interactive Syllabus / Course Plan -->
+    <section id="temario" class="py-16 sm:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-purple font-bold text-xs tracking-widest uppercase bg-purple-100 px-3 py-1 rounded-full">
+                    Mallas Curriculares Oficiales
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-3 tracking-tight">
+                    Estructura de Cursos del Ciclo Integral
+                </h2>
+                <p class="text-slate-600 text-base mt-2">
+                    Abarcamos los pilares fundamentales que determinan el puntaje de ingreso a PUCP y Beca 18.
+                </p>
+            </div>
+
+            <!-- Subject Tabs Header -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-8" id="subjectTabs">
+                <button onclick="switchTab('rm')" id="tab-rm" class="subject-tab-btn active bg-brand-purple text-white font-bold text-sm px-5 py-3 rounded-xl transition-all shadow-sm">
+                    <i class="fa-solid fa-calculator mr-2"></i> Razonamiento Matemático
+                </button>
+                <button onclick="switchTab('lc')" id="tab-lc" class="subject-tab-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm px-5 py-3 rounded-xl transition-all">
+                    <i class="fa-solid fa-book-open mr-2"></i> Lectura Crítica (PUCP)
+                </button>
+                <button onclick="switchTab('red')" id="tab-red" class="subject-tab-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm px-5 py-3 rounded-xl transition-all">
+                    <i class="fa-solid fa-pen-nib mr-2"></i> Redacción y Ortografía
+                </button>
+                <button onclick="switchTab('mat')" id="tab-mat" class="subject-tab-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm px-5 py-3 rounded-xl transition-all">
+                    <i class="fa-solid fa-chart-pie mr-2"></i> Matemática Académica
+                </button>
+            </div>
+
+            <!-- Tab Content Cards -->
+            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-10">
+                <!-- RM Content -->
+                <div id="content-rm" class="subject-content">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <span class="text-xs font-bold text-brand-purple uppercase tracking-wider">Materia Clave</span>
+                            <h3 class="text-2xl font-black text-slate-900 mt-1 mb-4">Razonamiento Matemático</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                                Desarrolla la rapidez de análisis lógico y resolución directa sin fórmulas extensas. Indispensable para los exámenes tipo admisión PUCP y evaluación Beca 18.
+                            </p>
+                            <ul class="space-y-2 text-sm text-slate-700 font-medium">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Planteo de Ecuaciones y Fracciones</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Porcentajes, Razones y Proporciones</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Lógica Recreativa e Inferencial</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Sucesiones y Áreas Sombreadas</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-purple-100 shadow-sm space-y-4">
+                            <h4 class="font-bold text-slate-900 text-sm uppercase">Técnica PiAcademy:</h4>
+                            <p class="text-slate-600 text-xs leading-relaxed">
+                                Enseñamos el "Método de Descarte Veloz" y atajos algebraicos aprobados para responder cada pregunta de RM en menos de 90 segundos.
+                            </p>
+                            <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-xs text-brand-purple font-semibold">
+                                <i class="fa-solid fa-lightbulb mr-1"></i> Incluye Banco de 500+ Preguntas Resueltas en Video.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lectura Critica Content -->
+                <div id="content-lc" class="subject-content hidden">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <span class="text-xs font-bold text-brand-purple uppercase tracking-wider">Formato Exclusivo PUCP</span>
+                            <h3 class="text-2xl font-black text-slate-900 mt-1 mb-4">Lectura Crítica</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                                Domina el formato más exigente del examen PUCP: análisis de argumentos, debilidades, reforzamientos, intenciones del autor y diálogos contrapuestos.
+                            </p>
+                            <ul class="space-y-2 text-sm text-slate-700 font-medium">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Estructura del Argumento (Tesis y Premisas)</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Debilitamiento y Reforzamiento</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Puntos de Acuerdo y Discrepancia</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Falacias Argumentativas Comunes</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-purple-100 shadow-sm space-y-4">
+                            <h4 class="font-bold text-slate-900 text-sm uppercase">Diferencial PiAcademy:</h4>
+                            <p class="text-slate-600 text-xs leading-relaxed">
+                                Descomponemos los textos largos en diagramas lógicos simples para que evites caer en las distractoras clásicas del examen PUCP.
+                            </p>
+                            <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-xs text-brand-purple font-semibold">
+                                <i class="fa-solid fa-book-reader mr-1"></i> Guías teóricas actualizadas según el último prospecto.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Redaccion Content -->
+                <div id="content-red" class="subject-content hidden">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <span class="text-xs font-bold text-brand-purple uppercase tracking-wider">Dominio del Lenguaje</span>
+                            <h3 class="text-2xl font-black text-slate-900 mt-1 mb-4">Redacción y Normativa</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                                Aprende las reglas de acentuación, puntuación, conectores lógicos y concordancia exigidas en la prueba de Redacción de la PUCP y Beca 18.
+                            </p>
+                            <ul class="space-y-2 text-sm text-slate-700 font-medium">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Ortografía y Acentuación Diacrítica/Especial</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Uso Correcto de la Coma, Punto y Coma y Dos Puntos</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Cohesión y Conectores Textuales</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Corrección Idiomática y Queísmo/Dequeísmo</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-purple-100 shadow-sm space-y-4">
+                            <h4 class="font-bold text-slate-900 text-sm uppercase">Práctica Orientada:</h4>
+                            <p class="text-slate-600 text-xs leading-relaxed">
+                                Evaluaciones semanales de corrección de textos para automatizar las reglas clave sin aburrirte con teoría memorística.
+                            </p>
+                            <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-xs text-brand-purple font-semibold">
+                                <i class="fa-solid fa-pen-fancy mr-1"></i> Talleres de aplicación directa con corrección personalizada.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Matematica Content -->
+                <div id="content-mat" class="subject-content hidden">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <span class="text-xs font-bold text-brand-purple uppercase tracking-wider">Fundamentos Matemáticos</span>
+                            <h3 class="text-2xl font-black text-slate-900 mt-1 mb-4">Matemática Académica (Álgebra / Aritmética)</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                                Consolida la base sólida en temas algebraicos, geométricos y numéricos para responder con exactitud sin titubear.
+                            </p>
+                            <ul class="space-y-2 text-sm text-slate-700 font-medium">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Productos Notables y Factorización</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Funciones, Inecuaciones y Logaritmos</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Geometría Plana y Geometría del Espacio</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Trigonometría Fundamental</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-purple-100 shadow-sm space-y-4">
+                            <h4 class="font-bold text-slate-900 text-sm uppercase">Acompañamiento Gradual:</h4>
+                            <p class="text-slate-600 text-xs leading-relaxed">
+                                Desde el nivel básico inicial hasta el nivel avanzado exigido en el examen de admisión, garantizando que nadie se quede atrás.
+                            </p>
+                            <div class="bg-purple-50 p-4 rounded-xl border border-purple-200 text-xs text-brand-purple font-semibold">
+                                <i class="fa-solid fa-square-root-variable mr-1"></i> Formularios en PDF y trucos algebraicos interactivos.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Investment & Schedules (Ciclo Integral Pricing Card) -->
+    <section id="inversion" class="py-16 sm:py-24 bg-slate-900 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-amber-400 font-bold text-xs tracking-widest uppercase bg-amber-400/10 border border-amber-400/30 px-3 py-1 rounded-full">
+                    Planes de Inversión Accesibles
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black mt-3 tracking-tight">
+                    Invierte en tu Futuro Universitario
+                </h2>
+                <p class="text-slate-300 text-base mt-2">
+                    Accede al plan completo con facilidades de pago y todo el material incluido.
+                </p>
+            </div>
+
+            <!-- Single Unique Course Card - Ciclo Integral -->
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-gradient-to-b from-slate-800 to-slate-900 rounded-3xl border-2 border-brand-purple p-8 sm:p-10 shadow-2xl relative overflow-hidden">
+                    
+                    <!-- Popular Tag -->
+                    <div class="absolute top-0 right-0 bg-brand-amber text-slate-950 font-black text-xs px-5 py-2 rounded-bl-2xl uppercase tracking-wider shadow-md">
+                        <i class="fa-solid fa-star mr-1"></i> Programa Principal
+                    </div>
+
+                    <div class="text-center pb-8 border-b border-slate-700">
+                        <span class="text-brand-amber font-bold text-xs uppercase tracking-widest bg-amber-400/10 px-3 py-1 rounded-full">Exclusivo PUCP & Beca 18</span>
+                        <h3 class="text-3xl font-black text-white mt-3">CICLO INTEGRAL</h3>
+                        <p class="text-slate-300 text-sm mt-1">Preparación completa teórica y práctica intensiva</p>
+
+                        <!-- Price display -->
+                        <div class="mt-6 flex items-center justify-center gap-3">
+                            <span class="text-slate-400 line-through text-lg font-bold">S/ 380</span>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-xs font-bold text-amber-400">S/</span>
+                                <span class="text-5xl font-black text-amber-400">220</span>
+                                <span class="text-xs text-slate-300 font-medium">/ pago único</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-emerald-400 font-bold mt-2">
+                            <i class="fa-solid fa-tags"></i> ¡Ahorras S/ 160 inscribiéndote hoy!
+                        </p>
+                    </div>
+
+                    <!-- Course Inclusion Checklist -->
+                    <div class="py-8 space-y-4 text-sm text-slate-200">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-amber-400 text-lg mt-0.5"></i>
+                            <span><strong>Clases 100% En Vivo</strong> con interacción docente directa en Zoom HD.</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-amber-400 text-lg mt-0.5"></i>
+                            <span><strong>Acceso Ilimitado 24/7</strong> a la plataforma de grabaciones e insumos.</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-amber-400 text-lg mt-0.5"></i>
+                            <span><strong>Simulacros Tipo Examen Real</strong> con cuadro de méritos y puntaje detallado.</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-amber-400 text-lg mt-0.5"></i>
+                            <span><strong>Materiales Didácticos PDF:</strong> Prácticas resueltas, fórmulas y compendios teóricos.</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-amber-400 text-lg mt-0.5"></i>
+                            <span><strong>Tutoría Académica y Orientación:</strong> Seguimiento semanal personalizado.</span>
+                        </div>
+                    </div>
+
+                    <!-- Horarios Info Box -->
+                    <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-2xl mb-8">
+                        <h4 class="text-xs font-bold uppercase text-amber-400 mb-2">
+                            <i class="fa-solid fa-clock mr-1"></i> Turnos Disponibles:
+                        </h4>
+                        <div class="grid grid-cols-2 gap-3 text-xs text-slate-300">
+                            <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+                                <span class="font-bold text-white block">Turno Mañana:</span>
+                                <span>8:00 am - 1:00 pm</span>
+                            </div>
+                            <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+                                <span class="font-bold text-white block">Turno Tarde/Noche:</span>
+                                <span>4:00 pm - 8:30 pm</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <button onclick="openEnrollModal('Plan Ciclo Integral')" class="w-full bg-brand-amber hover:bg-brand-amberHover text-slate-950 font-black text-base py-4 rounded-xl shadow-xl transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-bolt text-lg"></i>
+                        <span>INSCRIBIRME AL CICLO INTEGRAL AHORA</span>
+                    </button>
+
+                    <div class="mt-4 text-center">
+                        <a href="https://wa.me/51934894501?text=Hola%20PiAcademy,%20deseo%20consultar%20por%20los%20medios%20de%20pago%20(Yape/Plin/Transferencia)%20para%20el%20Ciclo%20Integral" target="_blank" class="text-xs text-slate-400 hover:text-amber-300 underline font-medium">
+                            ¿Preguntas sobre Yape, Plin o transferencias bancarias? Escríbenos aquí.
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Student Testimonials -->
+    <section class="py-16 sm:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-purple font-bold text-xs tracking-widest uppercase bg-purple-100 px-3 py-1 rounded-full">
+                    Casos de Éxito
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-3 tracking-tight">
+                    Nuestros Cachimbos y Becarios Opinan
+                </h2>
+                <p class="text-slate-600 text-base mt-2">
+                    Ellos confiaron en la metodología de PiAcademy y hoy ya estudian en la universidad.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm relative flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 text-sm mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-700 text-sm italic mb-6">
+                            "Gracias a los trucos en Razonamiento Matemático y a las guías de Lectura Crítica logré mi ingreso a la PUCP a la primera. Las clases grabadas me ayudaron muchísimo a repasar."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 border-t border-slate-200 pt-4">
+                        <div class="w-10 h-10 bg-brand-purple text-white font-bold rounded-full flex items-center justify-center text-sm">
+                            AR
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">Andrea Ramírez</h4>
+                            <span class="text-xs text-brand-purple font-semibold">Ingresante PUCP - Ingeniería</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm relative flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 text-sm mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-700 text-sm italic mb-6">
+                            "Postulé al Examen Nacional de Preselección de Beca 18 con mucho miedo, pero en PiAcademy me dieron la seguridad y la velocidad para resolver cada pregunta. ¡Gané la Beca!"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 border-t border-slate-200 pt-4">
+                        <div class="w-10 h-10 bg-brand-amber text-slate-950 font-bold rounded-full flex items-center justify-center text-sm">
+                            MC
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">Mateo Castillo</h4>
+                            <span class="text-xs text-amber-600 font-bold">Ganador Beca 18 PRONABEC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm relative flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 text-sm mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-700 text-sm italic mb-6">
+                            "Los simulacros semanales son idénticos al examen real. La atención por WhatsApp cuando tenía dudas de ejercicios siempre fue rápida y amable."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 border-t border-slate-200 pt-4">
+                        <div class="w-10 h-10 bg-brand-purple text-white font-bold rounded-full flex items-center justify-center text-sm">
+                            SV
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">Sofia Vargas</h4>
+                            <span class="text-xs text-brand-purple font-semibold">Ingresante PUCP - Gestión</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: FAQ Accordion -->
+    <section id="faq" class="py-16 sm:py-24 bg-slate-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-16">
+                <span class="text-brand-purple font-bold text-xs tracking-widest uppercase bg-purple-200/60 px-3 py-1 rounded-full">
+                    Resolvemos tus Dudas
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-3 tracking-tight">
+                    Preguntas Frecuentes
+                </h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                    <button onclick="toggleFaq(1)" class="w-full text-left p-5 font-bold text-slate-900 flex justify-between items-center hover:text-brand-purple transition-colors">
+                        <span>¿Cómo es la modalidad de clases en el Ciclo Integral?</span>
+                        <i id="faq-icon-1" class="fa-solid fa-plus text-brand-purple"></i>
+                    </button>
+                    <div id="faq-ans-1" class="hidden px-5 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-3">
+                        Las clases son 100% en vivo a través de Zoom HD. Interactúas con los profesores en tiempo real. Además, todas las sesiones quedan grabadas y subidas a la plataforma virtual 24/7 para repasar cuando desees.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                    <button onclick="toggleFaq(2)" class="w-full text-left p-5 font-bold text-slate-900 flex justify-between items-center hover:text-brand-purple transition-colors">
+                        <span>¿El ciclo sirve tanto para PUCP como para Beca 18 al mismo tiempo?</span>
+                        <i id="faq-icon-2" class="fa-solid fa-plus text-brand-purple"></i>
+                    </button>
+                    <div id="faq-ans-2" class="hidden px-5 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-3">
+                        ¡Sí! El temario del Ciclo Integral abarca la intersección perfecta entre las preguntas del examen PUCP (Lectura Crítica, Redacción, Matemática) y la prueba ENP de Beca 18 (Razonamiento Lógico-Matemático y Verbal).
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                    <button onclick="toggleFaq(3)" class="w-full text-left p-5 font-bold text-slate-900 flex justify-between items-center hover:text-brand-purple transition-colors">
+                        <span>¿Cuáles son los medios de pago disponibles?</span>
+                        <i id="faq-icon-3" class="fa-solid fa-plus text-brand-purple"></i>
+                    </button>
+                    <div id="faq-ans-3" class="hidden px-5 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-3">
+                        Aceptamos transferencias bancarias (BCP, Interbank, BBVA), Yape, Plin y tarjetas de débito/crédito. Escríbenos a nuestro WhatsApp <strong>+51 934894501</strong> para facilitarte las cuentas.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                    <button onclick="toggleFaq(4)" class="w-full text-left p-5 font-bold text-slate-900 flex justify-between items-center hover:text-brand-purple transition-colors">
+                        <span>¿Incluye materiales y simulacros?</span>
+                        <i id="faq-icon-4" class="fa-solid fa-plus text-brand-purple"></i>
+                    </button>
+                    <div id="faq-ans-4" class="hidden px-5 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-3">
+                        Sí, incluye todos los PDF digitales de teoría, listas de ejercicios, simulacros semanales calificados y sus respectivos solucionarios explicados.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-brand-navy text-white pt-16 pb-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-12 gap-8 pb-12 border-b border-slate-800">
+                
+                <!-- Brand Info Column -->
+                <div class="md:col-span-5 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-11 bg-gradient-to-br from-brand-purple to-brand-darkPurple rounded-lg flex items-center justify-center shadow-md">
+                            <span class="text-white font-serif font-black text-xl">π</span>
+                        </div>
+                        <span class="text-2xl font-black tracking-tight uppercase">PI ACADEMY</span>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed max-w-sm">
+                        Academia virtual de alto rendimiento especializada en la preparación exclusiva para postulantes a la Pontificia Universidad Católica del Perú (PUCP) y becarios Beca 18 (PRONABEC).
+                    </p>
+
+                    <!-- Contact Details -->
+                    <div class="pt-2 space-y-2 text-sm text-slate-300 font-medium">
+                        <p class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-brand-amber"></i>
+                            <span>Teléfono / WhatsApp: <a href="tel:+51934894501" class="hover:text-amber-300 font-bold">+51 934894501</a></span>
+                        </p>
+                        <p class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-brand-amber"></i>
+                            <span>Contacto: informe@piacademy.edu.pe</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Quick Links Column -->
+                <div class="md:col-span-3 space-y-3">
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-amber-400">Navegación</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#beneficios" class="hover:text-white transition-colors">Metodología PiAcademy</a></li>
+                        <li><a href="#audiencia" class="hover:text-white transition-colors">Enfoque PUCP & Beca 18</a></li>
+                        <li><a href="#temario" class="hover:text-white transition-colors">Plan de Cursos</a></li>
+                        <li><a href="#inversion" class="hover:text-white transition-colors">Ciclo Integral & Inversión</a></li>
+                        <li><a href="#diagnostico" class="hover:text-white transition-colors">Test de Nivel Gratuito</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social Media Networks Column -->
+                <div class="md:col-span-4 space-y-4">
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-amber-400">Síguenos en Redes Sociales</h4>
+                    <p class="text-xs text-slate-400">
+                        Únete a nuestras comunidades oficiales para acceder a simulacros gratuitos, clases modelo y tips de estudio diarios.
+                    </p>
+
+                    <!-- Social Icons Row -->
+                    <div class="flex items-center gap-3 pt-2">
+                        <!-- Facebook -->
+                        <a href="https://facebook.com" target="_blank" title="Página de Facebook PiAcademy" class="w-11 h-11 bg-slate-800 hover:bg-blue-600 text-white rounded-xl flex items-center justify-center text-lg transition-colors shadow-md">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+
+                        <!-- YouTube -->
+                        <a href="https://youtube.com" target="_blank" title="Canal de YouTube PiAcademy" class="w-11 h-11 bg-slate-800 hover:bg-red-600 text-white rounded-xl flex items-center justify-center text-lg transition-colors shadow-md">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+
+                        <!-- TikTok -->
+                        <a href="https://tiktok.com" target="_blank" title="Cuenta de TikTok PiAcademy" class="w-11 h-11 bg-slate-800 hover:bg-slate-950 text-white rounded-xl flex items-center justify-center text-lg transition-colors shadow-md border border-slate-700">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </a>
+
+                        <!-- Instagram -->
+                        <a href="https://instagram.com" target="_blank" title="Cuenta de Instagram PiAcademy" class="w-11 h-11 bg-slate-800 hover:bg-pink-600 text-white rounded-xl flex items-center justify-center text-lg transition-colors shadow-md">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+
+                        <!-- WhatsApp Direct -->
+                        <a href="https://wa.me/51934894501?text=Hola%20PiAcademy,%20vengo%20desde%20la%20pagina%20web" target="_blank" title="WhatsApp PiAcademy" class="w-11 h-11 bg-slate-800 hover:bg-emerald-600 text-white rounded-xl flex items-center justify-center text-lg transition-colors shadow-md">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Copyright Notice -->
+            <div class="pt-8 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p>© 2026 PiAcademy Virtual. Todos los derechos reservados.</p>
+                <p class="text-slate-600">Preparación de alto nivel para el Examen de Admisión PUCP y Preselección Beca 18.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Sticky WhatsApp Button -->
+    <a href="https://wa.me/51934894501?text=Hola%20PiAcademy,%20quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20Ciclo%20Integral%20PUCP%20y%20Beca%2018" 
+       target="_blank" 
+       class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 flex items-center gap-3 border-2 border-white">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+        <span class="hidden md:inline font-bold text-sm pr-2">¿Consultas? Escríbenos</span>
+    </a>
+
+    <!-- Enrollment / Inscription Modal Popup -->
+    <div id="enrollModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative border border-slate-100">
+            <!-- Close Button -->
+            <button onclick="closeEnrollModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-2xl font-bold p-1">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-purple-100 text-brand-purple rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3 font-bold">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="text-2xl font-black text-slate-900">Inscripción al Ciclo Integral</h3>
+                <p class="text-xs text-slate-500 mt-1">Completa tus datos para enviarte el prospecto detallado y asegurar tu vacante con descuento por WhatsApp.</p>
+            </div>
+
+            <form id="enrollForm" onsubmit="submitEnrollForm(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Nombre Completo del Estudiante:</label>
+                    <input type="text" id="studentName" required placeholder="Ej. Carlos Mendoza" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-purple">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Teléfono WhatsApp de Contacto:</label>
+                    <input type="tel" id="studentPhone" required placeholder="Ej. 912345678" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-purple">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Modalidad de Interés Principal:</label>
+                    <select id="studentTarget" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-purple font-medium">
+                        <option value="Ingreso PUCP">Postulante a la PUCP</option>
+                        <option value="Beca 18 PRONABEC">Postulante a Beca 18 (ENP)</option>
+                        <option value="Ambos (PUCP y Beca 18)">Ambos exámenes (PUCP & Beca 18)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Turno Preferido:</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="flex items-center gap-2 border border-slate-200 p-3 rounded-xl cursor-pointer hover:bg-purple-50">
+                            <input type="radio" name="turno" value="Mañana" checked class="accent-brand-purple">
+                            <span class="text-xs font-bold text-slate-800">Mañana (8am - 1pm)</span>
+                        </label>
+                        <label class="flex items-center gap-2 border border-slate-200 p-3 rounded-xl cursor-pointer hover:bg-purple-50">
+                            <input type="radio" name="turno" value="Noche" class="accent-brand-purple">
+                            <span class="text-xs font-bold text-slate-800">Noche (4pm - 8:30pm)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <input type="hidden" id="modalOrigin" value="General">
+
+                <button type="submit" class="w-full bg-brand-purple hover:bg-brand-darkPurple text-white font-extrabold py-3.5 rounded-xl shadow-lg transition-colors flex items-center justify-center gap-2 text-sm mt-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Continuar inscripción por WhatsApp (+51 934894501)</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Subject Tabs Navigation
+        function switchTab(tabKey) {
+            // Hide all content blocks
+            document.querySelectorAll('.subject-content').forEach(el => el.classList.add('hidden'));
+            // Reset all tab button styles
+            document.querySelectorAll('.subject-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-purple', 'text-white', 'active');
+                btn.classList.add('bg-slate-100', 'text-slate-700');
+            });
+
+            // Show selected content
+            document.getElementById(`content-${tabKey}`).classList.remove('hidden');
+            // Active current tab button
+            const activeBtn = document.getElementById(`tab-${tabKey}`);
+            activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
+            activeBtn.classList.add('bg-brand-purple', 'text-white', 'active');
+        }
+
+        // FAQ Toggle
+        function toggleFaq(index) {
+            const ans = document.getElementById(`faq-ans-${index}`);
+            const icon = document.getElementById(`faq-icon-${index}`);
+
+            if (ans.classList.contains('hidden')) {
+                ans.classList.remove('hidden');
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            } else {
+                ans.classList.add('hidden');
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            }
+        }
+
+        // Interactive Diagnostic Quiz Handler
+        let currentStep = 1;
+        let correctAnswers = 0;
+
+        function answerQuiz(step, isCorrect) {
+            if (isCorrect) correctAnswers++;
+
+            document.getElementById(`q${step}`).classList.add('hidden');
+            
+            if (step < 3) {
+                const nextStep = step + 1;
+                document.getElementById(`q${nextStep}`).classList.remove('hidden');
+                document.getElementById('quizStepText').innerText = `Pregunta ${nextStep} de 3`;
+            } else {
+                document.getElementById('quizStepText').innerText = 'Resultado Final';
+                document.getElementById('quizResult').classList.remove('hidden');
+                document.getElementById('correctCount').innerText = correctAnswers;
+            }
+        }
+
+        // Enrollment Modal Controls
+        function openEnrollModal(origin) {
+            document.getElementById('modalOrigin').value = origin;
+            document.getElementById('enrollModal').classList.remove('hidden');
+        }
+
+        function closeEnrollModal() {
+            document.getElementById('enrollModal').classList.add('hidden');
+        }
+
+        // Handle Form Submission -> WhatsApp Link
+        function submitEnrollForm(event) {
+            event.preventDefault();
+            const name = document.getElementById('studentName').value;
+            const phone = document.getElementById('studentPhone').value;
+            const target = document.getElementById('studentTarget').value;
+            const origin = document.getElementById('modalOrigin').value;
+            const turno = document.querySelector('input[name="turno"]:checked').value;
+
+            const message = `Hola PiAcademy (+51 934894501), deseo inscribirme al *Ciclo Integral*.
+            
+*Mis Datos:*
+• Nombre: ${name}
+• Teléfono: ${phone}
+• Modalidad: ${target}
+• Turno deseado: ${turno}
+• Origen: ${origin}`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/51934894501?text=${encodedMessage}`;
+
+            window.open(whatsappUrl, '_blank');
+            closeEnrollModal();
+        }
+
+        // Countdown Timer
+        let totalSeconds = (3 * 24 * 3600) + (14 * 3600) + (28 * 60) + 45;
+
+        function updateCountdown() {
+            if (totalSeconds <= 0) return;
+            totalSeconds--;
+
+            const days = Math.floor(totalSeconds / (3600 * 24));
+            const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = Math.floor(totalSeconds % 60);
+
+            document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+            document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('cd-mins').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('cd-secs').innerText = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
