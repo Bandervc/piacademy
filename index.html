@@ -94,78 +94,81 @@
 </head>
 <body class="bg-slate-50 text-slate-900 antialiased selection:bg-brand-amber selection:text-white">
 
-    <!-- Announcement Top Banner -->
-    <div class="bg-brand-navy text-white text-xs md:text-sm py-2 px-4 text-center font-medium flex flex-wrap items-center justify-center gap-2 border-b border-purple-900/40">
-        <span class="inline-flex items-center bg-brand-amber text-slate-950 text-xs font-bold px-2.5 py-0.5 rounded-full uppercase">
-            <i class="fa-solid fa-fire mr-1"></i> ¡Inicios Confirmados!
-        </span>
-        <span data-dato="promocion.avisoBanner"></span>
-        <a data-wa="bannerSuperior" class="underline text-amber-300 font-bold hover:text-white transition-colors"
-           data-dato="promocion.enlaceBanner"></a>
+    <!-- Sticky Navigation Container (Announcement Banner + Header Pinned Together) -->
+    <div class="sticky top-0 z-40">
+        <!-- Announcement Top Banner -->
+        <div class="bg-brand-navy text-white text-xs md:text-sm py-2 px-4 text-center font-medium flex flex-wrap items-center justify-center gap-2 border-b border-purple-900/40">
+            <span class="inline-flex items-center bg-brand-amber text-slate-950 text-xs font-bold px-2.5 py-0.5 rounded-full uppercase">
+                <i class="fa-solid fa-fire mr-1"></i> ¡Inicios Confirmados!
+            </span>
+            <span data-dato="promocion.avisoBanner"></span>
+            <a data-wa="bannerSuperior" class="underline text-amber-300 font-bold hover:text-white transition-colors"
+               data-dato="promocion.enlaceBanner"></a>
+        </div>
+
+        <!-- Navigation Header -->
+        <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <!-- Hexagon Logo Icon -->
+                    <div class="w-11 h-12 bg-gradient-to-br from-brand-purple to-brand-darkPurple rounded-lg flex items-center justify-center shadow-md shadow-purple-900/20 transition-transform group-hover:scale-105">
+                        <span class="text-white font-serif font-black text-2xl tracking-tighter">π</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xl md:text-2xl font-black text-brand-purple tracking-tight leading-none uppercase"
+                              data-dato="marca.nombre"></span>
+                        <span class="text-[10px] text-slate-500 tracking-wider font-semibold uppercase"
+                              data-dato="marca.lema"></span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-slate-700 text-sm">
+                    <a href="#beneficios" class="hover:text-brand-purple transition-colors">¿Por qué PiAcademy?</a>
+                    <a href="#audiencia" class="hover:text-brand-purple transition-colors">Dirigido A</a>
+                    <a href="#temario" class="hover:text-brand-purple transition-colors">Cursos</a>
+                    <a href="#diagnostico" class="hover:text-brand-purple transition-colors">Test de Nivel</a>
+                    <a href="#inversion" class="hover:text-brand-purple transition-colors">Inversión</a>
+                    <a href="#faq" class="hover:text-brand-purple transition-colors">Preguntas</a>
+                </nav>
+
+                <!-- CTA Call & Social Button -->
+                <div class="hidden sm:flex items-center gap-3">
+                    <a data-attr="href:contacto.enlaceTelefono" class="flex items-center gap-2 text-slate-700 hover:text-brand-purple font-semibold text-sm px-3 py-2">
+                        <i class="fa-solid fa-phone text-brand-purple" aria-hidden="true"></i>
+                        <span data-dato="contacto.telefonoVisible"></span>
+                    </a>
+                    <button onclick="abrirInscripcion('Cabecera')" class="bg-brand-purple hover:bg-brand-darkPurple text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-purple-600/30 transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2">
+                        <i class="fa-solid fa-graduation-cap"></i> Inscripción
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-700 hover:text-brand-purple focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Drawer Menu -->
+            <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3">
+                <a href="#beneficios" class="block py-2 text-slate-700 font-medium border-b border-slate-100">¿Por qué PiAcademy?</a>
+                <a href="#audiencia" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Dirigido A (PUCP & Beca 18)</a>
+                <a href="#temario" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Plan de Cursos</a>
+                <a href="#diagnostico" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Test Diagnóstico</a>
+                <a href="#inversion" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Inversión y Horarios</a>
+                <a href="#faq" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Preguntas Frecuentes</a>
+                <div class="pt-2 flex flex-col gap-2">
+                    <a data-attr="href:contacto.enlaceTelefono" class="flex items-center justify-center gap-2 bg-slate-100 text-slate-800 font-semibold py-2.5 rounded-xl text-sm">
+                        <i class="fa-solid fa-phone text-brand-purple" aria-hidden="true"></i> Llamar al <span data-dato="contacto.telefonoVisible"></span>
+                    </a>
+                    <button onclick="abrirInscripcion('Menú móvil')" class="bg-brand-purple text-white font-bold py-3 rounded-xl text-center shadow-md">
+                        ¡Inscribirme Ahora!
+                    </button>
+                </div>
+            </div>
+        </header>
     </div>
-
-    <!-- Navigation Header -->
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="#" class="flex items-center gap-3 group">
-                <!-- Hexagon Logo Icon -->
-                <div class="w-11 h-12 bg-gradient-to-br from-brand-purple to-brand-darkPurple rounded-lg flex items-center justify-center shadow-md shadow-purple-900/20 transition-transform group-hover:scale-105">
-                    <span class="text-white font-serif font-black text-2xl tracking-tighter">π</span>
-                </div>
-                <div class="flex flex-col">
-                    <span class="text-xl md:text-2xl font-black text-brand-purple tracking-tight leading-none uppercase"
-                          data-dato="marca.nombre"></span>
-                    <span class="text-[10px] text-slate-500 tracking-wider font-semibold uppercase"
-                          data-dato="marca.lema"></span>
-                </div>
-            </a>
-
-            <!-- Desktop Menu -->
-            <nav class="hidden md:flex items-center gap-8 font-medium text-slate-700 text-sm">
-                <a href="#beneficios" class="hover:text-brand-purple transition-colors">¿Por qué PiAcademy?</a>
-                <a href="#audiencia" class="hover:text-brand-purple transition-colors">Dirigido A</a>
-                <a href="#temario" class="hover:text-brand-purple transition-colors">Cursos</a>
-                <a href="#diagnostico" class="hover:text-brand-purple transition-colors">Test de Nivel</a>
-                <a href="#inversion" class="hover:text-brand-purple transition-colors">Inversión</a>
-                <a href="#faq" class="hover:text-brand-purple transition-colors">Preguntas</a>
-            </nav>
-
-            <!-- CTA Call & Social Button -->
-            <div class="hidden sm:flex items-center gap-3">
-                <a data-attr="href:contacto.enlaceTelefono" class="flex items-center gap-2 text-slate-700 hover:text-brand-purple font-semibold text-sm px-3 py-2">
-                    <i class="fa-solid fa-phone text-brand-purple" aria-hidden="true"></i>
-                    <span data-dato="contacto.telefonoVisible"></span>
-                </a>
-                <button onclick="abrirInscripcion('Cabecera')" class="bg-brand-purple hover:bg-brand-darkPurple text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-purple-600/30 transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2">
-                    <i class="fa-solid fa-graduation-cap"></i> Inscripción
-                </button>
-            </div>
-
-            <!-- Mobile menu button -->
-            <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-700 hover:text-brand-purple focus:outline-none">
-                <i class="fa-solid fa-bars text-2xl"></i>
-            </button>
-        </div>
-
-        <!-- Mobile Drawer Menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3">
-            <a href="#beneficios" class="block py-2 text-slate-700 font-medium border-b border-slate-100">¿Por qué PiAcademy?</a>
-            <a href="#audiencia" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Dirigido A (PUCP & Beca 18)</a>
-            <a href="#temario" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Plan de Cursos</a>
-            <a href="#diagnostico" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Test Diagnóstico</a>
-            <a href="#inversion" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Inversión y Horarios</a>
-            <a href="#faq" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Preguntas Frecuentes</a>
-            <div class="pt-2 flex flex-col gap-2">
-                <a data-attr="href:contacto.enlaceTelefono" class="flex items-center justify-center gap-2 bg-slate-100 text-slate-800 font-semibold py-2.5 rounded-xl text-sm">
-                    <i class="fa-solid fa-phone text-brand-purple" aria-hidden="true"></i> Llamar al <span data-dato="contacto.telefonoVisible"></span>
-                </a>
-                <button onclick="abrirInscripcion('Menú móvil')" class="bg-brand-purple text-white font-bold py-3 rounded-xl text-center shadow-md">
-                    ¡Inscribirme Ahora!
-                </button>
-            </div>
-        </div>
-    </header>
 
     <!-- Hero Section -->
     <section class="relative overflow-hidden gradient-purple-bg text-white pt-12 pb-20 lg:pt-20 lg:pb-28">
@@ -376,19 +379,28 @@
     <section id="diagnostico" data-si="test.mostrar" class="py-16 bg-gradient-to-br from-brand-navy to-slate-950 text-white scroll-mt-24">
         <div class="max-w-4xl mx-auto px-4 sm:px-6">
             <div class="text-center mb-10">
-                <span class="text-amber-400 font-bold text-xs tracking-widest uppercase bg-amber-400/10 border border-amber-400/30 px-3 py-1 rounded-full">
+                <span class="text-amber-400 font-bold text-xs tracking-widest uppercase bg-amber-400/10 border border-amber-400/30 px-3 py-1 rounded-full" data-dato="textos.testEtiqueta">
                     Herramienta Interactiva
                 </span>
-                <h2 class="text-2xl sm:text-3xl font-black mt-3">Mide tu nivel en 1 minuto</h2>
-                <p class="text-slate-300 text-sm mt-1">Responde este rápido mini-test para comprobar qué tanto dominas el tipo de preguntas PUCP & Beca 18.</p>
+                <h2 class="text-2xl sm:text-3xl font-black mt-3" data-dato="textos.testTitulo">Mide tu nivel en 1 minuto</h2>
+                <p class="text-slate-300 text-sm mt-1" data-dato="textos.testSubtitulo">Responde este rápido mini-test para comprobar qué tanto dominas el tipo de preguntas PUCP &amp; Beca 18.</p>
             </div>
 
             <!-- Quiz Box Container -->
-            <div class="bg-slate-900 border border-purple-800/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative">
+            <div class="bg-slate-900 border border-purple-800/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
                 <div id="quizContainer">
-                    <div class="flex justify-between items-center text-xs text-slate-400 border-b border-slate-800 pb-3 mb-6">
+                    <div class="flex justify-between items-center text-xs text-slate-400 border-b border-slate-800 pb-3 mb-4">
                         <span id="quizStepText">Pregunta 1 de 3</span>
+                        <div id="quizTimerBadge" class="hidden flex items-center gap-1.5 bg-amber-400/20 text-amber-300 border border-amber-400/40 text-xs font-black px-3 py-1 rounded-full">
+                            <i class="fa-solid fa-stopwatch animate-pulse text-amber-400"></i>
+                            <span>Tiempo: <strong id="quizTimerSeconds">90</strong>s</span>
+                        </div>
                         <span class="text-amber-400 font-bold"><i class="fa-solid fa-star mr-1"></i> Tipo Examen PUCP / Beca 18</span>
+                    </div>
+
+                    <!-- Animated Timer Progress Bar -->
+                    <div id="quizTimerBar" class="w-full bg-slate-800 rounded-full h-1.5 mb-6 overflow-hidden hidden">
+                        <div id="quizTimerProgress" class="bg-amber-400 h-full w-full transition-all duration-1000"></div>
                     </div>
 
                     <!-- Pregunta actual (generada por app.js desde datos.js) -->
@@ -396,7 +408,7 @@
 
                     <!-- Quiz Results Box -->
                     <div id="quizResult" class="hidden text-center py-6 space-y-4">
-                        <div class="w-16 h-16 bg-brand-amber text-slate-950 rounded-full flex items-center justify-center text-3xl font-black mx-auto">
+                        <div class="w-16 h-16 bg-brand-amber text-slate-950 rounded-full flex items-center justify-center text-3xl font-black mx-auto shadow-lg shadow-amber-500/20">
                             <i class="fa-solid fa-trophy" aria-hidden="true"></i>
                         </div>
                         <h3 class="text-2xl font-black text-white">¡Test Completado!</h3>
@@ -404,16 +416,34 @@
                             Obtuviste <span id="correctCount" class="text-amber-400 font-bold">0</span>
                             de <span id="totalCount" class="text-amber-400 font-bold">0</span> respuestas correctas.
                         </p>
+
+                        <!-- Reward Card (Gamified Code Box) -->
+                        <div id="quizRewardCard" class="hidden bg-gradient-to-r from-purple-950 to-slate-900 border-2 border-amber-400/60 rounded-2xl p-5 max-w-lg mx-auto shadow-xl space-y-3">
+                            <span class="inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 text-xs font-black uppercase px-3 py-1 rounded-full shadow-sm">
+                                <i class="fa-solid fa-gift"></i> ¡Premio Desbloqueado!
+                            </span>
+                            <p id="quizRewardMsg" class="text-white font-bold text-sm leading-relaxed"></p>
+                            <div class="inline-flex items-center gap-2 bg-slate-950 border border-purple-800 px-5 py-2.5 rounded-xl">
+                                <span class="text-xs text-slate-400 font-medium">Tu código de descuento:</span>
+                                <span id="quizRewardCode" class="text-xl font-black text-amber-400 tracking-wider"></span>
+                            </div>
+                            <button type="button" id="btnCanjearPremio" class="w-full bg-brand-amber hover:bg-brand-amberHover text-slate-950 font-black py-3.5 rounded-xl shadow-lg transition-transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 text-sm">
+                                <i class="fa-solid fa-graduation-cap text-base"></i>
+                                <span>Canjear Descuento e Inscribirme Ahora</span>
+                            </button>
+                        </div>
+
                         <p class="text-xs text-slate-400 bg-slate-800/80 p-4 rounded-xl max-w-lg mx-auto">
                             ¡El Ciclo Integral de PiAcademy te dará el método de resolución rápida exacto para asegurar tu puntaje máximo!
                         </p>
+
                         <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
                             <a id="btnAsesoriaTest" href="#" target="_blank" rel="noopener"
-                               class="bg-brand-amber hover:bg-brand-amberHover text-slate-950 font-black px-8 py-3.5 rounded-xl shadow-lg transition-transform hover:scale-105">
-                                Recibir asesoría personalizada por WhatsApp
+                               class="bg-slate-800 hover:bg-slate-700 text-white font-bold px-6 py-3 rounded-xl border border-slate-700 transition-colors text-xs sm:text-sm">
+                                Consultar con un asesor por WhatsApp
                             </a>
                             <button type="button" id="btnRepetirTest"
-                                    class="text-slate-300 hover:text-white underline text-sm font-semibold px-4 py-3">
+                                    class="text-slate-400 hover:text-white underline text-xs sm:text-sm font-semibold px-4 py-3">
                                 Repetir el test
                             </button>
                         </div>

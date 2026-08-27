@@ -65,11 +65,37 @@ window.DATOS = {
     nota: "pago único",
   },
 
-  // ═══ 6. TURNOS ═══
+  // ═══ 6. TURNOS Y HORARIOS ═══
+  // disponible: true para permitir inscripción, false para mostrar como "Cupos Llenos"
   horarios: [
-    { nombre: "Turno Mañana", rango: "8:00 am - 1:00 pm" },
-    { nombre: "Turno Tarde/Noche", rango: "4:00 pm - 8:30 pm" },
+    { nombre: "Turno Mañana", rango: "8:00 am - 1:00 pm", disponible: true },
+    { nombre: "Turno Tarde/Noche", rango: "4:00 pm - 8:30 pm", disponible: true },
   ],
+
+  // ═══ 6.1 ENCABEZADOS Y TÍTULOS EDITABLES ═══
+  textos: {
+    heroPildora: "Aprende con especialistas en ingreso directo",
+    heroBadge: "100% Exclusivo",
+    heroTitulo: "Asegura tu Ingreso a la PUCP o tu Beca 18 con Preparación de Élite",
+    heroSubtitulo: "El único Ciclo Integral virtual enfocado con precisión quirúrgica en el formato de preguntas de la PUCP y del Examen Nacional de Beca 18 (PRONABEC). Clases en vivo, simulacros semanales y asesoría continua.",
+    beneficiosEtiqueta: "Metodología Probada",
+    beneficiosTitulo: "La Fórmula que Convierte Postulantes en Ingresantes",
+    beneficiosSubtitulo: "Estrategias de aprendizaje activo diseñadas para maximizar tu puntaje en el menor tiempo posible.",
+    audienciaEtiqueta: "Doble Enfoque Estratégico",
+    audienciaTitulo: "¿A quiénes preparamos en este ciclo?",
+    audienciaSubtitulo: "Nuestro plan de estudios está perfectamente sincronizado con los dos objetivos académicos más importantes del país.",
+    cursosEtiqueta: "Mallas Curriculares Oficiales",
+    cursosTitulo: "Estructura de Cursos del Ciclo Integral",
+    cursosSubtitulo: "Abarcamos los pilares fundamentales que determinan el puntaje de ingreso a PUCP y Beca 18.",
+    inversionEtiqueta: "Planes de Inversión Accesibles",
+    inversionTitulo: "Invierte en tu Futuro Universitario",
+    inversionSubtitulo: "Accede al plan completo con facilidades de pago y todo el material incluido.",
+    testEtiqueta: "Herramienta Interactiva",
+    testTitulo: "Mide tu nivel en 1 minuto",
+    testSubtitulo: "Responde este rápido mini-test para comprobar qué tanto dominas el tipo de preguntas PUCP & Beca 18.",
+    faqEtiqueta: "Resolvemos tus Dudas",
+    faqTitulo: "Preguntas Frecuentes",
+  },
 
   // ═══ 7. A QUIÉN ESTÁ DIRIGIDO (las 2 tarjetas moradas) ═══
   // acento: color de la tarjeta ("morado" o "ambar")
@@ -191,12 +217,16 @@ window.DATOS = {
     },
   ],
 
-  // ═══ 10. TEST DE NIVEL ═══
-  // "correcta" es la POSICIÓN de la respuesta correcta empezando en 0.
-  // (0 = primera alternativa, 1 = segunda, 2 = tercera, 3 = cuarta)
-  // Puedes agregar más preguntas copiando un bloque { ... } completo.
+  // ═══ 10. TEST DE NIVEL Y PREMIOS GAMIFICADOS ═══
+  // "tiempoSegundos": tiempo límite en segundos (0 para sin límite).
+  // "premios": asigna un código de descuento según el rango de aciertos.
   test: {
     mostrar: true,
+    tiempoSegundos: 90,
+    premios: [
+      { minAciertos: 1, maxAciertos: 2, codigo: "LIVE20", mensaje: "¡Buen intento! Desbloqueaste el código LIVE20 (-S/20 de descuento)" },
+      { minAciertos: 3, maxAciertos: 99, codigo: "BECA50", mensaje: "¡Puntaje excelente! Desbloqueaste la super beca BECA50 (-S/50 de descuento)" },
+    ],
     preguntas: [
       {
         enunciado: "En un examen de preselección, si el 20% del 30% de un número N es igual a 18, ¿cuál es el valor del 50% de N?",

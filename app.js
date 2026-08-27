@@ -227,9 +227,49 @@
     var aciertos = 0;
 
     var progreso = document.getElementById('quizStepText');
-    var resultado = document.getElementById('quizResult');
-    var botonAsesoria = document.getElementById('btnAsesoriaTest');
-    var letras = ['A', 'B', 'C', 'D', 'E', 'F'];
+    var quizTimerBadge = document.getElementById('quizTimerBadge');
+    var quizTimerSeconds = document.getElementById('quizTimerSeconds');
+    var quizTimerBar = document.getElementById('quizTimerBar');
+    var quizTimerProgress = document.getElementById('quizTimerProgress');
+    var quizRewardCard = document.getElementById('quizRewardCard');
+    var quizRewardMsg = document.getElementById('quizRewardMsg');
+    var quizRewardCode = document.getElementById('quizRewardCode');
+    var btnCanjearPremio = document.getElementById('btnCanjearPremio');
+
+    var tiempoLimite = datos.test.tiempoSegundos || 0;
+    var tiempoRestante = tiempoLimite;
+    var timerInterval = null;
+
+    function iniciarTemporizador() {
+      if (!tiempoLimite || tiempoLimite <= 0) {
+        if (quizTimerBadge) quizTimerBadge.classList.add('hidden');
+        if (quizTimerBar) quizTimerBar.classList.add('hidden');
+        return;
+      }
+
+      tiempoRestante = tiempoLimite;
+      if (quizTimerBadge) {
+        quizTimerBadge.classList.remove('hidden');
+        quizTimerSeconds.textContent = tiempoRestante;
+      }
+      if (quizTimerBar) quizTimerBar.classList.remove('hidden');
+      if (quizTimerProgress) quizTimerProgress.style.width = '100%';
+
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(function () {
+        tiempoRestante--;
+        if (quizTimerSeconds) quizTimerSeconds.textContent = tiempoRestante;
+        if (quizTimerProgress) {
+          var porcentaje = Math.max(0, (tiempoRestante / tiempoLimite) * 100);
+          quizTimerProgress.style.width = porcentaje + '%';
+        }
+
+        if (tiempoRestante <= 0) {
+          clearInterval(timerInterval);
+          terminar(true);
+        }
+      }, 1000);
+    }
 
     function pintarPregunta() {
       var pregunta = preguntas[paso];
@@ -260,14 +300,47 @@
       if (esCorrecta) aciertos++;
       paso++;
       if (paso < total) { pintarPregunta(); return; }
-      terminar();
+      terminar(false);
     }
 
-    function terminar() {
+    function terminar(porTiempo) {
+      if (timerInterval) clearInterval(timerInterval);
       contenedor.innerHTML = '';
-      progreso.textContent = 'Resultado final';
+      progreso.textContent = porTiempo ? '¡Tiempo agotado!' : 'Resultado final';
       document.getElementById('correctCount').textContent = aciertos;
       document.getElementById('totalCount').textContent = total;
+
+      // Buscar premio por aciertos
+      var premios = datos.test.premios || [];
+      var premioGanado = null;
+      for (var i = 0; i < premios.length; i++) {
+        var p = premios[i];
+        if (aciertos >= p.minAciertos && aciertos <= p.maxAciertos) {
+          premioGanado = p;
+          break;
+        }
+      }
+
+      if (premioGanado && quizRewardCard) {
+        quizRewardCard.classList.remove('hidden');
+        if (quizRewardMsg) quizRewardMsg.textContent = premioGanado.mensaje;
+        if (quizRewardCode) quizRewardCode.textContent = premioGanado.codigo;
+
+        if (btnCanjearPremio) {
+          btnCanjearPremio.onclick = function () {
+            if (window.abrirInscripcion) window.abrirInscripcion('Test de Nivel');
+            var inputCod = document.getElementById('discountCode');
+            var btnApply = document.getElementById('btnApplyCode');
+            if (inputCod && btnApply) {
+              inputCod.value = premioGanado.codigo;
+              btnApply.click();
+            }
+          };
+        }
+      } else if (quizRewardCard) {
+        quizRewardCard.classList.add('hidden');
+      }
+
       botonAsesoria.setAttribute('href', N.urlWhatsApp(
         datos.contacto.whatsapp,
         window.PiApp.mensajeWhatsApp('testCompletado', { aciertos: aciertos, total: total })
@@ -279,9 +352,12 @@
       paso = 0;
       aciertos = 0;
       resultado.classList.add('hidden');
+      if (quizRewardCard) quizRewardCard.classList.add('hidden');
+      iniciarTemporizador();
       pintarPregunta();
     });
 
+    iniciarTemporizador();
     pintarPregunta();
   }
 
@@ -461,8 +537,30 @@
       abrirModalPago(datos);
     });
 
-    var primerTurno = formulario.querySelector('input[name="turno"]');
-    if (primerTurno) primerTurno.checked = true;
+    // Configurar turnos disponibles / cupos llenos
+    var turnos = datos.horarios || [];
+    var primerHabilitado = null;
+    formulario.querySelectorAll('input[name="turno"]').forEach(function (radio, idx) {
+      var item = turnos[idx];
+      if (item && item.disponible === false) {
+        radio.disabled = true;
+        var parentLabel = radio.closest('label');
+        if (parentLabel) {
+          parentLabel.classList.add('opacity-50', 'bg-slate-100', 'cursor-not-allowed');
+          parentLabel.classList.remove('hover:bg-purple-50', 'cursor-pointer');
+          if (!parentLabel.querySelector('.js-cupo-lleno')) {
+            var badge = document.createElement('span');
+            badge.className = 'js-cupo-lleno ml-auto text-[10px] font-black uppercase text-rose-600 bg-rose-100 px-1.5 py-0.5 rounded shrink-0';
+            badge.textContent = 'Cupos Llenos';
+            parentLabel.appendChild(badge);
+          }
+        }
+      } else if (!primerHabilitado && radio && !radio.disabled) {
+        primerHabilitado = radio;
+      }
+    });
+
+    if (primerHabilitado) primerHabilitado.checked = true;
 
     window.abrirInscripcion = abrir;
   }

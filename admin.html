@@ -47,12 +47,9 @@
 </head>
 <body class="min-h-full bg-slate-950 text-slate-100 flex flex-col antialiased">
 
-    <!-- ══════════════════════════════════════════════════════════
-         PANTALLA DE ACCESO (PIN LOCK SCREEN)
-         ══════════════════════════════════════════════════════════ -->
+    <!-- PANTALLA DE ACCESO (PIN LOCK SCREEN) -->
     <div id="pinScreen" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center p-4">
         <div class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl text-center relative overflow-hidden">
-            <!-- Background Glow -->
             <div class="absolute -top-24 -right-24 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
             
             <div class="w-16 h-16 bg-gradient-to-br from-brand-purple to-brand-darkPurple rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-900/30">
@@ -78,27 +75,23 @@
                 </button>
             </form>
             
-            <p class="text-[11px] text-slate-500 mt-6">PIN inicial por defecto: <strong class="text-slate-400">2026</strong> (puedes cambiarlo adentro).</p>
+            <p class="text-[11px] text-slate-500 mt-6">PIN por defecto: <strong class="text-slate-400">2026</strong></p>
         </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════════
-         CABECERA DEL PANEL
-         ══════════════════════════════════════════════════════════ -->
+    <!-- CABECERA DEL PANEL -->
     <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-30 shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-            <!-- Brand -->
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-gradient-to-br from-brand-purple to-brand-darkPurple rounded-xl flex items-center justify-center shadow-md">
                     <span class="text-white font-serif font-black text-xl">π</span>
                 </div>
                 <div>
                     <span class="text-lg font-black text-white uppercase tracking-tight block">PiAcademy <span class="text-amber-400 text-xs font-bold px-2 py-0.5 rounded-full bg-amber-400/10 border border-amber-400/20 ml-1">Admin</span></span>
-                    <span class="text-[10px] text-slate-400">Gestor de contenidos y promociones</span>
+                    <span class="text-[10px] text-slate-400">Gestor de contenidos, preguntas y promociones</span>
                 </div>
             </div>
 
-            <!-- Header Actions -->
             <div class="flex items-center gap-3">
                 <a href="index.html" target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs px-4 py-2.5 rounded-xl border border-slate-700 transition-colors">
                     <i class="fa-solid fa-arrow-up-right-from-square text-amber-400"></i>
@@ -117,9 +110,7 @@
         </div>
     </header>
 
-    <!-- ══════════════════════════════════════════════════════════
-         CONTENIDO PRINCIPAL
-         ══════════════════════════════════════════════════════════ -->
+    <!-- CONTENIDO PRINCIPAL -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         <!-- Banner Estado de GitHub -->
@@ -140,31 +131,41 @@
 
         <!-- Navigation Tabs -->
         <div class="flex flex-wrap gap-2 mb-8 border-b border-slate-800 pb-4" id="tabsNav">
-            <button type="button" class="tab-btn active px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-slate-900 text-slate-400 border border-slate-800" data-tab="tab-codigos">
+            <button type="button" class="tab-btn active px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-slate-900 text-slate-400 border border-slate-800" data-tab="tab-codigos">
                 <i class="fa-solid fa-tag text-amber-400"></i>
                 <span>Códigos de Descuento (Lives)</span>
             </button>
-            <button type="button" class="tab-btn px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-slate-900 text-slate-400 border border-slate-800" data-tab="tab-precios">
+            <button type="button" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-slate-900 text-slate-400 border border-slate-800" data-tab="tab-test">
+                <i class="fa-solid fa-bullseye text-purple-400"></i>
+                <span>Test de Nivel y Premios</span>
+            </button>
+            <button type="button" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-slate-900 text-slate-400 border border-slate-800" data-tab="tab-turnos">
+                <i class="fa-solid fa-clock text-amber-400"></i>
+                <span>Turnos y Cupos Llenos</span>
+            </button>
+            <button type="button" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-slate-900 text-slate-400 border border-slate-800" data-tab="tab-precios">
                 <i class="fa-solid fa-coins text-emerald-400"></i>
                 <span>Precios y Contador</span>
             </button>
-            <button type="button" class="tab-btn px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-slate-900 text-slate-400 border border-slate-800" data-tab="tab-pagos">
+            <button type="button" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-slate-900 text-slate-400 border border-slate-800" data-tab="tab-textos">
+                <i class="fa-solid fa-pen-to-square text-blue-400"></i>
+                <span>Encabezados y Títulos</span>
+            </button>
+            <button type="button" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-slate-900 text-slate-400 border border-slate-800" data-tab="tab-pagos">
                 <i class="fa-solid fa-qrcode text-purple-400"></i>
                 <span>Yape &amp; Plin</span>
             </button>
-            <button type="button" class="tab-btn px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-slate-900 text-slate-400 border border-slate-800" data-tab="tab-contacto">
-                <i class="fa-solid fa-phone text-blue-400"></i>
-                <span>Contacto y Avisos</span>
+            <button type="button" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-slate-900 text-slate-400 border border-slate-800" data-tab="tab-contacto">
+                <i class="fa-solid fa-share-nodes text-emerald-400"></i>
+                <span>Contacto y Redes</span>
             </button>
-            <button type="button" class="tab-btn px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-slate-900 text-slate-400 border border-slate-800" data-tab="tab-seguridad">
+            <button type="button" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-slate-900 text-slate-400 border border-slate-800" data-tab="tab-seguridad">
                 <i class="fa-solid fa-shield-halved text-rose-400"></i>
-                <span>Seguridad (PIN)</span>
+                <span>PIN</span>
             </button>
         </div>
 
-        <!-- ══════════════════════════════════════════════════════
-             TAB 1: CÓDIGOS DE DESCUENTO PARA LIVES
-             ══════════════════════════════════════════════════════ -->
+        <!-- TAB 1: CÓDIGOS DE DESCUENTO PARA LIVES -->
         <section id="tab-codigos" class="tab-content space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 p-6 rounded-3xl border border-slate-800">
                 <div>
@@ -180,15 +181,99 @@
                 </button>
             </div>
 
-            <!-- Lista de Códigos -->
-            <div id="codigosList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Se rellena dinámicamente con JS -->
+            <div id="codigosList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </section>
+
+        <!-- TAB 2: TEST DE NIVEL Y PREMIOS GAMIFICADOS -->
+        <section id="tab-test" class="tab-content hidden space-y-6">
+            <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6">
+                    <div>
+                        <h3 class="text-xl font-black text-white flex items-center gap-2">
+                            <i class="fa-solid fa-stopwatch text-amber-400"></i>
+                            Configuración General del Test y Temporizador
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1">Establece el tiempo límite y activa o desactiva la evaluación en vivo.</p>
+                    </div>
+
+                    <div class="flex items-center gap-3 bg-slate-950 p-3 rounded-2xl border border-slate-800">
+                        <input type="checkbox" id="checkTestMostrar" class="w-5 h-5 rounded accent-brand-purple">
+                        <label for="checkTestMostrar" class="text-xs font-bold text-slate-200">Mostrar sección Test en la web</label>
+                    </div>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Tiempo Límite del Test (segundos):</label>
+                        <input type="number" id="inputTestTiempo" min="0" placeholder="Ej: 90" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-black text-amber-400 text-lg focus:outline-none focus:border-brand-purple">
+                        <span class="text-[10px] text-slate-500 mt-1 block">Pon 0 para que no tenga tiempo límite</span>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Instrucción del Temporizador:</label>
+                        <input type="text" id="inputTestTiempoNote" value="El reloj comenzará al mostrar la primera pregunta." disabled class="w-full bg-slate-950/60 border border-slate-800 rounded-2xl px-4 py-3 text-xs text-slate-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rangos de Premios por Aciertos -->
+            <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                    <div>
+                        <h3 class="text-lg font-black text-white flex items-center gap-2">
+                            <i class="fa-solid fa-gift text-emerald-400"></i>
+                            Premios y Códigos por Rango de Aciertos
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1">Elige qué código desbloquea el alumno según sus respuestas correctas.</p>
+                    </div>
+                    <button type="button" id="btnAddPremio" class="bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl border border-slate-700 flex items-center gap-1.5">
+                        <i class="fa-solid fa-plus text-emerald-400"></i> Agregar Rango
+                    </button>
+                </div>
+
+                <div id="premiosList" class="space-y-3"></div>
+            </div>
+
+            <!-- Preguntas del Test -->
+            <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                    <div>
+                        <h3 class="text-lg font-black text-white flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-purple-400"></i>
+                            Preguntas y Alternativas del Test
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1">Agrega, edita o elimina las preguntas evaluativas de tu página.</p>
+                    </div>
+                    <button type="button" id="btnAddPregunta" class="bg-brand-purple hover:bg-brand-darkPurple text-white font-extrabold text-xs px-4 py-2.5 rounded-xl shadow-md flex items-center gap-1.5">
+                        <i class="fa-solid fa-plus"></i> Nueva Pregunta
+                    </button>
+                </div>
+
+                <div id="preguntasList" class="space-y-4"></div>
             </div>
         </section>
 
-        <!-- ══════════════════════════════════════════════════════
-             TAB 2: PRECIOS Y CONTADOR
-             ══════════════════════════════════════════════════════ -->
+        <!-- TAB 3: TURNOS Y CUPOS LLENOS -->
+        <section id="tab-turnos" class="tab-content hidden space-y-6">
+            <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                    <div>
+                        <h3 class="text-xl font-black text-white flex items-center gap-2">
+                            <i class="fa-solid fa-clock text-amber-400"></i>
+                            Gestión de Turnos y Cupos Llenos
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1">Deshabilita un turno cuando se agoten las vacantes. Se mostrará como <strong>[Cupos Llenos]</strong> en la web y no se podrá seleccionar.</p>
+                    </div>
+                    <button type="button" id="btnAddTurno" class="bg-brand-purple hover:bg-brand-darkPurple text-white font-extrabold text-xs px-4 py-2.5 rounded-xl shadow-md flex items-center gap-1.5">
+                        <i class="fa-solid fa-plus"></i> Nuevo Turno
+                    </button>
+                </div>
+
+                <div id="turnosList" class="space-y-4"></div>
+            </div>
+        </section>
+
+        <!-- TAB 4: PRECIOS Y CONTADOR -->
         <section id="tab-precios" class="tab-content hidden space-y-6">
             <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6">
                 <h3 class="text-xl font-black text-white flex items-center gap-2">
@@ -200,19 +285,16 @@
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Precio Normal (S/):</label>
                         <input type="number" id="inputPrecioNormal" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-black text-lg text-white focus:outline-none focus:border-brand-purple">
-                        <span class="text-[10px] text-slate-500 mt-1 block">Aparece tachado en la web</span>
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold uppercase text-emerald-400 mb-2">Precio Promocional (S/):</label>
                         <input type="number" id="inputPrecioPromo" class="w-full bg-slate-950 border border-emerald-500/50 rounded-2xl px-4 py-3 font-black text-xl text-emerald-400 focus:outline-none focus:border-emerald-400">
-                        <span class="text-[10px] text-slate-500 mt-1 block">Precio que paga el alumno sin código</span>
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Nota / Frecuencia:</label>
                         <input type="text" id="inputPrecioNota" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-semibold text-sm text-white focus:outline-none focus:border-brand-purple">
-                        <span class="text-[10px] text-slate-500 mt-1 block">Ejemplo: "pago único"</span>
                     </div>
                 </div>
 
@@ -227,7 +309,6 @@
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Fecha y Hora Límite:</label>
                         <input type="datetime-local" id="inputFechaLimite" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-bold text-sm text-white focus:outline-none focus:border-brand-purple">
-                        <span class="text-[10px] text-slate-500 mt-1 block">Al llegar a cero, el contador desaparecerá solo</span>
                     </div>
 
                     <div>
@@ -243,82 +324,124 @@
             </div>
         </section>
 
-        <!-- ══════════════════════════════════════════════════════
-             TAB 3: YAPE Y PLIN
-             ══════════════════════════════════════════════════════ -->
+        <!-- TAB 5: ENCABEZADOS Y TÍTULOS -->
+        <section id="tab-textos" class="tab-content hidden space-y-6">
+            <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6">
+                <h3 class="text-xl font-black text-white flex items-center gap-2">
+                    <i class="fa-solid fa-pen-to-square text-blue-400"></i>
+                    Personalización de Títulos y Secciones
+                </h3>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Píldora Superior del Hero:</label>
+                        <input type="text" id="inputTextosHeroPildora" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-purple">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Título Principal del Hero (Encabezado):</label>
+                        <textarea id="inputTextosHeroTitulo" rows="2" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-brand-purple font-bold"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Subtítulo / Descripción del Hero:</label>
+                        <textarea id="inputTextosHeroSubtitulo" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-brand-purple"></textarea>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-4 pt-4 border-t border-slate-800">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Título Beneficios (¿Por qué PiAcademy?):</label>
+                            <input type="text" id="inputTextosBeneficiosTitulo" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Título Audiencia (Dirigido A):</label>
+                            <input type="text" id="inputTextosAudienciaTitulo" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Título Cursos / Malla Curricular:</label>
+                            <input type="text" id="inputTextosCursosTitulo" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Título Inversión:</label>
+                            <input type="text" id="inputTextosInversionTitulo" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 6: YAPE Y PLIN -->
         <section id="tab-pagos" class="tab-content hidden space-y-6">
             <div class="grid md:grid-cols-2 gap-6">
                 <!-- Yape Card -->
-                <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-purple-900/50 relative overflow-hidden space-y-5">
+                <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-purple-900/50 space-y-5">
                     <div class="flex items-center gap-3">
                         <span class="w-8 h-8 rounded-full bg-purple-700 text-white font-black text-xs flex items-center justify-center">Y</span>
                         <h3 class="text-xl font-black text-white">Configuración de Yape</h3>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Nombre Completo del Titular:</label>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Titular Yape:</label>
                         <input type="text" id="inputYapeTitular" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-semibold text-sm text-white focus:outline-none focus:border-brand-purple">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Número Yape (solo dígitos):</label>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Número (dígitos):</label>
                         <input type="text" id="inputYapeNumero" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-semibold text-sm text-white focus:outline-none focus:border-brand-purple">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Número Visible (con espacios):</label>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Número Visible:</label>
                         <input type="text" id="inputYapeVisible" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-semibold text-sm text-white focus:outline-none focus:border-brand-purple">
                     </div>
 
                     <div class="pt-2 border-t border-slate-800">
-                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Código QR Yape Actual:</label>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">QR Yape Actual:</label>
                         <div class="flex items-center gap-4">
                             <img id="previewQrYape" src="qr-yape.png" alt="QR Yape" class="w-24 h-24 object-contain rounded-xl bg-white p-1 border border-slate-700">
                             <div>
                                 <label class="cursor-pointer inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-slate-700 transition-colors">
                                     <i class="fa-solid fa-camera text-purple-400"></i>
-                                    <span>Cambiar Imagen QR</span>
+                                    <span>Cambiar QR</span>
                                     <input type="file" id="fileQrYape" accept="image/*" class="hidden">
                                 </label>
-                                <span class="block text-[10px] text-slate-500 mt-1">Sube imagen cuadrada (PNG/JPG)</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Plin Card -->
-                <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-teal-900/50 relative overflow-hidden space-y-5">
+                <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-teal-900/50 space-y-5">
                     <div class="flex items-center gap-3">
                         <span class="w-8 h-8 rounded-full bg-teal-500 text-white font-black text-xs flex items-center justify-center">P</span>
                         <h3 class="text-xl font-black text-white">Configuración de Plin</h3>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Nombre Completo del Titular:</label>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Titular Plin:</label>
                         <input type="text" id="inputPlinTitular" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-semibold text-sm text-white focus:outline-none focus:border-brand-purple">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Número Plin (solo dígitos):</label>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Número (dígitos):</label>
                         <input type="text" id="inputPlinNumero" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-semibold text-sm text-white focus:outline-none focus:border-brand-purple">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Número Visible (con espacios):</label>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Número Visible:</label>
                         <input type="text" id="inputPlinVisible" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-semibold text-sm text-white focus:outline-none focus:border-brand-purple">
                     </div>
 
                     <div class="pt-2 border-t border-slate-800">
-                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Código QR Plin Actual:</label>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">QR Plin Actual:</label>
                         <div class="flex items-center gap-4">
                             <img id="previewQrPlin" src="qr-plin.png" alt="QR Plin" class="w-24 h-24 object-contain rounded-xl bg-white p-1 border border-slate-700">
                             <div>
                                 <label class="cursor-pointer inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-slate-700 transition-colors">
                                     <i class="fa-solid fa-camera text-teal-400"></i>
-                                    <span>Cambiar Imagen QR</span>
+                                    <span>Cambiar QR</span>
                                     <input type="file" id="fileQrPlin" accept="image/*" class="hidden">
                                 </label>
-                                <span class="block text-[10px] text-slate-500 mt-1">Sube imagen cuadrada (PNG/JPG)</span>
                             </div>
                         </div>
                     </div>
@@ -326,9 +449,7 @@
             </div>
         </section>
 
-        <!-- ══════════════════════════════════════════════════════
-             TAB 4: CONTACTO Y AVISOS
-             ══════════════════════════════════════════════════════ -->
+        <!-- TAB 7: CONTACTO Y REDES -->
         <section id="tab-contacto" class="tab-content hidden space-y-6">
             <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6">
                 <h3 class="text-xl font-black text-white flex items-center gap-2">
@@ -338,20 +459,48 @@
 
                 <div class="grid sm:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">WhatsApp Principal (con código 51):</label>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">WhatsApp Principal (código 51):</label>
                         <input type="text" id="inputContactoWhatsapp" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-semibold text-sm text-white focus:outline-none focus:border-brand-purple">
-                        <span class="text-[10px] text-slate-500 mt-1 block">Ejemplo: 51934894501</span>
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Teléfono Visible en Web:</label>
                         <input type="text" id="inputContactoVisible" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-semibold text-sm text-white focus:outline-none focus:border-brand-purple">
-                        <span class="text-[10px] text-slate-500 mt-1 block">Ejemplo: +51 934 894 501</span>
                     </div>
 
                     <div class="sm:col-span-2">
                         <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Correo Electrónico:</label>
                         <input type="email" id="inputContactoCorreo" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-semibold text-sm text-white focus:outline-none focus:border-brand-purple">
+                    </div>
+                </div>
+
+                <hr class="border-slate-800 my-6">
+
+                <h3 class="text-xl font-black text-white flex items-center gap-2">
+                    <i class="fa-solid fa-share-nodes text-emerald-400"></i>
+                    Redes Sociales (Iconos en Footer)
+                </h3>
+                <p class="text-xs text-slate-400">Si completas el enlace, el icono correspondiente aparecerá activo en la web.</p>
+
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2"><i class="fa-brands fa-tiktok mr-1"></i> TikTok URL:</label>
+                        <input type="text" id="inputRedesTiktok" placeholder="https://tiktok.com/@tu_cuenta" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2"><i class="fa-brands fa-facebook-f mr-1"></i> Facebook URL:</label>
+                        <input type="text" id="inputRedesFacebook" placeholder="https://facebook.com/tu_pagina" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2"><i class="fa-brands fa-instagram mr-1"></i> Instagram URL:</label>
+                        <input type="text" id="inputRedesInstagram" placeholder="https://instagram.com/tu_cuenta" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2"><i class="fa-brands fa-youtube mr-1"></i> YouTube URL:</label>
+                        <input type="text" id="inputRedesYoutube" placeholder="https://youtube.com/@tu_canal" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none">
                     </div>
                 </div>
 
@@ -365,27 +514,24 @@
                 <div class="grid sm:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Texto del Banner:</label>
-                        <input type="text" id="inputAvisoBanner" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-purple">
+                        <input type="text" id="inputAvisoBanner" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none">
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Texto del Enlace:</label>
-                        <input type="text" id="inputEnlaceBanner" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-purple">
+                        <input type="text" id="inputEnlaceBanner" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ══════════════════════════════════════════════════════
-             TAB 5: SEGURIDAD (PIN)
-             ══════════════════════════════════════════════════════ -->
+        <!-- TAB 8: SEGURIDAD (PIN) -->
         <section id="tab-seguridad" class="tab-content hidden space-y-6">
             <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800 max-w-xl mx-auto space-y-6">
                 <h3 class="text-xl font-black text-white flex items-center gap-2">
                     <i class="fa-solid fa-key text-rose-400"></i>
                     Cambiar PIN de Acceso al Panel
                 </h3>
-                <p class="text-xs text-slate-400">Este PIN se guarda en tu navegador para proteger el acceso al panel desde tu dispositivo.</p>
 
                 <div>
                     <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Nuevo PIN (4 a 8 caracteres):</label>
@@ -398,7 +544,7 @@
             </div>
         </section>
 
-        <!-- Bottom Action Bar (Fixed on mobile) -->
+        <!-- Bottom Action Bar -->
         <div class="mt-12 bg-slate-900/90 backdrop-blur-md border border-slate-800 p-6 rounded-3xl shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="text-center sm:text-left">
                 <span class="text-sm font-bold text-white block">¿Listo para aplicar tus cambios?</span>
@@ -420,57 +566,82 @@
 
     </main>
 
-    <!-- ══════════════════════════════════════════════════════════
-         MODAL CREAR / EDITAR CÓDIGO DE DESCUENTO
-         ══════════════════════════════════════════════════════════ -->
+    <!-- MODAL CREAR / EDITAR CÓDIGO DE DESCUENTO -->
     <div id="modalCodigo" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
             <button type="button" id="btnCerrarModalCodigo" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-
-            <h3 id="modalCodigoTitulo" class="text-xl font-black text-white mb-1">Nuevo Código de Descuento</h3>
-            <p class="text-xs text-slate-400 mb-6">El alumno podrá ingresarlo para obtener el descuento.</p>
-
+            <h3 id="modalCodigoTitulo" class="text-xl font-black text-white mb-1">Nuevo Código</h3>
             <form id="formCodigo" class="space-y-4">
                 <input type="hidden" id="editCodigoIndex" value="-1">
-
                 <div>
-                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Código (lo que escribe el alumno):</label>
-                    <input type="text" id="modalInputCodigo" required placeholder="Ej: LIVE30" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 uppercase font-black tracking-wider text-white focus:outline-none focus:border-brand-purple">
+                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Código (ej: LIVE30):</label>
+                    <input type="text" id="modalInputCodigo" required class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 uppercase font-black text-white">
                 </div>
-
                 <div>
-                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Monto de Descuento (en Soles S/):</label>
-                    <input type="number" id="modalInputDescuento" required min="1" placeholder="Ej: 30" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 font-black text-emerald-400 focus:outline-none focus:border-brand-purple">
+                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Descuento en Soles (S/):</label>
+                    <input type="number" id="modalInputDescuento" required min="1" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 font-black text-emerald-400">
                 </div>
-
                 <div>
-                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Fecha de Expiración (opcional):</label>
-                    <input type="date" id="modalInputVence" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 font-semibold text-sm text-white focus:outline-none focus:border-brand-purple">
-                    <span class="text-[10px] text-slate-500 mt-1 block">Déjalo vacío si no quieres que venza nunca</span>
+                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Fecha Expiración (AAAA-MM-DD):</label>
+                    <input type="date" id="modalInputVence" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white">
                 </div>
-
                 <div>
-                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Descripción que ve el alumno:</label>
-                    <input type="text" id="modalInputDesc" required placeholder="Ej: Descuento especial Live S/30" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-purple">
+                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Descripción:</label>
+                    <input type="text" id="modalInputDesc" required class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white">
                 </div>
-
                 <div class="pt-2 flex gap-3">
-                    <button type="button" id="btnCancelarCodigo" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-3 rounded-xl transition-colors">
-                        Cancelar
-                    </button>
-                    <button type="submit" class="flex-1 bg-brand-purple hover:bg-brand-darkPurple text-white font-extrabold py-3 rounded-xl shadow-lg transition-colors">
-                        Guardar Código
-                    </button>
+                    <button type="button" id="btnCancelarCodigo" class="flex-1 bg-slate-800 text-slate-300 font-bold py-3 rounded-xl">Cancelar</button>
+                    <button type="submit" class="flex-1 bg-brand-purple text-white font-extrabold py-3 rounded-xl">Guardar</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════════
-         MODAL CONFIGURAR GITHUB TOKEN
-         ══════════════════════════════════════════════════════ -->
+    <!-- MODAL CREAR / EDITAR PREGUNTA TEST -->
+    <div id="modalPregunta" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button type="button" id="btnCerrarModalPregunta" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 id="modalPreguntaTitulo" class="text-xl font-black text-white mb-4">Editar Pregunta del Test</h3>
+            
+            <form id="formPregunta" class="space-y-4">
+                <input type="hidden" id="editPreguntaIndex" value="-1">
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Enunciado de la Pregunta:</label>
+                    <textarea id="modalPreguntaEnunciado" required rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-white font-semibold focus:outline-none"></textarea>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold uppercase text-slate-400">Alternativas de Respuesta:</label>
+                    <div><input type="text" id="alt0" required placeholder="A)" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white"></div>
+                    <div><input type="text" id="alt1" required placeholder="B)" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white"></div>
+                    <div><input type="text" id="alt2" required placeholder="C)" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white"></div>
+                    <div><input type="text" id="alt3" required placeholder="D)" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white"></div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-amber-400 mb-1">Respuesta Correcta:</label>
+                    <select id="modalPreguntaCorrecta" class="w-full bg-slate-950 border border-amber-500/50 text-white rounded-xl px-4 py-2.5 text-xs font-bold">
+                        <option value="0">Alternativa A (Primera)</option>
+                        <option value="1">Alternativa B (Segunda)</option>
+                        <option value="2">Alternativa C (Tercera)</option>
+                        <option value="3">Alternativa D (Cuarta)</option>
+                    </select>
+                </div>
+
+                <div class="pt-2 flex gap-3">
+                    <button type="button" id="btnCancelarPregunta" class="flex-1 bg-slate-800 text-slate-300 font-bold py-3 rounded-xl">Cancelar</button>
+                    <button type="submit" class="flex-1 bg-brand-purple text-white font-extrabold py-3 rounded-xl">Guardar Pregunta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL CONFIGURAR GITHUB TOKEN -->
     <div id="modalConfig" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button type="button" id="btnCerrarModalConfig" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
@@ -481,43 +652,26 @@
                 <i class="fa-brands fa-github text-2xl text-purple-400"></i>
                 <h3 class="text-xl font-black text-white">Conexión con GitHub</h3>
             </div>
-            <p class="text-xs text-slate-400 mb-6">Permite al panel guardar cambios directamente en tu repositorio para que Vercel los publique solo.</p>
 
             <form id="formConfig" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Repositorio (Owner/Repo):</label>
-                    <input type="text" id="configRepo" required value="Bandervc/piacademy" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 font-semibold text-sm text-white focus:outline-none focus:border-brand-purple">
+                    <input type="text" id="configRepo" required value="Bandervc/piacademy" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 font-semibold text-sm text-white">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1">GitHub Personal Access Token (Classic o Fine-grained):</label>
-                    <input type="password" id="configToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 font-mono text-sm text-white focus:outline-none focus:border-brand-purple">
-                    <span class="text-[11px] text-slate-500 mt-1 block">Se almacena únicamente en tu navegador.</span>
-                </div>
-
-                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-xs text-slate-400 space-y-2">
-                    <span class="font-bold text-amber-400 block"><i class="fa-solid fa-circle-info mr-1"></i> ¿Cómo obtener tu Token de GitHub? (1 minuto):</span>
-                    <ol class="list-decimal list-inside space-y-1 text-[11px]">
-                        <li>Entra a GitHub → Tu foto de perfil → <strong>Settings</strong>.</li>
-                        <li>Baja a la izquierda a <strong>Developer Settings</strong> → <strong>Personal access tokens</strong> → <strong>Tokens (classic)</strong>.</li>
-                        <li>Haz clic en <strong>Generate new token (classic)</strong>.</li>
-                        <li>Marca la casilla <strong>repo</strong> (acceso completo a repositorios).</li>
-                        <li>Genera el token, cópialo y pégalo aquí.</li>
-                    </ol>
+                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1">GitHub Access Token:</label>
+                    <input type="password" id="configToken" placeholder="github_pat_xxx o ghp_xxx" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 font-mono text-sm text-white">
                 </div>
 
                 <div class="pt-2 flex gap-3">
-                    <button type="submit" class="w-full bg-brand-purple hover:bg-brand-darkPurple text-white font-extrabold py-3.5 rounded-xl shadow-lg transition-colors">
-                        Guardar Conexión
-                    </button>
+                    <button type="submit" class="w-full bg-brand-purple text-white font-extrabold py-3.5 rounded-xl shadow-lg">Guardar Conexión</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════════
-         TOAST / NOTIFICACIONES DE ESTADO
-         ══════════════════════════════════════════════════════ -->
+    <!-- TOAST NOTIFICACIONES -->
     <div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-slate-800 border border-slate-700 text-white px-5 py-4 rounded-2xl shadow-2xl flex items-center gap-3 transition-all">
         <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-xl"></i>
         <div>
@@ -526,29 +680,24 @@
         </div>
     </div>
 
-    <!-- Carga los datos actuales del sitio -->
     <script charset="UTF-8" src="datos.js"></script>
 
-    <!-- ══════════════════════════════════════════════════════════
-         LÓGICA DEL PANEL DE ADMINISTRACIÓN
-         ══════════════════════════════════════════════════════ -->
+    <!-- LÓGICA COMPLETA DEL PANEL -->
     <script>
         (function() {
             'use strict';
 
-            // Claves en LocalStorage
             const PIN_STORAGE_KEY = 'pi_admin_pin';
             const TOKEN_STORAGE_KEY = 'pi_github_token';
             const REPO_STORAGE_KEY = 'pi_github_repo';
             const DEFAULT_PIN = '2026';
             const DEFAULT_REPO = 'Bandervc/piacademy';
 
-            // Estado de trabajo
             let stateDatos = JSON.parse(JSON.stringify(window.DATOS || {}));
             let newQrYapeBase64 = null;
             let newQrPlinBase64 = null;
 
-            // --- 1. Autenticación y PIN ---
+            // --- 1. PIN & Security ---
             const pinScreen = document.getElementById('pinScreen');
             const pinForm = document.getElementById('pinForm');
             const pinInput = document.getElementById('pinInput');
@@ -566,28 +715,26 @@
                 } else {
                     pinError.classList.remove('hidden');
                     pinInput.value = '';
-                    pinInput.focus();
                 }
             });
 
             document.getElementById('btnLogout').addEventListener('click', () => {
                 pinInput.value = '';
                 pinScreen.classList.remove('hidden');
-                pinInput.focus();
             });
 
             document.getElementById('btnGuardarPin').addEventListener('click', () => {
                 const nuevo = document.getElementById('inputNuevoPin').value.trim();
                 if (nuevo.length >= 4) {
                     localStorage.setItem(PIN_STORAGE_KEY, nuevo);
-                    showToast('PIN Actualizado', 'Tu nuevo PIN ha sido guardado en este navegador.', 'success');
+                    showToast('PIN Actualizado', 'Tu nuevo PIN ha sido guardado.', 'success');
                     document.getElementById('inputNuevoPin').value = '';
                 } else {
-                    showToast('PIN muy corto', 'El PIN debe tener al menos 4 caracteres.', 'error');
+                    showToast('Error', 'El PIN debe tener al menos 4 caracteres.', 'error');
                 }
             });
 
-            // --- 2. Pestañas del Panel ---
+            // --- 2. Navigation Tabs ---
             const tabButtons = document.querySelectorAll('.tab-btn');
             const tabContents = document.querySelectorAll('.tab-content');
 
@@ -597,24 +744,37 @@
                     tabContents.forEach(c => c.classList.add('hidden'));
 
                     btn.classList.add('active');
-                    const targetId = btn.dataset.tab;
-                    document.getElementById(targetId).classList.remove('hidden');
+                    document.getElementById(btn.dataset.tab).classList.remove('hidden');
                 });
             });
 
-            // --- 3. Poblar Formularios con Datos ---
+            // --- 3. Poblar Formularios ---
             function poblarFormularios() {
                 const d = stateDatos;
 
                 // Precios
-                document.getElementById('inputPrecioNormal').value = d.precio?.normal || 380;
-                document.getElementById('inputPrecioPromo').value = d.precio?.promocional || 220;
+                document.getElementById('inputPrecioNormal').value = d.precio?.normal || 300;
+                document.getElementById('inputPrecioPromo').value = d.precio?.promocional || 150;
                 document.getElementById('inputPrecioNota').value = d.precio?.nota || 'pago único';
 
                 // Contador
                 document.getElementById('inputFechaLimite').value = d.promocion?.fechaLimite || '2026-09-15T23:59';
                 document.getElementById('inputTextoContador').value = d.promocion?.textoContador || '';
                 document.getElementById('checkMostrarContador').checked = d.promocion?.mostrarContador ?? true;
+
+                // Test
+                document.getElementById('checkTestMostrar').checked = d.test?.mostrar ?? true;
+                document.getElementById('inputTestTiempo').value = d.test?.tiempoSegundos ?? 90;
+
+                // Encabezados
+                const tx = d.textos || {};
+                document.getElementById('inputTextosHeroPildora').value = tx.heroPildora || '';
+                document.getElementById('inputTextosHeroTitulo').value = tx.heroTitulo || '';
+                document.getElementById('inputTextosHeroSubtitulo').value = tx.heroSubtitulo || '';
+                document.getElementById('inputTextosBeneficiosTitulo').value = tx.beneficiosTitulo || '';
+                document.getElementById('inputTextosAudienciaTitulo').value = tx.audienciaTitulo || '';
+                document.getElementById('inputTextosCursosTitulo').value = tx.cursosTitulo || '';
+                document.getElementById('inputTextosInversionTitulo').value = tx.inversionTitulo || '';
 
                 // Pagos
                 document.getElementById('inputYapeTitular').value = d.pago?.yape?.titular || '';
@@ -625,147 +785,260 @@
                 document.getElementById('inputPlinNumero').value = d.pago?.plin?.numero || '';
                 document.getElementById('inputPlinVisible').value = d.pago?.plin?.numeroVisible || '';
 
-                // Contacto
+                // Contacto & Redes
                 document.getElementById('inputContactoWhatsapp').value = d.contacto?.whatsapp || '';
                 document.getElementById('inputContactoVisible').value = d.contacto?.telefonoVisible || '';
                 document.getElementById('inputContactoCorreo').value = d.contacto?.correo || '';
                 document.getElementById('inputAvisoBanner').value = d.promocion?.avisoBanner || '';
                 document.getElementById('inputEnlaceBanner').value = d.promocion?.enlaceBanner || '';
 
-                // Renderizar lista de códigos
+                document.getElementById('inputRedesTiktok').value = d.redes?.tiktok || '';
+                document.getElementById('inputRedesFacebook').value = d.redes?.facebook || '';
+                document.getElementById('inputRedesInstagram').value = d.redes?.instagram || '';
+                document.getElementById('inputRedesYoutube').value = d.redes?.youtube || '';
+
                 renderCodigosList();
+                renderTurnosList();
+                renderPremiosList();
+                renderPreguntasList();
             }
 
-            // --- 4. Gestión de Códigos de Descuento ---
-            const codigosList = document.getElementById('codigosList');
-            const modalCodigo = document.getElementById('modalCodigo');
-            const formCodigo = document.getElementById('formCodigo');
-
+            // --- 4. Render Lista de Códigos ---
             function renderCodigosList() {
-                codigosList.innerHTML = '';
-                const codigos = stateDatos.codigos || [];
-
-                if (codigos.length === 0) {
-                    codigosList.innerHTML = `
-                        <div class="sm:col-span-3 text-center py-12 bg-slate-900/50 border border-dashed border-slate-800 rounded-3xl">
-                            <i class="fa-solid fa-tag text-3xl text-slate-600 mb-2"></i>
-                            <p class="text-sm font-bold text-slate-400">No hay códigos creados actualmente</p>
-                            <p class="text-xs text-slate-500 mt-1">Crea uno para tus transmisiones en vivo.</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                codigos.forEach((item, index) => {
+                const container = document.getElementById('codigosList');
+                container.innerHTML = '';
+                (stateDatos.codigos || []).forEach((item, index) => {
                     const card = document.createElement('div');
-                    card.className = 'bg-slate-900 border border-slate-800 p-5 rounded-3xl shadow-sm hover:border-purple-800/60 transition-all flex flex-col justify-between';
-
-                    const expiraTexto = item.vence ? `Vence: ${item.vence}` : 'Sin fecha de vencimiento';
-                    const expiraClase = item.vence ? 'text-amber-400/80' : 'text-emerald-400/80';
-
+                    card.className = 'bg-slate-900 border border-slate-800 p-5 rounded-3xl shadow-sm flex flex-col justify-between';
                     card.innerHTML = `
                         <div>
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="bg-purple-950/80 text-purple-300 border border-purple-800/40 text-xs font-black tracking-wider px-3 py-1 rounded-full uppercase">
-                                    ${item.codigo}
-                                </span>
-                                <span class="text-xl font-black text-emerald-400">
-                                    -S/ ${item.descuento}
-                                </span>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="bg-purple-950 text-purple-300 text-xs font-black px-3 py-1 rounded-full">${item.codigo}</span>
+                                <span class="text-lg font-black text-emerald-400">-S/ ${item.descuento}</span>
                             </div>
-                            <p class="text-sm font-bold text-white mb-1">${item.descripcion}</p>
-                            <p class="text-[11px] font-semibold ${expiraClase}">
-                                <i class="fa-regular fa-calendar mr-1"></i>${expiraTexto}
-                            </p>
+                            <p class="text-xs font-bold text-white mb-1">${item.descripcion}</p>
+                            <p class="text-[10px] text-slate-400">${item.vence ? 'Vence: ' + item.vence : 'Sin fecha límite'}</p>
                         </div>
-
-                        <div class="flex items-center gap-2 pt-4 mt-4 border-t border-slate-800/80">
-                            <button type="button" class="btn-edit-code flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold py-2 rounded-xl transition-colors flex items-center justify-center gap-1" data-index="${index}">
-                                <i class="fa-solid fa-pen"></i> Editar
-                            </button>
-                            <button type="button" class="btn-del-code p-2 bg-slate-800 hover:bg-red-500/20 text-slate-400 hover:text-red-400 rounded-xl transition-colors" data-index="${index}" title="Eliminar código">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
+                        <div class="flex gap-2 pt-4 mt-3 border-t border-slate-800">
+                            <button type="button" onclick="window.editCod(${index})" class="flex-1 bg-slate-800 text-xs font-bold py-2 rounded-xl text-slate-300">Editar</button>
+                            <button type="button" onclick="window.delCod(${index})" class="p-2 bg-slate-800 text-red-400 rounded-xl"><i class="fa-solid fa-trash"></i></button>
                         </div>
                     `;
-                    codigosList.appendChild(card);
-                });
-
-                // Attach events
-                document.querySelectorAll('.btn-edit-code').forEach(btn => {
-                    btn.addEventListener('click', () => abrirModalCodigo(parseInt(btn.dataset.index)));
-                });
-                document.querySelectorAll('.btn-del-code').forEach(btn => {
-                    btn.addEventListener('click', () => eliminarCodigo(parseInt(btn.dataset.index)));
+                    container.appendChild(card);
                 });
             }
 
-            function abrirModalCodigo(index = -1) {
+            window.editCod = (index) => {
+                const c = stateDatos.codigos[index];
                 document.getElementById('editCodigoIndex').value = index;
-                if (index >= 0) {
-                    const c = stateDatos.codigos[index];
-                    document.getElementById('modalCodigoTitulo').textContent = 'Editar Código de Descuento';
-                    document.getElementById('modalInputCodigo').value = c.codigo;
-                    document.getElementById('modalInputDescuento').value = c.descuento;
-                    document.getElementById('modalInputVence').value = c.vence || '';
-                    document.getElementById('modalInputDesc').value = c.descripcion;
-                } else {
-                    document.getElementById('modalCodigoTitulo').textContent = 'Nuevo Código de Descuento';
-                    formCodigo.reset();
-                    document.getElementById('editCodigoIndex').value = -1;
-                }
-                modalCodigo.classList.remove('hidden');
-                document.getElementById('modalInputCodigo').focus();
-            }
+                document.getElementById('modalInputCodigo').value = c.codigo;
+                document.getElementById('modalInputDescuento').value = c.descuento;
+                document.getElementById('modalInputVence').value = c.vence || '';
+                document.getElementById('modalInputDesc').value = c.descripcion;
+                document.getElementById('modalCodigo').classList.remove('hidden');
+            };
 
-            function cerrarModalCodigo() {
-                modalCodigo.classList.add('hidden');
-            }
-
-            function eliminarCodigo(index) {
-                if (confirm(`¿Seguro que deseas eliminar el código "${stateDatos.codigos[index].codigo}"?`)) {
+            window.delCod = (index) => {
+                if (confirm('¿Eliminar este código?')) {
                     stateDatos.codigos.splice(index, 1);
                     renderCodigosList();
-                    showToast('Código Eliminado', 'Recuerda hacer clic en "Guardar y Publicar" para aplicar.', 'info');
                 }
-            }
+            };
 
-            document.getElementById('btnAddCode').addEventListener('click', () => abrirModalCodigo(-1));
-            document.getElementById('btnCerrarModalCodigo').addEventListener('click', cerrarModalCodigo);
-            document.getElementById('btnCancelarCodigo').addEventListener('click', cerrarModalCodigo);
+            document.getElementById('btnAddCode').addEventListener('click', () => {
+                document.getElementById('editCodigoIndex').value = -1;
+                document.getElementById('formCodigo').reset();
+                document.getElementById('modalCodigo').classList.remove('hidden');
+            });
+            document.getElementById('btnCerrarModalCodigo').onclick = () => document.getElementById('modalCodigo').classList.add('hidden');
+            document.getElementById('btnCancelarCodigo').onclick = () => document.getElementById('modalCodigo').classList.add('hidden');
 
-            formCodigo.addEventListener('submit', (e) => {
+            document.getElementById('formCodigo').onsubmit = (e) => {
                 e.preventDefault();
-                const index = parseInt(document.getElementById('editCodigoIndex').value);
-                const nuevoItem = {
+                const idx = parseInt(document.getElementById('editCodigoIndex').value);
+                const nuevo = {
                     codigo: document.getElementById('modalInputCodigo').value.trim().toUpperCase(),
                     descuento: parseInt(document.getElementById('modalInputDescuento').value),
                     vence: document.getElementById('modalInputVence').value,
                     descripcion: document.getElementById('modalInputDesc').value.trim(),
                 };
-
                 if (!stateDatos.codigos) stateDatos.codigos = [];
+                if (idx >= 0) stateDatos.codigos[idx] = nuevo;
+                else stateDatos.codigos.push(nuevo);
 
-                if (index >= 0) {
-                    stateDatos.codigos[index] = nuevoItem;
-                } else {
-                    stateDatos.codigos.push(nuevoItem);
-                }
-
-                cerrarModalCodigo();
+                document.getElementById('modalCodigo').classList.add('hidden');
                 renderCodigosList();
-                showToast('Código Guardado', `Código ${nuevoItem.codigo} listo. Haz clic en "Guardar y Publicar".`, 'success');
-            });
+            };
 
-            // --- 5. Subida de Imágenes QR (Previsualización) ---
+            // --- 5. Render Lista de Turnos & Cupos ---
+            function renderTurnosList() {
+                const container = document.getElementById('turnosList');
+                container.innerHTML = '';
+                (stateDatos.horarios || []).forEach((item, index) => {
+                    const disp = item.disponible !== false;
+                    const card = document.createElement('div');
+                    card.className = `p-4 rounded-2xl border flex items-center justify-between gap-4 ${disp ? 'bg-slate-900 border-slate-800' : 'bg-rose-950/20 border-rose-900/40'}`;
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-white text-sm">${item.nombre}</span>
+                                <span class="text-xs ${disp ? 'text-emerald-400 font-bold bg-emerald-950 px-2 py-0.5 rounded-full' : 'text-rose-400 font-black uppercase bg-rose-900/50 px-2 py-0.5 rounded-full'}">
+                                    ${disp ? '✓ Disponible' : '⛔ Cupos Llenos'}
+                                </span>
+                            </div>
+                            <span class="text-xs text-slate-400 block mt-1"><i class="fa-regular fa-clock mr-1"></i>${item.rango}</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <label class="flex items-center gap-2 cursor-pointer bg-slate-800 px-3 py-2 rounded-xl text-xs font-bold">
+                                <input type="checkbox" ${disp ? 'checked' : ''} onchange="window.toggleTurno(${index})" class="w-4 h-4 accent-brand-purple">
+                                <span>Permitir inscripciones</span>
+                            </label>
+                            <button type="button" onclick="window.delTurno(${index})" class="p-2 bg-slate-800 text-slate-400 hover:text-red-400 rounded-xl"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+
+            window.toggleTurno = (index) => {
+                stateDatos.horarios[index].disponible = !stateDatos.horarios[index].disponible;
+                renderTurnosList();
+            };
+
+            window.delTurno = (index) => {
+                if (confirm('¿Eliminar este turno?')) {
+                    stateDatos.horarios.splice(index, 1);
+                    renderTurnosList();
+                }
+            };
+
+            document.getElementById('btnAddTurno').onclick = () => {
+                const nombre = prompt('Nombre del turno (ej: Turno Noche):');
+                if (!nombre) return;
+                const rango = prompt('Horario / Rango (ej: 6:00 pm - 9:00 pm):');
+                if (!rango) return;
+                if (!stateDatos.horarios) stateDatos.horarios = [];
+                stateDatos.horarios.push({ nombre, rango, disponible: true });
+                renderTurnosList();
+            };
+
+            // --- 6. Render Lista de Premios del Test ---
+            function renderPremiosList() {
+                const container = document.getElementById('premiosList');
+                container.innerHTML = '';
+                (stateDatos.test?.premios || []).forEach((item, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-slate-950 p-4 rounded-2xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs';
+                    card.innerHTML = `
+                        <div>
+                            <span class="font-bold text-amber-400 block mb-0.5">De ${item.minAciertos} a ${item.maxAciertos} respuestas correctas:</span>
+                            <span class="text-slate-300 font-semibold">${item.mensaje}</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <span class="bg-purple-950 text-purple-300 font-black px-3 py-1 rounded-full">Código: ${item.codigo}</span>
+                            <button type="button" onclick="window.delPremio(${index})" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+
+            window.delPremio = (index) => {
+                stateDatos.test.premios.splice(index, 1);
+                renderPremiosList();
+            };
+
+            document.getElementById('btnAddPremio').onclick = () => {
+                const minA = parseInt(prompt('Aciertos MÍNIMOS para este premio (ej: 1):') || '1');
+                const maxA = parseInt(prompt('Aciertos MÁXIMOS para este premio (ej: 2):') || '2');
+                const cod = (prompt('Código de descuento a otorgar (ej: LIVE20):') || 'LIVE20').trim().toUpperCase();
+                const msg = prompt('Mensaje felicitando al alumno:', '¡Excelente! Ganaste el descuento especial ' + cod);
+                if (!stateDatos.test) stateDatos.test = {};
+                if (!stateDatos.test.premios) stateDatos.test.premios = [];
+                stateDatos.test.premios.push({ minAciertos: minA, maxAciertos: maxA, codigo: cod, mensaje: msg });
+                renderPremiosList();
+            };
+
+            // --- 7. Render Lista de Preguntas del Test ---
+            function renderPreguntasList() {
+                const container = document.getElementById('preguntasList');
+                container.innerHTML = '';
+                (stateDatos.test?.preguntas || []).forEach((item, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-2';
+                    const alts = (item.alternativas || []).map((a, i) => `<span class="${i === item.correcta ? 'text-emerald-400 font-bold' : 'text-slate-400'}">${['A','B','C','D'][i]}) ${a}</span>`).join(' &nbsp;|&nbsp; ');
+                    card.innerHTML = `
+                        <div class="flex items-start justify-between gap-3">
+                            <h4 class="font-bold text-white text-sm">${index + 1}. ${item.enunciado}</h4>
+                            <div class="flex gap-2 shrink-0">
+                                <button type="button" onclick="window.editPregunta(${index})" class="text-slate-400 hover:text-white"><i class="fa-solid fa-pen"></i></button>
+                                <button type="button" onclick="window.delPregunta(${index})" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="text-xs pt-1 border-t border-slate-900">${alts}</div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+
+            window.editPregunta = (index) => {
+                const p = stateDatos.test.preguntas[index];
+                document.getElementById('editPreguntaIndex').value = index;
+                document.getElementById('modalPreguntaEnunciado').value = p.enunciado;
+                (p.alternativas || []).forEach((alt, i) => {
+                    if (document.getElementById('alt' + i)) document.getElementById('alt' + i).value = alt;
+                });
+                document.getElementById('modalPreguntaCorrecta').value = String(p.correcta || 0);
+                document.getElementById('modalPregunta').classList.remove('hidden');
+            };
+
+            window.delPregunta = (index) => {
+                if (confirm('¿Eliminar esta pregunta?')) {
+                    stateDatos.test.preguntas.splice(index, 1);
+                    renderPreguntasList();
+                }
+            };
+
+            document.getElementById('btnAddPregunta').onclick = () => {
+                document.getElementById('editPreguntaIndex').value = -1;
+                document.getElementById('formPregunta').reset();
+                document.getElementById('modalPregunta').classList.remove('hidden');
+            };
+
+            document.getElementById('btnCerrarModalPregunta').onclick = () => document.getElementById('modalPregunta').classList.add('hidden');
+            document.getElementById('btnCancelarPregunta').onclick = () => document.getElementById('modalPregunta').classList.add('hidden');
+
+            document.getElementById('formPregunta').onsubmit = (e) => {
+                e.preventDefault();
+                const idx = parseInt(document.getElementById('editPreguntaIndex').value);
+                const nueva = {
+                    enunciado: document.getElementById('modalPreguntaEnunciado').value.trim(),
+                    alternativas: [
+                        document.getElementById('alt0').value.trim(),
+                        document.getElementById('alt1').value.trim(),
+                        document.getElementById('alt2').value.trim(),
+                        document.getElementById('alt3').value.trim(),
+                    ],
+                    correcta: parseInt(document.getElementById('modalPreguntaCorrecta').value),
+                };
+
+                if (!stateDatos.test) stateDatos.test = {};
+                if (!stateDatos.test.preguntas) stateDatos.test.preguntas = [];
+
+                if (idx >= 0) stateDatos.test.preguntas[idx] = nueva;
+                else stateDatos.test.preguntas.push(nueva);
+
+                document.getElementById('modalPregunta').classList.add('hidden');
+                renderPreguntasList();
+            };
+
+            // --- 8. QR Upload Previews ---
             function configurarInputImagen(inputId, previewId, callback) {
                 const input = document.getElementById(inputId);
                 const preview = document.getElementById(previewId);
-
                 input.addEventListener('change', (e) => {
                     const file = e.target.files[0];
                     if (!file) return;
-
                     const reader = new FileReader();
                     reader.onload = (event) => {
                         preview.src = event.target.result;
@@ -779,11 +1052,11 @@
             configurarInputImagen('fileQrYape', 'previewQrYape', (base64) => { newQrYapeBase64 = base64; });
             configurarInputImagen('fileQrPlin', 'previewQrPlin', (base64) => { newQrPlinBase64 = base64; });
 
-            // --- 6. Recopilar Formulario a Objeto ---
+            // --- 9. Recolectar Todos los Datos ---
             function recolectarDatosDeFormularios() {
                 stateDatos.precio = {
-                    normal: parseInt(document.getElementById('inputPrecioNormal').value) || 380,
-                    promocional: parseInt(document.getElementById('inputPrecioPromo').value) || 220,
+                    normal: parseInt(document.getElementById('inputPrecioNormal').value) || 300,
+                    promocional: parseInt(document.getElementById('inputPrecioPromo').value) || 150,
                     nota: document.getElementById('inputPrecioNota').value.trim() || 'pago único',
                 };
 
@@ -793,6 +1066,19 @@
                 stateDatos.promocion.mostrarContador = document.getElementById('checkMostrarContador').checked;
                 stateDatos.promocion.avisoBanner = document.getElementById('inputAvisoBanner').value.trim();
                 stateDatos.promocion.enlaceBanner = document.getElementById('inputEnlaceBanner').value.trim();
+
+                if (!stateDatos.test) stateDatos.test = {};
+                stateDatos.test.mostrar = document.getElementById('checkTestMostrar').checked;
+                stateDatos.test.tiempoSegundos = parseInt(document.getElementById('inputTestTiempo').value) || 0;
+
+                if (!stateDatos.textos) stateDatos.textos = {};
+                stateDatos.textos.heroPildora = document.getElementById('inputTextosHeroPildora').value.trim();
+                stateDatos.textos.heroTitulo = document.getElementById('inputTextosHeroTitulo').value.trim();
+                stateDatos.textos.heroSubtitulo = document.getElementById('inputTextosHeroSubtitulo').value.trim();
+                stateDatos.textos.beneficiosTitulo = document.getElementById('inputTextosBeneficiosTitulo').value.trim();
+                stateDatos.textos.audienciaTitulo = document.getElementById('inputTextosAudienciaTitulo').value.trim();
+                stateDatos.textos.cursosTitulo = document.getElementById('inputTextosCursosTitulo').value.trim();
+                stateDatos.textos.inversionTitulo = document.getElementById('inputTextosInversionTitulo').value.trim();
 
                 if (!stateDatos.pago) stateDatos.pago = { yape: {}, plin: {} };
                 stateDatos.pago.yape.titular = document.getElementById('inputYapeTitular').value.trim();
@@ -810,20 +1096,19 @@
                 stateDatos.contacto.telefonoVisible = document.getElementById('inputContactoVisible').value.trim();
                 stateDatos.contacto.correo = document.getElementById('inputContactoCorreo').value.trim();
 
+                if (!stateDatos.redes) stateDatos.redes = {};
+                stateDatos.redes.tiktok = document.getElementById('inputRedesTiktok').value.trim();
+                stateDatos.redes.facebook = document.getElementById('inputRedesFacebook').value.trim();
+                stateDatos.redes.instagram = document.getElementById('inputRedesInstagram').value.trim();
+                stateDatos.redes.youtube = document.getElementById('inputRedesYoutube').value.trim();
+
                 return stateDatos;
             }
 
-            // --- 7. Generador de datos.js ---
+            // --- 10. Generar datos.js ---
             function generarCodigoDatosJS(d) {
                 return `/* ═══════════════════════════════════════════════════════════════
    ✏️  ESTE ES EL ÚNICO ARCHIVO QUE NECESITAS EDITAR
-
-   Reglas para no romper nada:
-   1. Cambia solo lo que está entre "comillas".
-   2. No borres las comas del final de cada línea.
-   3. Los números (precios) van SIN comillas.
-   4. Después de guardar, actualiza la página en el navegador (F5).
-   5. Si algo sale mal, verás un aviso rojo arriba explicándote qué revisar.
    ═══════════════════════════════════════════════════════════════ */
 
 window.DATOS = {
@@ -843,8 +1128,11 @@ window.DATOS = {
   // ═══ 5. PRECIO ═══
   precio: ${JSON.stringify(d.precio || {}, null, 4).replace(/\n/g, '\n  ')},
 
-  // ═══ 6. TURNOS ═══
+  // ═══ 6. TURNOS Y HORARIOS ═══
   horarios: ${JSON.stringify(d.horarios || [], null, 4).replace(/\n/g, '\n  ')},
+
+  // ═══ 6.1 ENCABEZADOS Y TÍTULOS EDITABLES ═══
+  textos: ${JSON.stringify(d.textos || {}, null, 4).replace(/\n/g, '\n  ')},
 
   // ═══ 7. A QUIÉN ESTÁ DIRIGIDO ═══
   audiencia: ${JSON.stringify(d.audiencia || [], null, 4).replace(/\n/g, '\n  ')},
@@ -855,7 +1143,7 @@ window.DATOS = {
   // ═══ 9. CURSOS ═══
   cursos: ${JSON.stringify(d.cursos || [], null, 4).replace(/\n/g, '\n  ')},
 
-  // ═══ 10. TEST DE NIVEL ═══
+  // ═══ 10. TEST DE NIVEL Y PREMIOS GAMIFICADOS ═══
   test: ${JSON.stringify(d.test || {}, null, 4).replace(/\n/g, '\n  ')},
 
   // ═══ 11. TESTIMONIOS ═══
@@ -876,7 +1164,7 @@ window.DATOS = {
 `;
             }
 
-            // --- 8. Publicación en GitHub (Vercel Deploy) ---
+            // --- 11. Publicación en GitHub ---
             async function publicarEnGitHub() {
                 const token = localStorage.getItem(TOKEN_STORAGE_KEY);
                 const repo = localStorage.getItem(REPO_STORAGE_KEY) || DEFAULT_REPO;
@@ -892,14 +1180,12 @@ window.DATOS = {
                 try {
                     recolectarDatosDeFormularios();
                     const codigoJS = generarCodigoDatosJS(stateDatos);
-                    
-                    // Codificar a Base64 en UTF-8 seguro
+
                     const utf8Bytes = new TextEncoder().encode(codigoJS);
                     let binaryStr = '';
                     utf8Bytes.forEach(b => binaryStr += String.fromCharCode(b));
                     const base64Content = btoa(binaryStr);
 
-                    // 1. Obtener SHA actual de datos.js
                     const getUrl = `https://api.github.com/repos/${repo}/contents/datos.js`;
                     const getRes = await fetch(getUrl, {
                         headers: {
@@ -908,14 +1194,9 @@ window.DATOS = {
                         }
                     });
 
-                    if (!getRes.ok && getRes.status !== 404) {
-                        throw new Error(`Error al leer archivo (${getRes.status}): ${await getRes.text()}`);
-                    }
-
                     const getData = getRes.ok ? await getRes.json() : null;
                     const sha = getData ? getData.sha : null;
 
-                    // 2. Subir nuevo datos.js
                     const putRes = await fetch(getUrl, {
                         method: 'PUT',
                         headers: {
@@ -924,23 +1205,20 @@ window.DATOS = {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            message: 'Actualizar contenidos desde Panel de Administrador',
+                            message: 'Actualizar contenidos, preguntas y turnos desde Panel de Administrador',
                             content: base64Content,
                             sha: sha || undefined,
                         })
                     });
 
                     if (!putRes.ok) {
-                        throw new Error(`Error al subir a GitHub (${putRes.status}): ${await putRes.text()}`);
+                        throw new Error(`Error al subir a GitHub (${putRes.status})`);
                     }
 
-                    // 3. Si hay nuevo QR de Yape, subirlo
                     if (newQrYapeBase64) {
                         await subirImagenAGitHub(repo, token, 'qr-yape.png', newQrYapeBase64);
                         newQrYapeBase64 = null;
                     }
-
-                    // 4. Si hay nuevo QR de Plin, subirlo
                     if (newQrPlinBase64) {
                         await subirImagenAGitHub(repo, token, 'qr-plin.png', newQrPlinBase64);
                         newQrPlinBase64 = null;
@@ -957,35 +1235,23 @@ window.DATOS = {
             async function subirImagenAGitHub(repo, token, fileName, dataUrl) {
                 const base64Data = dataUrl.split(',')[1];
                 const url = `https://api.github.com/repos/${repo}/contents/${fileName}`;
-
                 let sha = null;
                 try {
                     const res = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` } });
-                    if (res.ok) {
-                        const data = await res.json();
-                        sha = data.sha;
-                    }
+                    if (res.ok) sha = (await res.json()).sha;
                 } catch(e) {}
 
                 await fetch(url, {
                     method: 'PUT',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        message: `Actualizar imagen ${fileName}`,
-                        content: base64Data,
-                        sha: sha || undefined,
-                    })
+                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: `Actualizar imagen ${fileName}`, content: base64Data, sha: sha || undefined })
                 });
             }
 
-            document.getElementById('btnDeployTop').addEventListener('click', publicarEnGitHub);
-            document.getElementById('btnDeployBottom').addEventListener('click', publicarEnGitHub);
+            document.getElementById('btnDeployTop').onclick = publicarEnGitHub;
+            document.getElementById('btnDeployBottom').onclick = publicarEnGitHub;
 
-            // --- 9. Descargar datos.js (Respaldo Manual) ---
-            document.getElementById('btnDescargarDatos').addEventListener('click', () => {
+            document.getElementById('btnDescargarDatos').onclick = () => {
                 recolectarDatosDeFormularios();
                 const codigoJS = generarCodigoDatosJS(stateDatos);
                 const blob = new Blob([codigoJS], { type: 'application/javascript;charset=utf-8' });
@@ -997,73 +1263,56 @@ window.DATOS = {
                 a.click();
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
-                showToast('Archivo Descargado', 'Guarda el archivo datos.js en la carpeta de tu proyecto.', 'info');
-            });
+                showToast('Archivo Descargado', 'Respaldo datos.js guardado.', 'info');
+            };
 
-            // --- 10. Configuración GitHub Modal ---
+            // Modal Config
             const modalConfig = document.getElementById('modalConfig');
-            const formConfig = document.getElementById('formConfig');
-
-            document.getElementById('btnOpenConfigModal').addEventListener('click', () => {
+            document.getElementById('btnOpenConfigModal').onclick = () => {
                 document.getElementById('configRepo').value = localStorage.getItem(REPO_STORAGE_KEY) || DEFAULT_REPO;
                 document.getElementById('configToken').value = localStorage.getItem(TOKEN_STORAGE_KEY) || '';
                 modalConfig.classList.remove('hidden');
-            });
+            };
+            document.getElementById('btnCerrarModalConfig').onclick = () => modalConfig.classList.add('hidden');
 
-            document.getElementById('btnCerrarModalConfig').addEventListener('click', () => {
-                modalConfig.classList.add('hidden');
-            });
-
-            formConfig.addEventListener('submit', (e) => {
+            document.getElementById('formConfig').onsubmit = (e) => {
                 e.preventDefault();
                 const repo = document.getElementById('configRepo').value.trim();
                 const token = document.getElementById('configToken').value.trim();
-
                 localStorage.setItem(REPO_STORAGE_KEY, repo);
                 if (token) localStorage.setItem(TOKEN_STORAGE_KEY, token);
-
                 modalConfig.classList.add('hidden');
                 actualizarBannerGithub();
-                showToast('Configuración Guardada', 'Conexión con GitHub actualizada.', 'success');
-            });
+                showToast('Configuración Guardada', 'Conexión con GitHub lista.', 'success');
+            };
 
             function actualizarBannerGithub() {
                 const repo = localStorage.getItem(REPO_STORAGE_KEY) || DEFAULT_REPO;
                 const hasToken = !!localStorage.getItem(TOKEN_STORAGE_KEY);
                 const statusText = document.getElementById('githubStatusText');
-                
                 if (hasToken) {
                     statusText.textContent = `Conexión con GitHub activa: ${repo}`;
                     document.getElementById('githubStatusBox').className = 'mb-6 p-4 rounded-2xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-emerald-950/40 border-emerald-800/40 text-emerald-200 text-xs';
                 } else {
-                    statusText.textContent = `Falta configurar Token de GitHub para publicación automática (${repo})`;
+                    statusText.textContent = `Configura tu Token de GitHub para publicar (${repo})`;
                     document.getElementById('githubStatusBox').className = 'mb-6 p-4 rounded-2xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-amber-950/40 border-amber-800/40 text-amber-200 text-xs';
                 }
             }
 
-            // --- 11. Toast Helper ---
             function showToast(title, msg, type = 'success') {
                 const toast = document.getElementById('toast');
                 const icon = document.getElementById('toastIcon');
                 document.getElementById('toastTitle').textContent = title;
                 document.getElementById('toastMsg').textContent = msg;
-
-                if (type === 'success') {
-                    icon.className = 'fa-solid fa-circle-check text-emerald-400 text-xl';
-                } else if (type === 'error') {
-                    icon.className = 'fa-solid fa-circle-xmark text-rose-400 text-xl';
-                } else {
-                    icon.className = 'fa-solid fa-circle-info text-amber-400 text-xl';
-                }
-
+                if (type === 'success') icon.className = 'fa-solid fa-circle-check text-emerald-400 text-xl';
+                else if (type === 'error') icon.className = 'fa-solid fa-circle-xmark text-rose-400 text-xl';
+                else icon.className = 'fa-solid fa-circle-info text-amber-400 text-xl';
                 toast.classList.remove('hidden');
                 setTimeout(() => { toast.classList.add('hidden'); }, 4000);
             }
 
-            // Inicialización
             poblarFormularios();
             actualizarBannerGithub();
-
         })();
     </script>
 </body>
