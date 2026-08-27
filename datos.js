@@ -38,7 +38,7 @@ window.DATOS = {
       {
           "nombre": "Turno Noche",
           "rango": "7:00 pm - 8:30 pm",
-          "disponible": true
+          "disponible": false
       },
       {
           "nombre": "Turno Tarde",
@@ -50,7 +50,7 @@ window.DATOS = {
   // ═══ 6.1 ENCABEZADOS Y TÍTULOS EDITABLES ═══
   textos: {
       "heroPildora": "PSDDA",
-      "heroTitulo": "TEXTO PRINCIPALhttps://pi-academy-kappa.vercel.app/index.html",
+      "heroTitulo": "TEXTO PRINCIPAL",
       "heroSubtitulo": "SUBTITULO",
       "beneficiosTitulo": "METODOLOGÍA",
       "audienciaTitulo": "DIRIGIDO A",
