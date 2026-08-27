@@ -22,8 +22,8 @@ window.DATOS = {
       "fechaLimite": "2026-09-15T23:59",
       "textoContador": "!No dejes pasar esta oportunidad!",
       "mostrarContador": true,
-      "avisoBanner": "TEXTO DEL BANNER",
-      "enlaceBanner": "TEXTO DEL ENLACE"
+      "avisoBanner": "Ciclo Integral PUCP & Beca 18 — Vacantes Limitadas.",
+      "enlaceBanner": "¡Reserva tu cupo con descuento aquí!"
   },
 
   // ═══ 5. PRECIO ═══
@@ -83,6 +83,18 @@ window.DATOS = {
               "maxAciertos": 10,
               "codigo": "LIVE20",
               "mensaje": "¡Excelente! Ganaste el descuento especial LIVE20"
+          }
+      ],
+      "preguntas": [
+          {
+              "enunciado": "Un camión transporta 50 cajas que contienen\nbotellas llenas de agua. Cada caja contiene\n20 botellas de 1,5 litros cada una. Si cada caja\nvacía pesa 0,04 kg, cada botella vacía pesa\n0,05 kg y 1 litro de agua pesa 1 kg, ¿cuánto\npesa, en total, la carga que transporta el\ncamión?",
+              "alternativas": [
+                  "1552 kg",
+                  "1570 kg",
+                  "1582 kg",
+                  "1590 kg"
+              ],
+              "correcta": 0
           }
       ]
   },
