@@ -566,6 +566,10 @@
 
                 <div class="grid sm:grid-cols-2 gap-6">
                     <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Nombre de Marca:</label>
+                        <input type="text" id="inputFooterNombre" placeholder="PiAcademy" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-semibold text-sm text-white focus:outline-none focus:border-brand-purple">
+                    </div>
+                    <div>
                         <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Año de Copyright:</label>
                         <input type="text" id="inputFooterAnio" placeholder="2026" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-semibold text-sm text-white focus:outline-none focus:border-brand-purple">
                     </div>
@@ -574,6 +578,32 @@
                 <div>
                     <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Descripción Corta (Footer):</label>
                     <textarea id="inputFooterDesc" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-semibold text-sm text-white focus:outline-none focus:border-brand-purple"></textarea>
+                </div>
+
+                <hr class="border-slate-800">
+
+                <h4 class="text-sm font-bold uppercase text-amber-400">Enlaces de Navegación</h4>
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Enlace 1:</label>
+                        <input type="text" id="inputFooterNav1" placeholder="Metodología PiAcademy" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2 text-sm text-white focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Enlace 2:</label>
+                        <input type="text" id="inputFooterNav2" placeholder="Enfoque PUCP & Beca 18" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2 text-sm text-white focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Enlace 3:</label>
+                        <input type="text" id="inputFooterNav3" placeholder="Plan de Cursos" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2 text-sm text-white focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Enlace 4:</label>
+                        <input type="text" id="inputFooterNav4" placeholder="Ciclo Integral & Inversión" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2 text-sm text-white focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Enlace 5:</label>
+                        <input type="text" id="inputFooterNav5" placeholder="Test de Nivel Gratuito" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2 text-sm text-white focus:outline-none">
+                    </div>
                 </div>
             </div>
         </section>
@@ -890,8 +920,14 @@
                 document.getElementById('inputRedesYoutube').value = d.redes?.youtube || '';
 
                 // Footer
+                document.getElementById('inputFooterNombre').value = d.marca?.nombre || '';
                 document.getElementById('inputFooterAnio').value = d.marca?.anioCopyright || '';
                 document.getElementById('inputFooterDesc').value = d.marca?.descripcionPie || '';
+                document.getElementById('inputFooterNav1').value = d.marca?.nav1 || 'Metodología PiAcademy';
+                document.getElementById('inputFooterNav2').value = d.marca?.nav2 || 'Enfoque PUCP & Beca 18';
+                document.getElementById('inputFooterNav3').value = d.marca?.nav3 || 'Plan de Cursos';
+                document.getElementById('inputFooterNav4').value = d.marca?.nav4 || 'Ciclo Integral & Inversión';
+                document.getElementById('inputFooterNav5').value = d.marca?.nav5 || 'Test de Nivel Gratuito';
 
                 renderCodigosList();
                 renderTurnosList();
@@ -1318,8 +1354,14 @@
                 stateDatos.redes.youtube = document.getElementById('inputRedesYoutube').value.trim();
 
                 if (!stateDatos.marca) stateDatos.marca = {};
+                stateDatos.marca.nombre = document.getElementById('inputFooterNombre').value.trim();
                 stateDatos.marca.anioCopyright = document.getElementById('inputFooterAnio').value.trim();
                 stateDatos.marca.descripcionPie = document.getElementById('inputFooterDesc').value.trim();
+                stateDatos.marca.nav1 = document.getElementById('inputFooterNav1').value.trim();
+                stateDatos.marca.nav2 = document.getElementById('inputFooterNav2').value.trim();
+                stateDatos.marca.nav3 = document.getElementById('inputFooterNav3').value.trim();
+                stateDatos.marca.nav4 = document.getElementById('inputFooterNav4').value.trim();
+                stateDatos.marca.nav5 = document.getElementById('inputFooterNav5').value.trim();
 
                 return stateDatos;
             }
