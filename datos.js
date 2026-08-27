@@ -69,7 +69,7 @@ window.DATOS = {
 
   // ═══ 10. TEST DE NIVEL Y PREMIOS GAMIFICADOS ═══
   test: {
-      "mostrar": true,
+      "mostrar": false,
       "tiempoSegundos": 1200,
       "premios": [
           {
