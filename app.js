@@ -878,6 +878,37 @@
 
   window.PiApp.modulos.push(iniciarMenuMovil);
 
+  // --- Preguntas Frecuentes (Acordeón) ---
+  function iniciarFaq() {
+    var botones = document.querySelectorAll('.faq-boton');
+    if (!botones.length) return;
+
+    botones.forEach(function (boton) {
+      boton.addEventListener('click', function () {
+        var expandido = boton.getAttribute('aria-expanded') === 'true';
+        var respuesta = boton.nextElementSibling;
+        var icono = boton.querySelector('.faq-icono');
+
+        boton.setAttribute('aria-expanded', !expandido);
+        if (!expandido) {
+          respuesta.classList.remove('hidden');
+          if (icono) {
+            icono.classList.remove('fa-plus');
+            icono.classList.add('fa-minus');
+          }
+        } else {
+          respuesta.classList.add('hidden');
+          if (icono) {
+            icono.classList.remove('fa-minus');
+            icono.classList.add('fa-plus');
+          }
+        }
+      });
+    });
+  }
+
+  window.PiApp.modulos.push(iniciarFaq);
+
   // --- Arranque ----------------------------------------------------------
 
   document.addEventListener('DOMContentLoaded', function () {
