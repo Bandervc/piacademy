@@ -304,11 +304,15 @@
       lista.className = 'space-y-3';
 
       pregunta.alternativas.forEach(function (texto, indice) {
+        var textoMostrado = texto;
+        if (textoMostrado.indexOf('\\') !== -1 && textoMostrado.indexOf('\\(') === -1 && textoMostrado.indexOf('\\[') === -1 && textoMostrado.indexOf('$$') === -1) {
+            textoMostrado = '\\(' + textoMostrado + '\\)';
+        }
         var boton = document.createElement('button');
         boton.type = 'button';
         boton.id = 'alt-btn-' + indice;
         boton.className = 'w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm font-medium';
-        boton.innerHTML = '<strong class="text-amber-400 mr-1">' + letras[indice] + ')</strong> ' + texto;
+        boton.innerHTML = '<strong class="text-amber-400 mr-1">' + letras[indice] + ')</strong> ' + textoMostrado;
         boton.addEventListener('click', function () { responder(indice, pregunta.correcta); });
         lista.appendChild(boton);
       });

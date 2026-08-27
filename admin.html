@@ -1247,11 +1247,15 @@
                 const previewAlts = document.getElementById('latexPreviewAlts');
 
                 previewEnunciado.innerHTML = enunciado;
-                previewAlts.innerHTML = alts.map((a, i) =>
-                    `<div class="${i === correcta ? 'text-emerald-400 font-bold' : 'text-slate-300'}">
-                        <strong>${letras[i]})</strong> ${a}
-                     </div>`
-                ).join('');
+                previewAlts.innerHTML = alts.map((a, i) => {
+                    let txt = a;
+                    if (txt.includes('\\') && !txt.includes('\\(') && !txt.includes('\\[') && !txt.includes('$$')) {
+                        txt = '\\(' + txt + '\\)';
+                    }
+                    return `<div class="${i === correcta ? 'text-emerald-400 font-bold' : 'text-slate-300'}">
+                        <strong>${letras[i]})</strong> ${txt}
+                     </div>`;
+                }).join('');
 
                 previewBox.classList.remove('hidden');
                 renderLatexAdmin(previewBox);
