@@ -1122,7 +1122,13 @@
                 (stateDatos.test?.preguntas || []).forEach((item, index) => {
                     const card = document.createElement('div');
                     card.className = 'bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-2';
-                    const alts = (item.alternativas || []).map((a, i) => `<span class="${i === item.correcta ? 'text-emerald-400 font-bold' : 'text-slate-400'}">${['A','B','C','D'][i]}) ${a}</span>`).join(' &nbsp;|&nbsp; ');
+                    const alts = (item.alternativas || []).map((a, i) => {
+                        let txt = a;
+                        if (txt.includes('\\') && !txt.includes('\\(') && !txt.includes('\\[') && !txt.includes('$$')) {
+                            txt = '\\(' + txt + '\\)';
+                        }
+                        return `<span class="${i === item.correcta ? 'text-emerald-400 font-bold' : 'text-slate-400'}">${['A','B','C','D'][i]}) ${txt}</span>`;
+                    }).join(' &nbsp;|&nbsp; ');
                     card.innerHTML = `
                         <div class="flex items-start justify-between gap-3">
                             <h4 class="font-bold text-white text-sm leading-relaxed">${index + 1}. ${item.enunciado}</h4>
