@@ -209,9 +209,9 @@
 
                 <div class="grid sm:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Tiempo Límite del Test (segundos):</label>
-                        <input type="number" id="inputTestTiempo" min="0" placeholder="Ej: 90" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-black text-amber-400 text-lg focus:outline-none focus:border-brand-purple">
-                        <span class="text-[10px] text-slate-500 mt-1 block">Pon 0 para que no tenga tiempo límite</span>
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Tiempo Límite del Test (en minutos):</label>
+                        <input type="number" id="inputTestTiempo" min="0" placeholder="Ej: 20" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 font-black text-amber-400 text-lg focus:outline-none focus:border-brand-purple">
+                        <span class="text-[10px] text-slate-500 mt-1 block">Pon 0 para que no haya límite de tiempo &nbsp;│&nbsp; Ej: 20 = 20 minutos</span>
                     </div>
 
                     <div>
@@ -781,9 +781,9 @@
                 document.getElementById('inputTextoContador').value = d.promocion?.textoContador || '';
                 document.getElementById('checkMostrarContador').checked = d.promocion?.mostrarContador ?? true;
 
-                // Test
+                // Test (convertir de segundos a minutos para mostrar en el campo)
                 document.getElementById('checkTestMostrar').checked = d.test?.mostrar ?? true;
-                document.getElementById('inputTestTiempo').value = d.test?.tiempoSegundos ?? 90;
+                document.getElementById('inputTestTiempo').value = d.test?.tiempoSegundos ? Math.round(d.test.tiempoSegundos / 60) : 0;
 
                 // Encabezados
                 const tx = d.textos || {};
@@ -1140,7 +1140,8 @@
 
                 if (!stateDatos.test) stateDatos.test = {};
                 stateDatos.test.mostrar = document.getElementById('checkTestMostrar').checked;
-                stateDatos.test.tiempoSegundos = parseInt(document.getElementById('inputTestTiempo').value) || 0;
+                // Convertir minutos a segundos al guardar
+                stateDatos.test.tiempoSegundos = (parseInt(document.getElementById('inputTestTiempo').value) || 0) * 60;
 
                 if (!stateDatos.textos) stateDatos.textos = {};
                 stateDatos.textos.heroPildora = document.getElementById('inputTextosHeroPildora').value.trim();

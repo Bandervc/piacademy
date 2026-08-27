@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Nivel | PiAcademy — PUCP & Beca 18</title>
+    <meta name="description" content="Evalúa tu nivel con preguntas tipo examen PUCP y Beca 18. ¡Gana un código de descuento según tus aciertos!">
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%235B21B6'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='21' font-weight='bold' fill='white' text-anchor='middle'%3E%CF%80%3C/text%3E%3C/svg%3E">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- KaTeX for LaTeX Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            purple: '#5B21B6',
+                            darkPurple: '#4C1D95',
+                            navy: '#0F172A',
+                            amber: '#F59E0B',
+                            amberHover: '#D97706',
+                        }
+                    },
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .katex { font-size: 1em; }
+        .katex-display { overflow-x: auto; overflow-y: hidden; padding: 4px 0; }
+    </style>
+</head>
+<body class="min-h-full bg-gradient-to-br from-slate-950 via-brand-navy to-slate-900 text-white antialiased flex flex-col">
+
+    <!-- HEADER MÍNIMO -->
+    <header class="bg-slate-900/80 backdrop-blur-sm border-b border-slate-800 sticky top-0 z-30">
+        <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div class="w-9 h-9 bg-gradient-to-br from-brand-purple to-brand-darkPurple rounded-xl flex items-center justify-center shadow-md">
+                    <span class="text-white font-serif font-black text-lg">π</span>
+                </div>
+                <span class="text-white font-black text-base tracking-tight hidden sm:block">PiAcademy</span>
+            </a>
+
+            <div class="flex items-center gap-2">
+                <span class="text-xs text-amber-400 font-bold bg-amber-400/10 border border-amber-400/30 px-3 py-1 rounded-full">
+                    <i class="fa-solid fa-star mr-1"></i>Test de Nivel
+                </span>
+                <a href="index.html" class="text-xs text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-xl border border-slate-700">
+                    <i class="fa-solid fa-arrow-left text-xs"></i>
+                    <span class="hidden sm:inline">Volver al inicio</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="flex-1 flex flex-col items-center justify-center px-4 py-10">
+        <div class="w-full max-w-3xl">
+
+            <!-- Título de la página -->
+            <div class="text-center mb-8">
+                <p class="text-amber-400 font-bold text-xs tracking-widest uppercase bg-amber-400/10 border border-amber-400/30 px-3 py-1 rounded-full inline-block mb-3">
+                    Herramienta Interactiva
+                </p>
+                <h1 class="text-2xl sm:text-3xl font-black text-white">Mide tu nivel en minutos</h1>
+                <p class="text-slate-400 text-sm mt-1">Responde preguntas tipo examen PUCP &amp; Beca 18 y gana un código de descuento.</p>
+            </div>
+
+            <!-- Quiz Box -->
+            <div class="bg-slate-900 border border-purple-800/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+
+                <!-- Pantalla de Inicio -->
+                <div id="quizStart" class="text-center py-10 space-y-6">
+                    <div class="w-24 h-24 bg-brand-purple/20 border-2 border-brand-purple rounded-full flex items-center justify-center text-5xl mx-auto shadow-lg shadow-purple-900/30">
+                        <i class="fa-solid fa-brain text-brand-purple" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-black text-white mb-2">¿Listo para el desafío?</h2>
+                        <p class="text-slate-300 text-sm max-w-md mx-auto">Responde las preguntas tipo examen PUCP y Beca 18. Al terminar podrás desbloquear un código de descuento según tus aciertos.</p>
+                    </div>
+                    <div id="infoTest" class="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-slate-400">
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-list-check text-purple-400"></i> <span id="totalPreguntas">...</span> preguntas</span>
+                        <span class="hidden sm:block text-slate-700">|</span>
+                        <span id="infoTiempo" class="flex items-center gap-1.5"><i class="fa-solid fa-stopwatch text-amber-400"></i> Tiempo limitado</span>
+                    </div>
+                    <button type="button" id="btnIniciarTest"
+                        class="bg-brand-amber hover:bg-brand-amberHover text-slate-950 font-black text-lg px-12 py-4 rounded-2xl shadow-xl transition-all transform hover:-translate-y-1 active:translate-y-0 flex items-center gap-3 mx-auto">
+                        <i class="fa-solid fa-bolt text-xl"></i>
+                        <span>INICIAR TEST</span>
+                    </button>
+                </div>
+
+                <!-- Área activa del test -->
+                <div id="quizArea" class="hidden">
+                    <!-- Barra superior: progreso + timer -->
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-3 mb-5">
+                        <span id="quizStepText" class="text-xs font-bold text-slate-400">Pregunta 1 de 3</span>
+                        <div id="quizTimerBadge" class="hidden items-center gap-1.5 bg-amber-400/20 text-amber-300 border border-amber-400/40 text-xs font-black px-3 py-1 rounded-full">
+                            <i class="fa-solid fa-stopwatch animate-pulse text-amber-400"></i>
+                            <span id="quizTimerLabel">00:00:00</span>
+                        </div>
+                        <span class="text-amber-400 font-bold text-xs"><i class="fa-solid fa-star mr-1"></i>Tipo PUCP / Beca 18</span>
+                    </div>
+
+                    <!-- Barra de progreso del timer -->
+                    <div id="quizTimerBar" class="w-full bg-slate-800 rounded-full h-1.5 mb-6 overflow-hidden hidden">
+                        <div id="quizTimerProgress" class="bg-amber-400 h-full w-full transition-all duration-1000"></div>
+                    </div>
+
+                    <!-- Pregunta dinámica -->
+                    <div id="preguntaTest"></div>
+
+                    <!-- Feedback respuesta -->
+                    <div id="quizFeedback" class="hidden mt-4 p-4 rounded-xl border text-sm font-semibold"></div>
+
+                    <!-- Botón siguiente -->
+                    <button type="button" id="btnSiguiente"
+                        class="hidden mt-5 w-full bg-brand-purple hover:bg-brand-darkPurple text-white font-bold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2">
+                        <span>Siguiente Pregunta</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Pantalla de Resultado -->
+                <div id="quizResult" class="hidden text-center py-8 space-y-5">
+                    <div class="w-20 h-20 bg-brand-amber text-slate-950 rounded-full flex items-center justify-center text-4xl font-black mx-auto shadow-lg shadow-amber-500/20">
+                        <i class="fa-solid fa-trophy" aria-hidden="true"></i>
+                    </div>
+                    <h2 class="text-2xl font-black text-white">¡Test Completado!</h2>
+                    <p class="text-slate-300 text-sm max-w-md mx-auto">
+                        Obtuviste <span id="correctCount" class="text-amber-400 font-bold text-lg">0</span>
+                        de <span id="totalCount" class="text-amber-400 font-bold text-lg">0</span> respuestas correctas.
+                    </p>
+
+                    <!-- Premio desbloqueado -->
+                    <div id="quizRewardCard" class="hidden bg-gradient-to-r from-purple-950 to-slate-900 border-2 border-amber-400/60 rounded-2xl p-5 max-w-lg mx-auto shadow-xl space-y-3">
+                        <span class="inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 text-xs font-black uppercase px-3 py-1 rounded-full shadow-sm">
+                            <i class="fa-solid fa-gift"></i> ¡Premio Desbloqueado!
+                        </span>
+                        <p id="quizRewardMsg" class="text-white font-bold text-sm leading-relaxed"></p>
+                        <div class="inline-flex items-center gap-2 bg-slate-950 border border-purple-800 px-5 py-2.5 rounded-xl">
+                            <span class="text-xs text-slate-400 font-medium">Tu código de descuento:</span>
+                            <span id="quizRewardCode" class="text-2xl font-black text-amber-400 tracking-widest"></span>
+                        </div>
+                        <a id="btnCanjearPremio" href="index.html#inversion"
+                            class="w-full bg-brand-amber hover:bg-brand-amberHover text-slate-950 font-black py-3.5 rounded-xl shadow-lg transition-transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 text-sm">
+                            <i class="fa-solid fa-graduation-cap text-base"></i>
+                            <span>Inscribirme con este descuento</span>
+                        </a>
+                    </div>
+
+                    <p class="text-xs text-slate-400 bg-slate-800/80 p-4 rounded-xl max-w-lg mx-auto">
+                        ¡El Ciclo Integral de PiAcademy te dará el método de resolución rápida exacto para asegurar tu puntaje máximo!
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                        <a id="btnAsesoriaTest" href="#" target="_blank" rel="noopener"
+                           class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-3 rounded-xl transition-colors text-xs sm:text-sm flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-base"></i>
+                            Consultar con un asesor
+                        </a>
+                        <button type="button" id="btnRepetirTest"
+                                class="text-slate-400 hover:text-white underline text-xs sm:text-sm font-semibold px-4 py-3">
+                            Repetir el test
+                        </button>
+                        <a href="index.html"
+                           class="text-slate-400 hover:text-white underline text-xs sm:text-sm font-semibold px-4 py-3">
+                            Volver a la página principal
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER MÍNIMO -->
+    <footer class="text-center py-4 text-xs text-slate-600 border-t border-slate-900">
+        © PiAcademy — <a href="index.html" class="hover:text-slate-400 transition-colors">Volver al inicio</a>
+    </footer>
+
+    <script src="datos.js" charset="UTF-8"></script>
+    <script src="nuclei.js" charset="UTF-8"></script>
+    <script>
+    (function () {
+        'use strict';
+
+        var letras = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+        function dosDigitos(n) { return String(Math.floor(n)).padStart(2, '0'); }
+
+        function formatHHMMSS(totalSegundos) {
+            var h = Math.floor(totalSegundos / 3600);
+            var m = Math.floor((totalSegundos % 3600) / 60);
+            var s = totalSegundos % 60;
+            return dosDigitos(h) + ':' + dosDigitos(m) + ':' + dosDigitos(s);
+        }
+
+        function renderLatex(elemento) {
+            if (!elemento) return;
+            function ejecutar() {
+                if (window.renderMathInElement) {
+                    window.renderMathInElement(elemento, {
+                        delimiters: [
+                            { left: '$$', right: '$$', display: true },
+                            { left: '\\[', right: '\\]', display: true },
+                            { left: '$', right: '$', display: false },
+                            { left: '\\(', right: '\\)', display: false },
+                        ],
+                        throwOnError: false,
+                    });
+                }
+            }
+            if (window.renderMathInElement) { ejecutar(); }
+            else { setTimeout(ejecutar, 300); setTimeout(ejecutar, 800); }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var datos = window.DATOS;
+            if (!datos || !datos.test) {
+                document.getElementById('quizStart').innerHTML =
+                    '<p class="text-red-400 font-bold">No se pudieron cargar las preguntas. Verifica datos.js.</p>';
+                return;
+            }
+
+            var test = datos.test;
+            var preguntas = test.preguntas || [];
+            var total = preguntas.length;
+
+            // Actualizar info pantalla de inicio
+            var spanTotal = document.getElementById('totalPreguntas');
+            if (spanTotal) spanTotal.textContent = total;
+
+            var tiempoLimite = test.tiempoSegundos || 0;
+            var infoTiempo = document.getElementById('infoTiempo');
+            if (tiempoLimite > 0 && infoTiempo) {
+                infoTiempo.innerHTML = '<i class="fa-solid fa-stopwatch text-amber-400"></i> Tiempo: ' + formatHHMMSS(tiempoLimite);
+            } else if (infoTiempo) {
+                infoTiempo.innerHTML = '<i class="fa-solid fa-infinity text-slate-400"></i> Sin límite de tiempo';
+            }
+
+            var paso = 0;
+            var aciertos = 0;
+            var yaRespondida = false;
+            var tiempoRestante = tiempoLimite;
+            var timerInterval = null;
+
+            var quizStart    = document.getElementById('quizStart');
+            var quizArea     = document.getElementById('quizArea');
+            var quizResult   = document.getElementById('quizResult');
+            var feedback     = document.getElementById('quizFeedback');
+            var btnSiguiente = document.getElementById('btnSiguiente');
+            var btnIniciar   = document.getElementById('btnIniciarTest');
+            var contenedor   = document.getElementById('preguntaTest');
+            var progreso     = document.getElementById('quizStepText');
+            var timerBadge   = document.getElementById('quizTimerBadge');
+            var timerLabel   = document.getElementById('quizTimerLabel');
+            var timerBar     = document.getElementById('quizTimerBar');
+            var timerProg    = document.getElementById('quizTimerProgress');
+            var rewardCard   = document.getElementById('quizRewardCard');
+            var rewardMsg    = document.getElementById('quizRewardMsg');
+            var rewardCode   = document.getElementById('quizRewardCode');
+            var btnAsesoria  = document.getElementById('btnAsesoriaTest');
+
+            function iniciarTemporizador() {
+                if (!tiempoLimite || tiempoLimite <= 0) {
+                    if (timerBadge) timerBadge.classList.add('hidden');
+                    if (timerBar) timerBar.classList.add('hidden');
+                    return;
+                }
+                tiempoRestante = tiempoLimite;
+                if (timerBadge) {
+                    timerBadge.classList.remove('hidden');
+                    timerBadge.classList.add('flex');
+                    timerLabel.textContent = formatHHMMSS(tiempoRestante);
+                }
+                if (timerBar) timerBar.classList.remove('hidden');
+                if (timerProg) timerProg.style.width = '100%';
+
+                if (timerInterval) clearInterval(timerInterval);
+                timerInterval = setInterval(function () {
+                    tiempoRestante--;
+                    if (timerLabel) timerLabel.textContent = formatHHMMSS(tiempoRestante);
+                    if (timerProg) timerProg.style.width = Math.max(0, (tiempoRestante / tiempoLimite) * 100) + '%';
+                    if (tiempoRestante <= 0) { clearInterval(timerInterval); terminar(true); }
+                }, 1000);
+            }
+
+            function pintarPregunta() {
+                yaRespondida = false;
+                var pregunta = preguntas[paso];
+                if (progreso) progreso.textContent = 'Pregunta ' + (paso + 1) + ' de ' + total;
+                contenedor.innerHTML = '';
+                if (feedback) { feedback.classList.add('hidden'); feedback.innerHTML = ''; }
+                if (btnSiguiente) btnSiguiente.classList.add('hidden');
+
+                var titulo = document.createElement('h3');
+                titulo.className = 'text-base sm:text-lg font-bold text-white mb-5 leading-relaxed';
+                titulo.innerHTML = (paso + 1) + '. ' + pregunta.enunciado;
+                contenedor.appendChild(titulo);
+
+                var lista = document.createElement('div');
+                lista.className = 'space-y-3';
+
+                pregunta.alternativas.forEach(function (texto, indice) {
+                    var boton = document.createElement('button');
+                    boton.type = 'button';
+                    boton.id = 'alt-btn-' + indice;
+                    boton.className = 'w-full text-left bg-slate-800 hover:bg-purple-900/40 p-4 rounded-xl border border-slate-700 transition-colors text-sm font-medium';
+                    boton.innerHTML = '<strong class="text-amber-400 mr-2">' + letras[indice] + ')</strong>' + texto;
+                    boton.addEventListener('click', function () { responder(indice, pregunta.correcta); });
+                    lista.appendChild(boton);
+                });
+
+                contenedor.appendChild(lista);
+                renderLatex(contenedor);
+            }
+
+            function responder(indiceElegido, indiceCorrecta) {
+                if (yaRespondida) return;
+                yaRespondida = true;
+                var esCorrecta = indiceElegido === indiceCorrecta;
+                if (esCorrecta) aciertos++;
+
+                preguntas[paso].alternativas.forEach(function (_, i) {
+                    var btn = document.getElementById('alt-btn-' + i);
+                    if (!btn) return;
+                    btn.disabled = true;
+                    if (i === indiceCorrecta) {
+                        btn.className = 'w-full text-left bg-emerald-900/60 border border-emerald-500 p-4 rounded-xl text-sm font-bold text-emerald-300';
+                    } else if (i === indiceElegido) {
+                        btn.className = 'w-full text-left bg-red-900/60 border border-red-500 p-4 rounded-xl text-sm font-bold text-red-300';
+                    } else {
+                        btn.className = 'w-full text-left bg-slate-800/40 border border-slate-700 p-4 rounded-xl text-sm font-medium text-slate-500';
+                    }
+                });
+
+                if (feedback) {
+                    feedback.className = 'mt-4 p-4 rounded-xl border text-sm font-semibold';
+                    if (esCorrecta) {
+                        feedback.classList.add('bg-emerald-900/40', 'border-emerald-500', 'text-emerald-300');
+                        feedback.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> ¡Correcto!';
+                    } else {
+                        var txtCorrecta = preguntas[paso].alternativas[indiceCorrecta];
+                        feedback.classList.add('bg-red-900/40', 'border-red-500', 'text-red-300');
+                        feedback.innerHTML = '<i class="fa-solid fa-circle-xmark mr-2"></i> Incorrecto. La respuesta correcta es: <strong>' + letras[indiceCorrecta] + ') ' + txtCorrecta + '</strong>';
+                        renderLatex(feedback);
+                    }
+                }
+
+                paso++;
+                if (paso < total) {
+                    if (btnSiguiente) {
+                        var esUltima = paso === total - 1;
+                        btnSiguiente.innerHTML = esUltima
+                            ? '<span>Ver Resultado Final</span><i class="fa-solid fa-flag-checkered ml-2"></i>'
+                            : '<span>Siguiente Pregunta</span><i class="fa-solid fa-arrow-right ml-2"></i>';
+                        btnSiguiente.classList.remove('hidden');
+                    }
+                } else {
+                    if (btnSiguiente) {
+                        btnSiguiente.innerHTML = '<span>Ver Resultado Final</span><i class="fa-solid fa-flag-checkered ml-2"></i>';
+                        btnSiguiente.classList.remove('hidden');
+                    }
+                }
+            }
+
+            function terminar(porTiempo) {
+                if (timerInterval) clearInterval(timerInterval);
+                quizArea.classList.add('hidden');
+
+                document.getElementById('correctCount').textContent = aciertos;
+                document.getElementById('totalCount').textContent = total;
+
+                var premios = test.premios || [];
+                var premioGanado = null;
+                for (var i = 0; i < premios.length; i++) {
+                    if (aciertos >= premios[i].minAciertos && aciertos <= premios[i].maxAciertos) {
+                        premioGanado = premios[i]; break;
+                    }
+                }
+
+                if (premioGanado && rewardCard) {
+                    rewardCard.classList.remove('hidden');
+                    if (rewardMsg) rewardMsg.textContent = premioGanado.mensaje;
+                    if (rewardCode) rewardCode.textContent = premioGanado.codigo;
+                } else if (rewardCard) {
+                    rewardCard.classList.add('hidden');
+                }
+
+                if (btnAsesoria && datos.contacto && datos.contacto.whatsapp) {
+                    var msg = 'Hola, completé el Test de Nivel con ' + aciertos + '/' + total + ' respuestas correctas. Quiero saber más sobre el Ciclo Integral.';
+                    btnAsesoria.setAttribute('href', 'https://wa.me/' + datos.contacto.whatsapp + '?text=' + encodeURIComponent(msg));
+                }
+
+                quizResult.classList.remove('hidden');
+            }
+
+            function reiniciar() {
+                paso = 0; aciertos = 0; yaRespondida = false;
+                quizResult.classList.add('hidden');
+                if (rewardCard) rewardCard.classList.add('hidden');
+                quizArea.classList.remove('hidden');
+                iniciarTemporizador();
+                pintarPregunta();
+            }
+
+            // Botón iniciar
+            btnIniciar.addEventListener('click', function () {
+                quizStart.classList.add('hidden');
+                quizArea.classList.remove('hidden');
+                iniciarTemporizador();
+                pintarPregunta();
+            });
+
+            // Botón siguiente
+            btnSiguiente.addEventListener('click', function () {
+                if (paso < total) { pintarPregunta(); } else { terminar(false); }
+            });
+
+            // Botón repetir
+            document.getElementById('btnRepetirTest').addEventListener('click', reiniciar);
+        });
+    })();
+    </script>
+</body>
+</html>
