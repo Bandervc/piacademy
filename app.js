@@ -271,14 +271,37 @@
       }, 1000);
     }
 
+    function renderLatex(elemento) {
+      if (!elemento) return;
+      function ejecutar() {
+        if (window.renderMathInElement) {
+          window.renderMathInElement(elemento, {
+            delimiters: [
+              { left: '$$', right: '$$', display: true },
+              { left: '\\[', right: '\\]', display: true },
+              { left: '$', right: '$', display: false },
+              { left: '\\(', right: '\\)', display: false },
+            ],
+            throwOnError: false,
+          });
+        }
+      }
+      if (window.renderMathInElement) {
+        ejecutar();
+      } else {
+        setTimeout(ejecutar, 300);
+        setTimeout(ejecutar, 800);
+      }
+    }
+
     function pintarPregunta() {
       var pregunta = preguntas[paso];
       progreso.textContent = 'Pregunta ' + (paso + 1) + ' de ' + total;
       contenedor.innerHTML = '';
 
       var titulo = document.createElement('h3');
-      titulo.className = 'text-lg font-bold text-white mb-4';
-      titulo.textContent = (paso + 1) + '. ' + pregunta.enunciado;
+      titulo.className = 'text-lg font-bold text-white mb-4 leading-relaxed';
+      titulo.innerHTML = (paso + 1) + '. ' + pregunta.enunciado;
       contenedor.appendChild(titulo);
 
       var lista = document.createElement('div');
@@ -287,13 +310,14 @@
       pregunta.alternativas.forEach(function (texto, indice) {
         var boton = document.createElement('button');
         boton.type = 'button';
-        boton.className = 'w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm';
-        boton.textContent = letras[indice] + ') ' + texto;
+        boton.className = 'w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm font-medium';
+        boton.innerHTML = '<strong class="text-amber-400 mr-1">' + letras[indice] + ')</strong> ' + texto;
         boton.addEventListener('click', function () { responder(indice === pregunta.correcta); });
         lista.appendChild(boton);
       });
 
       contenedor.appendChild(lista);
+      renderLatex(contenedor);
     }
 
     function responder(esCorrecta) {

@@ -16,6 +16,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+    <!-- KaTeX for LaTeX Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -959,6 +964,29 @@
                 renderPremiosList();
             };
 
+            function renderLatexAdmin(elemento) {
+                if (!elemento) return;
+                function ejecutar() {
+                    if (window.renderMathInElement) {
+                        window.renderMathInElement(elemento, {
+                            delimiters: [
+                                { left: '$$', right: '$$', display: true },
+                                { left: '\\[', right: '\\]', display: true },
+                                { left: '$', right: '$', display: false },
+                                { left: '\\(', right: '\\)', display: false },
+                            ],
+                            throwOnError: false,
+                        });
+                    }
+                }
+                if (window.renderMathInElement) {
+                    ejecutar();
+                } else {
+                    setTimeout(ejecutar, 300);
+                    setTimeout(ejecutar, 800);
+                }
+            }
+
             // --- 7. Render Lista de Preguntas del Test ---
             function renderPreguntasList() {
                 const container = document.getElementById('preguntasList');
@@ -969,7 +997,7 @@
                     const alts = (item.alternativas || []).map((a, i) => `<span class="${i === item.correcta ? 'text-emerald-400 font-bold' : 'text-slate-400'}">${['A','B','C','D'][i]}) ${a}</span>`).join(' &nbsp;|&nbsp; ');
                     card.innerHTML = `
                         <div class="flex items-start justify-between gap-3">
-                            <h4 class="font-bold text-white text-sm">${index + 1}. ${item.enunciado}</h4>
+                            <h4 class="font-bold text-white text-sm leading-relaxed">${index + 1}. ${item.enunciado}</h4>
                             <div class="flex gap-2 shrink-0">
                                 <button type="button" onclick="window.editPregunta(${index})" class="text-slate-400 hover:text-white"><i class="fa-solid fa-pen"></i></button>
                                 <button type="button" onclick="window.delPregunta(${index})" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button>
@@ -979,6 +1007,7 @@
                     `;
                     container.appendChild(card);
                 });
+                renderLatexAdmin(container);
             }
 
             window.editPregunta = (index) => {

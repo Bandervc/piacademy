@@ -87,12 +87,22 @@ window.DATOS = {
       ],
       "preguntas": [
           {
-              "enunciado": "Un camión transporta 50 cajas que contienen\nbotellas llenas de agua. Cada caja contiene\n20 botellas de 1,5 litros cada una. Si cada caja\nvacía pesa 0,04 kg, cada botella vacía pesa\n0,05 kg y 1 litro de agua pesa 1 kg, ¿cuánto\npesa, en total, la carga que transporta el\ncamión?",
+              "enunciado": "Un camión transporta 50 cajas que contienen botellas llenas de agua. Cada caja contiene 20 botellas de 1,5 litros cada una. Si cada caja vacía pesa 0,04 kg, cada botella vacía pesa 0,05 kg y 1 litro de agua pesa 1 kg, ¿cuánto pesa, en total, la carga que transporta el camión?",
               "alternativas": [
                   "1552 kg",
                   "1570 kg",
                   "1582 kg",
                   "1590 kg"
+              ],
+              "correcta": 0
+          },
+          {
+              "enunciado": "Resuelve el siguiente sistema: \\[ \\begin{cases} 2(x-1)-5(1-y)=-1 \\\\ 2(2x-1)-3(4-y)=12 \\end{cases} \\]",
+              "alternativas": [
+                  "x = 3, y = 2",
+                  "x = 1, y = 2",
+                  "x = 2, y = 3",
+                  "x = 4, y = 1"
               ],
               "correcta": 0
           }
