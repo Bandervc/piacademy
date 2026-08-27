@@ -307,7 +307,107 @@
 
   window.PiApp.modulos.push(iniciarFaq);
 
-  // --- Modal de inscripción (formulario conectado a datos.js) -------------
+  // --- Códigos de descuento --------------------------------------------------
+
+  var estadoPago = {
+    nombre: '',
+    telefono: '',
+    modalidad: '',
+    turno: '',
+    origen: '',
+    codigoAplicado: '',
+    descuento: 0,
+    montoFinal: 0,
+    metodoSeleccionado: 'yape',
+  };
+
+  function iniciarCodigosDescuento(datos) {
+    var btnAplicar = document.getElementById('btnApplyCode');
+    var inputCodigo = document.getElementById('discountCode');
+    var feedback = document.getElementById('discountFeedback');
+    var precioFinal = document.getElementById('enrollFinalPrice');
+    var badge = document.getElementById('enrollDiscountBadge');
+    var badgeTexto = document.getElementById('enrollDiscountText');
+    if (!btnAplicar || !inputCodigo) return;
+
+    var precioBase = datos.precio.promocional;
+    precioFinal.textContent = precioBase;
+    estadoPago.montoFinal = precioBase;
+
+    function mostrarFeedback(mensaje, esExito) {
+      feedback.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-700', 'bg-red-100', 'text-red-700');
+      if (esExito) {
+        feedback.classList.add('bg-emerald-100', 'text-emerald-700');
+        feedback.innerHTML = '<i class="fa-solid fa-circle-check"></i> ' + mensaje;
+      } else {
+        feedback.classList.add('bg-red-100', 'text-red-700');
+        feedback.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> ' + mensaje;
+      }
+    }
+
+    btnAplicar.addEventListener('click', function () {
+      var texto = inputCodigo.value.trim().toUpperCase();
+      if (!texto) {
+        mostrarFeedback('Escribe un código primero.', false);
+        return;
+      }
+
+      var codigos = datos.codigos || [];
+      var encontrado = null;
+      for (var i = 0; i < codigos.length; i++) {
+        if (codigos[i].codigo.toUpperCase() === texto) { encontrado = codigos[i]; break; }
+      }
+
+      if (!encontrado) {
+        mostrarFeedback('Código "' + texto + '" no válido. Verifica e intenta de nuevo.', false);
+        estadoPago.codigoAplicado = '';
+        estadoPago.descuento = 0;
+        estadoPago.montoFinal = precioBase;
+        precioFinal.textContent = precioBase;
+        badge.classList.add('hidden');
+        document.getElementById('appliedCode').value = '';
+        document.getElementById('appliedDiscount').value = '0';
+        return;
+      }
+
+      if (encontrado.vence) {
+        var hoy = new Date();
+        var vence = new Date(encontrado.vence + 'T23:59:59');
+        if (hoy > vence) {
+          mostrarFeedback('El código "' + texto + '" ya expiró. Solicita uno nuevo en nuestros lives.', false);
+          estadoPago.codigoAplicado = '';
+          estadoPago.descuento = 0;
+          estadoPago.montoFinal = precioBase;
+          precioFinal.textContent = precioBase;
+          badge.classList.add('hidden');
+          document.getElementById('appliedCode').value = '';
+          document.getElementById('appliedDiscount').value = '0';
+          return;
+        }
+      }
+
+      var nuevoMonto = Math.max(0, precioBase - encontrado.descuento);
+      estadoPago.codigoAplicado = texto;
+      estadoPago.descuento = encontrado.descuento;
+      estadoPago.montoFinal = nuevoMonto;
+      precioFinal.textContent = nuevoMonto;
+      document.getElementById('appliedCode').value = texto;
+      document.getElementById('appliedDiscount').value = String(encontrado.descuento);
+
+      mostrarFeedback('¡Código aplicado! ' + encontrado.descripcion + ' — Ahorras S/' + encontrado.descuento, true);
+      badge.classList.remove('hidden');
+      badgeTexto.textContent = encontrado.descripcion + ' (código ' + texto + ')';
+    });
+
+    // Permitir Enter en el campo de código
+    inputCodigo.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); btnAplicar.click(); }
+    });
+  }
+
+  window.PiApp.modulos.push(iniciarCodigosDescuento);
+
+  // --- Modal de inscripción (modificado: ahora va al paso de pago) ----------
 
   function iniciarModal(datos) {
     var modal = document.getElementById('enrollModal');
@@ -344,16 +444,21 @@
       evento.preventDefault();
       var turno = formulario.querySelector('input[name="turno"]:checked');
 
-      window.PiApp.abrirWhatsApp('inscripcion', {
-        nombre: document.getElementById('studentName').value.trim(),
-        telefono: document.getElementById('studentPhone').value.trim(),
-        modalidad: document.getElementById('studentTarget').value,
-        turno: turno ? turno.value : '',
-        origen: document.getElementById('modalOrigin').value,
-      });
+      // Guardar datos del alumno para el paso de pago
+      estadoPago.nombre = document.getElementById('studentName').value.trim();
+      estadoPago.telefono = document.getElementById('studentPhone').value.trim();
+      estadoPago.modalidad = document.getElementById('studentTarget').value;
+      estadoPago.turno = turno ? turno.value : '';
+      estadoPago.origen = document.getElementById('modalOrigin').value;
 
+      // Si no se aplicó precio explícitamente, usar el precio promocional
+      if (!estadoPago.montoFinal) {
+        estadoPago.montoFinal = datos.precio.promocional;
+      }
+
+      // Cerrar modal de inscripción y abrir modal de pago
       cerrar();
-      formulario.reset();
+      abrirModalPago(datos);
     });
 
     var primerTurno = formulario.querySelector('input[name="turno"]');
@@ -363,6 +468,168 @@
   }
 
   window.PiApp.modulos.push(iniciarModal);
+
+  // --- Modal de pago (Yape / Plin) ------------------------------------------
+
+  function abrirModalPago(datos) {
+    var modal = document.getElementById('paymentModal');
+    if (!modal) return;
+
+    // Actualizar monto
+    document.getElementById('paymentAmount').textContent = estadoPago.montoFinal;
+    document.getElementById('stepAmount').textContent = estadoPago.montoFinal;
+
+    // Mostrar badge de descuento si aplica
+    var badgePago = document.getElementById('paymentDiscountBadge');
+    var badgePagoTexto = document.getElementById('paymentDiscountText');
+    if (estadoPago.codigoAplicado) {
+      badgePago.classList.remove('hidden');
+      badgePagoTexto.textContent = 'Código ' + estadoPago.codigoAplicado + ' aplicado (-S/' + estadoPago.descuento + ')';
+    } else {
+      badgePago.classList.add('hidden');
+    }
+
+    // Activar tab Yape por defecto
+    activarTab('yape', datos);
+
+    // Construir link de WhatsApp para el voucher
+    actualizarLinkVoucher(datos);
+
+    modal.classList.remove('hidden');
+  }
+
+  function activarTab(tab, datos) {
+    estadoPago.metodoSeleccionado = tab;
+    var pago = datos.pago[tab];
+
+    // Actualizar tabs
+    document.querySelectorAll('.pay-tab').forEach(function (btn) {
+      btn.dataset.active = btn.dataset.tab === tab ? 'true' : 'false';
+    });
+
+    // Actualizar contenido
+    var nombreMetodo = tab === 'yape' ? 'Yape' : 'Plin';
+    document.getElementById('payMethodLabel').textContent = 'Número ' + nombreMetodo + ':';
+    document.getElementById('payPhoneNumber').textContent = pago.numeroVisible;
+    document.getElementById('payTitular').textContent = pago.titular;
+    document.getElementById('stepAppName').textContent = nombreMetodo;
+
+    // QR
+    var qrContainer = document.getElementById('payQrContainer');
+    var qrImage = document.getElementById('payQrImage');
+    if (pago.qrImagen) {
+      qrImage.src = pago.qrImagen;
+      qrImage.alt = 'QR ' + nombreMetodo;
+      qrContainer.classList.remove('hidden');
+    } else {
+      qrContainer.classList.add('hidden');
+    }
+
+    // Ocultar feedback de copiado
+    document.getElementById('copyFeedback').classList.add('hidden');
+
+    // Actualizar link de voucher
+    actualizarLinkVoucher(datos);
+  }
+
+  function actualizarLinkVoucher(datos) {
+    var metodoNombre = estadoPago.metodoSeleccionado === 'yape' ? 'Yape' : 'Plin';
+    var btnVoucher = document.getElementById('btnSendVoucher');
+    var mensaje = window.PiApp.mensajeWhatsApp('confirmacionPago', {
+      metodo: metodoNombre,
+      nombre: estadoPago.nombre,
+      telefono: estadoPago.telefono,
+      modalidad: estadoPago.modalidad,
+      turno: estadoPago.turno,
+      monto: String(estadoPago.montoFinal),
+      codigo: estadoPago.codigoAplicado || 'Ninguno',
+    });
+    btnVoucher.setAttribute('href', N.urlWhatsApp(datos.contacto.whatsapp, mensaje));
+  }
+
+  function iniciarModalPago(datos) {
+    var modal = document.getElementById('paymentModal');
+    if (!modal) return;
+
+    // Cerrar modal
+    document.getElementById('paymentModalClose').addEventListener('click', function () {
+      modal.classList.add('hidden');
+    });
+
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) modal.classList.add('hidden');
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) modal.classList.add('hidden');
+    });
+
+    // Botón volver
+    document.getElementById('paymentModalBack').addEventListener('click', function () {
+      modal.classList.add('hidden');
+      // Reabrir modal de inscripción
+      var enrollModal = document.getElementById('enrollModal');
+      if (enrollModal) enrollModal.classList.remove('hidden');
+    });
+
+    // Tabs Yape / Plin
+    document.querySelectorAll('.pay-tab').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        activarTab(btn.dataset.tab, datos);
+      });
+    });
+
+    // Copiar número
+    var btnCopy = document.getElementById('btnCopyNumber');
+    var copyFeedback = document.getElementById('copyFeedback');
+    var copyIcon = document.getElementById('copyIcon');
+    var copyTextEl = document.getElementById('copyText');
+    var feedbackTimer = null;
+
+    btnCopy.addEventListener('click', function () {
+      var pago = datos.pago[estadoPago.metodoSeleccionado];
+      var numero = pago.numero;
+
+      function mostrarCopiado() {
+        copyFeedback.classList.remove('hidden');
+        copyIcon.className = 'fa-solid fa-circle-check text-lg';
+        if (copyTextEl) copyTextEl.textContent = '¡Copiado!';
+
+        if (feedbackTimer) clearTimeout(feedbackTimer);
+        feedbackTimer = setTimeout(function () {
+          copyFeedback.classList.add('hidden');
+          copyIcon.className = 'fa-regular fa-copy text-lg';
+          if (copyTextEl) copyTextEl.textContent = 'Copiar';
+        }, 3000);
+      }
+
+      // Intentar usar clipboard API moderna
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(numero).then(mostrarCopiado).catch(function () {
+          // Fallback para navegadores sin soporte
+          copiarFallback(numero);
+          mostrarCopiado();
+        });
+      } else {
+        copiarFallback(numero);
+        mostrarCopiado();
+      }
+    });
+  }
+
+  // Fallback para copiar al portapapeles en navegadores antiguos
+  function copiarFallback(texto) {
+    var ta = document.createElement('textarea');
+    ta.value = texto;
+    ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) { /* silenciar */ }
+    document.body.removeChild(ta);
+  }
+
+  window.PiApp.modulos.push(iniciarModalPago);
 
   // --- Menú móvil (abre/cierra y se cierra al tocar un enlace) -----------
 

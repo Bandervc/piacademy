@@ -43,6 +43,7 @@ window.DATOS = {
     // Mensaje del formulario. Lo que va entre llaves lo completa el alumno.
     // Si deja un campo vacío, esa línea desaparece del mensaje.
     inscripcion: "Hola PiAcademy 👋 Deseo inscribirme al *Ciclo Integral*.\n\n*Mis datos:*\n• Nombre: {nombre}\n• Teléfono: {telefono}\n• Me preparo para: {modalidad}\n• Turno que prefiero: {turno}\n\n(Vengo de: {origen})",
+    confirmacionPago: "Hola PiAcademy 👋 Ya realicé el pago del *Ciclo Integral* por *{metodo}*.\n\n*Mis datos:*\n• Nombre: {nombre}\n• Teléfono: {telefono}\n• Me preparo para: {modalidad}\n• Turno: {turno}\n• Monto pagado: S/ {monto}\n• Código usado: {codigo}\n\nAdjunto mi comprobante de pago 📸",
   },
 
   // ═══ 4. PROMOCIÓN Y CUENTA REGRESIVA ═══
@@ -265,5 +266,37 @@ window.DATOS = {
     youtube: "",
     tiktok: "",
     instagram: "",
+  },
+
+  // ═══ 14. CÓDIGOS DE DESCUENTO ═══
+  // Crea los que quieras para soltar en tus lives.
+  //   codigo:      lo que escribe el alumno (no importan mayúsculas/minúsculas)
+  //   descuento:   monto fijo en soles que se resta del precio
+  //   vence:       fecha límite formato "AAAA-MM-DD". Pon "" para que no venza nunca.
+  //   descripcion: texto corto que ve el alumno al aplicar el código.
+  // Para agregar uno nuevo, copia una línea { ... } y pégala con su coma.
+  codigos: [
+    { codigo: "LIVE20",   descuento: 20,  vence: "2026-10-01", descripcion: "Descuento Live S/20" },
+    { codigo: "BECA50",   descuento: 50,  vence: "",           descripcion: "Beca especial S/50" },
+    { codigo: "PUCP30",   descuento: 30,  vence: "2026-09-15", descripcion: "Promo PUCP S/30" },
+  ],
+
+  // ═══ 15. PAGO CON YAPE / PLIN ═══
+  // Cambia los números, titulares y rutas de imagen QR con tus datos reales.
+  // Para la imagen QR: guarda tu captura de pantalla del QR como archivo
+  // (ej. "qr-yape.png") en la misma carpeta de la página y pon el nombre aquí.
+  pago: {
+    yape: {
+      numero: "934894501",
+      numeroVisible: "934 894 501",
+      titular: "Nombre del Titular",
+      qrImagen: "",                    // pon la ruta a tu imagen QR, ej: "qr-yape.png"
+    },
+    plin: {
+      numero: "934894501",
+      numeroVisible: "934 894 501",
+      titular: "Nombre del Titular",
+      qrImagen: "",                    // pon la ruta a tu imagen QR, ej: "qr-plin.png"
+    },
   },
 };
