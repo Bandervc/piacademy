@@ -19,7 +19,7 @@ window.DATOS = {
   // ═══ 2. TU CONTACTO ═══
   contacto: {
       "whatsapp": "934894501",
-      "telefonoVisible": "+51934894501",
+      "telefonoVisible": "934894501",
       "correo": ""
   },
 
