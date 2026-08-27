@@ -6,14 +6,20 @@ window.DATOS = {
 
   // ═══ 1. TU MARCA ═══
   marca: {
-      "anioCopyright": "",
-      "descripcionPie": ""
+      "anioCopyright": "2026",
+      "descripcionPie": "Todos los derechos reservados",
+      "nombre": "PiAcademy",
+      "nav1": "Metodología PiAcademy",
+      "nav2": "Enfoque PUCP & Beca 18",
+      "nav3": "Plan de Cursos",
+      "nav4": "Ciclo Integral & Inversión",
+      "nav5": "Test de Nivel Gratuito"
   },
 
   // ═══ 2. TU CONTACTO ═══
   contacto: {
       "whatsapp": "934894501",
-      "telefonoVisible": "123458",
+      "telefonoVisible": "934894501",
       "correo": ""
   },
 
@@ -257,7 +263,24 @@ window.DATOS = {
   testimonios: {},
 
   // ═══ 12. PREGUNTAS FRECUENTES ═══
-  faq: [],
+  faq: [
+      {
+          "pregunta": "¿Cómo es la Modalidad de Clases?",
+          "respuesta": "Las clases son 100% en vivo a través de Zoom HD. Interactúas con los profesores en tiempo real. Además, todas las sesiones quedan grabadas y subidas a la plataforma virtual 24/7 para repasar cuando desees."
+      },
+      {
+          "pregunta": "¿El ciclo sirve tanto PUCP como para BECA 18?",
+          "respuesta": "¡Sí! El temario del Ciclo Integral abarca la intersección perfecta entre las preguntas del examen PUCP (Lectura Crítica, Redacción, Matemática) y la prueba ENP de Beca 18 (Razonamiento Lógico-Matemático y Verbal). Además que las preguntas del ENP tienen base de temarios de la PUCP."
+      },
+      {
+          "pregunta": "¿Cuáles son los medios de pago disponible?",
+          "respuesta": "Aceptamos transferencias bancarias (BCP, Interbank, BBVA), Yape, Plin y tarjetas de débito/crédito. Escríbenos a nuestro WhatsApp +51 93489450 para facilitarte las cuentas."
+      },
+      {
+          "pregunta": "¿Incluye materiales y simulacros?",
+          "respuesta": "Sí, incluye todos los PDF digitales de teoría, listas de ejercicios, simulacros semanales calificados y sus respectivos solucionarios explicados."
+      }
+  ],
 
   // ═══ 13. REDES SOCIALES ═══
   redes: {
