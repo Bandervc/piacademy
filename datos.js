@@ -20,10 +20,10 @@ window.DATOS = {
   // ═══ 4. PROMOCIÓN Y CUENTA REGRESIVA ═══
   promocion: {
       "fechaLimite": "2026-09-15T23:59",
-      "textoContador": "",
+      "textoContador": "!No dejes pasar esta oportunidad!",
       "mostrarContador": true,
-      "avisoBanner": "",
-      "enlaceBanner": ""
+      "avisoBanner": "TEXTO DEL BANNER",
+      "enlaceBanner": "TEXTO DEL ENLACE"
   },
 
   // ═══ 5. PRECIO ═══
@@ -34,17 +34,28 @@ window.DATOS = {
   },
 
   // ═══ 6. TURNOS Y HORARIOS ═══
-  horarios: [],
+  horarios: [
+      {
+          "nombre": "Turno Noche",
+          "rango": "7:00 pm - 8:30 pm",
+          "disponible": true
+      },
+      {
+          "nombre": "Turno Tarde",
+          "rango": "5:00 pm - 6:30 pm",
+          "disponible": true
+      }
+  ],
 
   // ═══ 6.1 ENCABEZADOS Y TÍTULOS EDITABLES ═══
   textos: {
-      "heroPildora": "",
-      "heroTitulo": "",
-      "heroSubtitulo": "",
-      "beneficiosTitulo": "",
-      "audienciaTitulo": "",
-      "cursosTitulo": "",
-      "inversionTitulo": ""
+      "heroPildora": "PILDORA SUPERIOR DEL HERO",
+      "heroTitulo": "TEXTO PRINCIPAL",
+      "heroSubtitulo": "SUBTITULO",
+      "beneficiosTitulo": "TITULO BENEF",
+      "audienciaTitulo": "AUDIENCIA",
+      "cursosTitulo": "CURSOS",
+      "inversionTitulo": "INVERSION"
   },
 
   // ═══ 7. A QUIÉN ESTÁ DIRIGIDO ═══
@@ -59,7 +70,21 @@ window.DATOS = {
   // ═══ 10. TEST DE NIVEL Y PREMIOS GAMIFICADOS ═══
   test: {
       "mostrar": true,
-      "tiempoSegundos": 90
+      "tiempoSegundos": 1200,
+      "premios": [
+          {
+              "minAciertos": 1,
+              "maxAciertos": 5,
+              "codigo": "LIVE20",
+              "mensaje": "¡Excelente! Ganaste el descuento especial LIVE20"
+          },
+          {
+              "minAciertos": 6,
+              "maxAciertos": 10,
+              "codigo": "LIVE20",
+              "mensaje": "¡Excelente! Ganaste el descuento especial LIVE20"
+          }
+      ]
   },
 
   // ═══ 11. TESTIMONIOS ═══
@@ -77,20 +102,27 @@ window.DATOS = {
   },
 
   // ═══ 14. CÓDIGOS DE DESCUENTO ═══
-  codigos: [],
+  codigos: [
+      {
+          "codigo": "LIVE20",
+          "descuento": 20,
+          "vence": "2026-09-11",
+          "descripcion": "CÓDIGO PARA LIVE DE TIKTOK"
+      }
+  ],
 
   // ═══ 15. PAGO CON YAPE / PLIN ═══
   pago: {
       "yape": {
-          "titular": "",
-          "numero": "",
-          "numeroVisible": "",
+          "titular": "Bander Var*",
+          "numero": "934894501",
+          "numeroVisible": "934894501",
           "qrImagen": "qr-yape.png"
       },
       "plin": {
-          "titular": "",
-          "numero": "",
-          "numeroVisible": "",
+          "titular": "Bander Vargas",
+          "numero": "934894501",
+          "numeroVisible": "934894501",
           "qrImagen": "qr-plin.png"
       }
   },
