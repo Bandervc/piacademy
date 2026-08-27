@@ -215,16 +215,22 @@
 
   window.PiApp.modulos.push(iniciarPestanasCursos);
 
-  // --- Test de nivel (preguntas generadas desde datos.js) -----------------
-
-  function iniciarTest(datos) {
+  // --- Test de nivel (preguntas generadas desde datos.js) -----  function iniciarTest(datos) {
     var contenedor = document.getElementById('preguntaTest');
+    var quizStart   = document.getElementById('quizStart');
+    var quizArea    = document.getElementById('quizArea');
+    var quizResult  = document.getElementById('quizResult');
+    var feedback    = document.getElementById('quizFeedback');
+    var btnSiguiente = document.getElementById('btnSiguiente');
+    var btnIniciar  = document.getElementById('btnIniciarTest');
     if (!contenedor) return;
 
-    var preguntas = datos.test.preguntas;
+    var letras = ['A', 'B', 'C', 'D', 'E', 'F'];
+    var preguntas = datos.test && datos.test.preguntas ? datos.test.preguntas : [];
     var total = preguntas.length;
     var paso = 0;
     var aciertos = 0;
+    var yaRespondida = false;
 
     var progreso = document.getElementById('quizStepText');
     var quizTimerBadge = document.getElementById('quizTimerBadge');
@@ -235,8 +241,10 @@
     var quizRewardMsg = document.getElementById('quizRewardMsg');
     var quizRewardCode = document.getElementById('quizRewardCode');
     var btnCanjearPremio = document.getElementById('btnCanjearPremio');
+    var botonAsesoria = document.getElementById('btnAsesoriaTest');
+    var resultado = quizResult;
 
-    var tiempoLimite = datos.test.tiempoSegundos || 0;
+    var tiempoLimite = datos.test && datos.test.tiempoSegundos ? datos.test.tiempoSegundos : 0;
     var tiempoRestante = tiempoLimite;
     var timerInterval = null;
 
@@ -246,28 +254,16 @@
         if (quizTimerBar) quizTimerBar.classList.add('hidden');
         return;
       }
-
       tiempoRestante = tiempoLimite;
-      if (quizTimerBadge) {
-        quizTimerBadge.classList.remove('hidden');
-        quizTimerSeconds.textContent = tiempoRestante;
-      }
+      if (quizTimerBadge) { quizTimerBadge.classList.remove('hidden'); quizTimerSeconds.textContent = tiempoRestante; }
       if (quizTimerBar) quizTimerBar.classList.remove('hidden');
       if (quizTimerProgress) quizTimerProgress.style.width = '100%';
-
       if (timerInterval) clearInterval(timerInterval);
       timerInterval = setInterval(function () {
         tiempoRestante--;
         if (quizTimerSeconds) quizTimerSeconds.textContent = tiempoRestante;
-        if (quizTimerProgress) {
-          var porcentaje = Math.max(0, (tiempoRestante / tiempoLimite) * 100);
-          quizTimerProgress.style.width = porcentaje + '%';
-        }
-
-        if (tiempoRestante <= 0) {
-          clearInterval(timerInterval);
-          terminar(true);
-        }
+        if (quizTimerProgress) quizTimerProgress.style.width = Math.max(0, (tiempoRestante / tiempoLimite) * 100) + '%';
+        if (tiempoRestante <= 0) { clearInterval(timerInterval); terminar(true); }
       }, 1000);
     }
 
@@ -286,21 +282,19 @@
           });
         }
       }
-      if (window.renderMathInElement) {
-        ejecutar();
-      } else {
-        setTimeout(ejecutar, 300);
-        setTimeout(ejecutar, 800);
-      }
+      if (window.renderMathInElement) { ejecutar(); } else { setTimeout(ejecutar, 300); setTimeout(ejecutar, 800); }
     }
 
     function pintarPregunta() {
+      yaRespondida = false;
       var pregunta = preguntas[paso];
-      progreso.textContent = 'Pregunta ' + (paso + 1) + ' de ' + total;
+      if (progreso) progreso.textContent = 'Pregunta ' + (paso + 1) + ' de ' + total;
       contenedor.innerHTML = '';
+      if (feedback) { feedback.classList.add('hidden'); feedback.innerHTML = ''; }
+      if (btnSiguiente) btnSiguiente.classList.add('hidden');
 
       var titulo = document.createElement('h3');
-      titulo.className = 'text-lg font-bold text-white mb-4 leading-relaxed';
+      titulo.className = 'text-base sm:text-lg font-bold text-white mb-4 leading-relaxed';
       titulo.innerHTML = (paso + 1) + '. ' + pregunta.enunciado;
       contenedor.appendChild(titulo);
 
@@ -310,9 +304,10 @@
       pregunta.alternativas.forEach(function (texto, indice) {
         var boton = document.createElement('button');
         boton.type = 'button';
+        boton.id = 'alt-btn-' + indice;
         boton.className = 'w-full text-left bg-slate-800 hover:bg-purple-900/40 p-3.5 rounded-xl border border-slate-700 transition-colors text-sm font-medium';
         boton.innerHTML = '<strong class="text-amber-400 mr-1">' + letras[indice] + ')</strong> ' + texto;
-        boton.addEventListener('click', function () { responder(indice === pregunta.correcta); });
+        boton.addEventListener('click', function () { responder(indice, pregunta.correcta); });
         lista.appendChild(boton);
       });
 
@@ -320,72 +315,180 @@
       renderLatex(contenedor);
     }
 
-    function responder(esCorrecta) {
+    function responder(indiceElegido, indiceCorrecta) {
+      if (yaRespondida) return;
+      yaRespondida = true;
+      var esCorrecta = indiceElegido === indiceCorrecta;
       if (esCorrecta) aciertos++;
+
+      // Colorear todos los botones
+      preguntas[paso].alternativas.forEach(function (_, i) {
+        var btn = document.getElementById('alt-btn-' + i);
+        if (!btn) return;
+        btn.disabled = true;
+        if (i === indiceCorrecta) {
+          btn.className = 'w-full text-left bg-emerald-900/60 border border-emerald-500 p-3.5 rounded-xl text-sm font-bold text-emerald-300';
+        } else if (i === indiceElegido) {
+          btn.className = 'w-full text-left bg-red-900/60 border border-red-500 p-3.5 rounded-xl text-sm font-bold text-red-300';
+        } else {
+          btn.className = 'w-full text-left bg-slate-800/60 border border-slate-700 p-3.5 rounded-xl text-sm font-medium text-slate-500';
+        }
+      });
+
+      // Mostrar feedback
+      if (feedback) {
+        feedback.classList.remove('hidden', 'bg-emerald-900/40', 'border-emerald-500', 'text-emerald-300', 'bg-red-900/40', 'border-red-500', 'text-red-300');
+        if (esCorrecta) {
+          feedback.classList.add('bg-emerald-900/40', 'border-emerald-500', 'text-emerald-300');
+          feedback.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> ¡Correcto!';
+        } else {
+          var txtCorrecta = preguntas[paso].alternativas[indiceCorrecta];
+          feedback.classList.add('bg-red-900/40', 'border-red-500', 'text-red-300');
+          feedback.innerHTML = '<i class="fa-solid fa-circle-xmark mr-2"></i> Incorrecto. La respuesta correcta es: <span class="font-black">' + letras[indiceCorrecta] + ') ' + txtCorrecta + '</span>';
+          renderLatex(feedback);
+        }
+      }
+
       paso++;
-      if (paso < total) { pintarPregunta(); return; }
-      terminar(false);
+      if (paso < total) {
+        // Mostrar botón Siguiente
+        if (btnSiguiente) {
+          var esUltima = paso === total - 1;
+          btnSiguiente.innerHTML = esUltima
+            ? '<span>Ver Resultado Final</span><i class="fa-solid fa-flag-checkered ml-2"></i>'
+            : '<span>Siguiente Pregunta</span><i class="fa-solid fa-arrow-right ml-2"></i>';
+          btnSiguiente.classList.remove('hidden');
+        }
+      } else {
+        if (btnSiguiente) {
+          btnSiguiente.innerHTML = '<span>Ver Resultado Final</span><i class="fa-solid fa-flag-checkered ml-2"></i>';
+          btnSiguiente.classList.remove('hidden');
+        }
+      }
     }
 
     function terminar(porTiempo) {
       if (timerInterval) clearInterval(timerInterval);
-      contenedor.innerHTML = '';
-      progreso.textContent = porTiempo ? '¡Tiempo agotado!' : 'Resultado final';
+      if (quizArea) quizArea.classList.add('hidden');
+      if (progreso) progreso.textContent = porTiempo ? '\u00a1Tiempo agotado!' : 'Resultado final';
       document.getElementById('correctCount').textContent = aciertos;
       document.getElementById('totalCount').textContent = total;
 
-      // Buscar premio por aciertos
       var premios = datos.test.premios || [];
       var premioGanado = null;
       for (var i = 0; i < premios.length; i++) {
         var p = premios[i];
-        if (aciertos >= p.minAciertos && aciertos <= p.maxAciertos) {
-          premioGanado = p;
-          break;
-        }
+        if (aciertos >= p.minAciertos && aciertos <= p.maxAciertos) { premioGanado = p; break; }
       }
 
       if (premioGanado && quizRewardCard) {
         quizRewardCard.classList.remove('hidden');
         if (quizRewardMsg) quizRewardMsg.textContent = premioGanado.mensaje;
         if (quizRewardCode) quizRewardCode.textContent = premioGanado.codigo;
-
         if (btnCanjearPremio) {
           btnCanjearPremio.onclick = function () {
             if (window.abrirInscripcion) window.abrirInscripcion('Test de Nivel');
             var inputCod = document.getElementById('discountCode');
             var btnApply = document.getElementById('btnApplyCode');
-            if (inputCod && btnApply) {
-              inputCod.value = premioGanado.codigo;
-              btnApply.click();
-            }
+            if (inputCod && btnApply) { inputCod.value = premioGanado.codigo; btnApply.click(); }
           };
         }
       } else if (quizRewardCard) {
         quizRewardCard.classList.add('hidden');
       }
 
-      botonAsesoria.setAttribute('href', N.urlWhatsApp(
-        datos.contacto.whatsapp,
-        window.PiApp.mensajeWhatsApp('testCompletado', { aciertos: aciertos, total: total })
-      ));
-      resultado.classList.remove('hidden');
+      if (botonAsesoria) {
+        botonAsesoria.setAttribute('href', N.urlWhatsApp(
+          datos.contacto.whatsapp,
+          window.PiApp.mensajeWhatsApp('testCompletado', { aciertos: aciertos, total: total })
+        ));
+      }
+      if (resultado) resultado.classList.remove('hidden');
     }
 
-    document.getElementById('btnRepetirTest').addEventListener('click', function () {
+    function reiniciar() {
       paso = 0;
       aciertos = 0;
-      resultado.classList.add('hidden');
+      yaRespondida = false;
+      if (resultado) resultado.classList.add('hidden');
       if (quizRewardCard) quizRewardCard.classList.add('hidden');
+      if (quizArea) quizArea.classList.remove('hidden');
       iniciarTemporizador();
       pintarPregunta();
-    });
+    }
 
-    iniciarTemporizador();
-    pintarPregunta();
+    // Botón iniciar
+    if (btnIniciar) {
+      btnIniciar.addEventListener('click', function () {
+        if (quizStart) quizStart.classList.add('hidden');
+        if (quizArea) quizArea.classList.remove('hidden');
+        iniciarTemporizador();
+        pintarPregunta();
+      });
+    }
+
+    // Botón siguiente
+    if (btnSiguiente) {
+      btnSiguiente.addEventListener('click', function () {
+        if (paso < total) {
+          pintarPregunta();
+        } else {
+          terminar(false);
+        }
+      });
+    }
+
+    var btnRepetir = document.getElementById('btnRepetirTest');
+    if (btnRepetir) {
+      btnRepetir.addEventListener('click', function () {
+        reiniciar();
+      });
+    }
   }
 
   window.PiApp.modulos.push(iniciarTest);
+
+  // --- Encabezados y títulos personalizados desde datos.textos ---
+
+  function aplicarTextos(datos) {
+    var tx = datos.textos || {};
+    function reemplazarTexto(selector, valor) {
+      if (!valor) return;
+      var el = document.querySelector(selector);
+      if (el) el.textContent = valor;
+    }
+    // La píldora del hero (el badge de arriba del h1)
+    if (tx.heroPildora) {
+      document.querySelectorAll('.animate-ping').forEach(function (ping) {
+        var padre = ping.parentElement;
+        if (padre) {
+          var nodoTexto = padre.childNodes[padre.childNodes.length - 1];
+          if (nodoTexto && nodoTexto.nodeType === 3) nodoTexto.textContent = ' ' + tx.heroPildora;
+        }
+      });
+    }
+    // Título del hero (h1)
+    if (tx.heroTitulo) {
+      var h1 = document.querySelector('section h1');
+      if (h1) h1.innerHTML = tx.heroTitulo;
+    }
+    // Subtítulo del hero
+    if (tx.heroSubtitulo) {
+      var heroP = document.querySelector('section h1 + p');
+      if (heroP) heroP.textContent = tx.heroSubtitulo;
+    }
+    // Título de Beneficios
+    if (tx.beneficiosTitulo) reemplazarTexto('#beneficios h2', tx.beneficiosTitulo);
+    // Título de Audiencia
+    if (tx.audienciaTitulo) reemplazarTexto('#audiencia h2', tx.audienciaTitulo);
+    // Título de Cursos
+    if (tx.cursosTitulo) reemplazarTexto('#temario h2', tx.cursosTitulo);
+    // Título de Inversión
+    if (tx.inversionTitulo) reemplazarTexto('#inversion h2', tx.inversionTitulo);
+  }
+
+  window.PiApp.modulos.push(aplicarTextos);
+
 
   // --- Acordeón de preguntas frecuentes (FAQ generadas desde datos.js) ----
 

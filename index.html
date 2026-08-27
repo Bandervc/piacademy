@@ -133,7 +133,7 @@
                     <a href="#beneficios" class="hover:text-brand-purple transition-colors">¿Por qué PiAcademy?</a>
                     <a href="#audiencia" class="hover:text-brand-purple transition-colors">Dirigido A</a>
                     <a href="#temario" class="hover:text-brand-purple transition-colors">Cursos</a>
-                    <a href="#diagnostico" class="hover:text-brand-purple transition-colors">Test de Nivel</a>
+                    <a href="https://pi-academy-kappa.vercel.app/#diagnostico" target="_blank" rel="noopener" class="hover:text-brand-purple transition-colors">Test de Nivel</a>
                     <a href="#inversion" class="hover:text-brand-purple transition-colors">Inversión</a>
                     <a href="#faq" class="hover:text-brand-purple transition-colors">Preguntas</a>
                 </nav>
@@ -160,7 +160,7 @@
                 <a href="#beneficios" class="block py-2 text-slate-700 font-medium border-b border-slate-100">¿Por qué PiAcademy?</a>
                 <a href="#audiencia" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Dirigido A (PUCP & Beca 18)</a>
                 <a href="#temario" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Plan de Cursos</a>
-                <a href="#diagnostico" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Test Diagnóstico</a>
+                <a href="https://pi-academy-kappa.vercel.app/#diagnostico" target="_blank" rel="noopener" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Test Diagnóstico</a>
                 <a href="#inversion" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Inversión y Horarios</a>
                 <a href="#faq" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Preguntas Frecuentes</a>
                 <div class="pt-2 flex flex-col gap-2">
@@ -381,7 +381,7 @@
     </section>
 
     <!-- Section: Interactive Diagnostic Quiz for Students -->
-    <section id="diagnostico" data-si="test.mostrar" class="py-16 bg-gradient-to-br from-brand-navy to-slate-950 text-white scroll-mt-24">
+    <section id="diagnostico" class="py-16 bg-gradient-to-br from-brand-navy to-slate-950 text-white scroll-mt-24">
         <div class="max-w-4xl mx-auto px-4 sm:px-6">
             <div class="text-center mb-10">
                 <span class="text-amber-400 font-bold text-xs tracking-widest uppercase bg-amber-400/10 border border-amber-400/30 px-3 py-1 rounded-full" data-dato="textos.testEtiqueta">
@@ -394,22 +394,50 @@
             <!-- Quiz Box Container -->
             <div class="bg-slate-900 border border-purple-800/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
                 <div id="quizContainer">
-                    <div class="flex justify-between items-center text-xs text-slate-400 border-b border-slate-800 pb-3 mb-4">
-                        <span id="quizStepText">Pregunta 1 de 3</span>
-                        <div id="quizTimerBadge" class="hidden flex items-center gap-1.5 bg-amber-400/20 text-amber-300 border border-amber-400/40 text-xs font-black px-3 py-1 rounded-full">
-                            <i class="fa-solid fa-stopwatch animate-pulse text-amber-400"></i>
-                            <span>Tiempo: <strong id="quizTimerSeconds">90</strong>s</span>
+
+                    <!-- Pantalla de Inicio del Test -->
+                    <div id="quizStart" class="text-center py-8 space-y-6">
+                        <div class="w-20 h-20 bg-brand-purple/20 border-2 border-brand-purple rounded-full flex items-center justify-center text-4xl mx-auto">
+                            <i class="fa-solid fa-brain text-brand-purple" aria-hidden="true"></i>
                         </div>
-                        <span class="text-amber-400 font-bold"><i class="fa-solid fa-star mr-1"></i> Tipo Examen PUCP / Beca 18</span>
+                        <div>
+                            <h3 class="text-xl font-black text-white mb-2">¿Listo para el desafío?</h3>
+                            <p class="text-slate-300 text-sm max-w-md mx-auto">Responde las preguntas tipo examen PUCP y Beca 18. Al terminar podrás desbloquear un código de descuento según tus aciertos.</p>
+                        </div>
+                        <button type="button" id="btnIniciarTest" class="bg-brand-amber hover:bg-brand-amberHover text-slate-950 font-black text-base px-10 py-4 rounded-xl shadow-xl transition-all transform hover:-translate-y-1 active:translate-y-0 flex items-center gap-3 mx-auto">
+                            <i class="fa-solid fa-bolt text-lg"></i>
+                            <span>INICIAR TEST AHORA</span>
+                        </button>
                     </div>
 
-                    <!-- Animated Timer Progress Bar -->
-                    <div id="quizTimerBar" class="w-full bg-slate-800 rounded-full h-1.5 mb-6 overflow-hidden hidden">
-                        <div id="quizTimerProgress" class="bg-amber-400 h-full w-full transition-all duration-1000"></div>
-                    </div>
+                    <!-- Área de pregunta (se muestra al iniciar) -->
+                    <div id="quizArea" class="hidden">
+                        <div class="flex justify-between items-center text-xs text-slate-400 border-b border-slate-800 pb-3 mb-4">
+                            <span id="quizStepText">Pregunta 1 de 3</span>
+                            <div id="quizTimerBadge" class="hidden flex items-center gap-1.5 bg-amber-400/20 text-amber-300 border border-amber-400/40 text-xs font-black px-3 py-1 rounded-full">
+                                <i class="fa-solid fa-stopwatch animate-pulse text-amber-400"></i>
+                                <span>Tiempo: <strong id="quizTimerSeconds">90</strong>s</span>
+                            </div>
+                            <span class="text-amber-400 font-bold"><i class="fa-solid fa-star mr-1"></i> Tipo Examen PUCP / Beca 18</span>
+                        </div>
 
-                    <!-- Pregunta actual (generada por app.js desde datos.js) -->
-                    <div id="preguntaTest"></div>
+                        <!-- Animated Timer Progress Bar -->
+                        <div id="quizTimerBar" class="w-full bg-slate-800 rounded-full h-1.5 mb-6 overflow-hidden hidden">
+                            <div id="quizTimerProgress" class="bg-amber-400 h-full w-full transition-all duration-1000"></div>
+                        </div>
+
+                        <!-- Pregunta actual (generada por app.js desde datos.js) -->
+                        <div id="preguntaTest"></div>
+
+                        <!-- Feedback al responder: muestra respuesta correcta -->
+                        <div id="quizFeedback" class="hidden mt-4 p-4 rounded-xl border text-sm font-semibold"></div>
+
+                        <!-- Botón siguiente pregunta (aparece tras responder) -->
+                        <button type="button" id="btnSiguiente" class="hidden mt-4 w-full bg-brand-purple hover:bg-brand-darkPurple text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2">
+                            <span>Siguiente Pregunta</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
 
                     <!-- Quiz Results Box -->
                     <div id="quizResult" class="hidden text-center py-6 space-y-4">
