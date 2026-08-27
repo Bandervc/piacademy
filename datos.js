@@ -52,8 +52,8 @@ window.DATOS = {
       "heroPildora": "PSDDA",
       "heroTitulo": "TEXTO PRINCIPAL",
       "heroSubtitulo": "SUBTITULO",
-      "beneficiosTitulo": "TITULO BENEF",
-      "audienciaTitulo": "AUDIENCIA",
+      "beneficiosTitulo": "METODOLOGÍA",
+      "audienciaTitulo": "DIRIGIDO A",
       "cursosTitulo": "CURSOS",
       "inversionTitulo": "INVERSION"
   },
