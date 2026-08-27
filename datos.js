@@ -254,24 +254,7 @@ window.DATOS = {
   testimonios: {},
 
   // ═══ 12. PREGUNTAS FRECUENTES ═══
-  faq: [
-      {
-          "pregunta": "¿Cómo es la modalidad de clases en el Ciclo Integral?",
-          "respuesta": "Las clases son 100% en vivo a través de Zoom HD. Interactúas con los profesores en tiempo real. Además, todas las sesiones quedan grabadas y subidas a la plataforma virtual 24/7 para repasar cuando desees."
-      },
-      {
-          "pregunta": "¿El ciclo sirve tanto para PUCP como para Beca 18 al mismo tiempo?",
-          "respuesta": "¡Sí! El temario del Ciclo Integral abarca la intersección perfecta entre las preguntas del examen PUCP (Lectura Crítica, Redacción, Matemática) y la prueba ENP de Beca 18 (Razonamiento Lógico-Matemático y Verbal)."
-      },
-      {
-          "pregunta": "¿Cuáles son los medios de pago disponibles?",
-          "respuesta": "Aceptamos transferencias bancarias (BCP, Interbank, BBVA), Yape, Plin y tarjetas de débito/crédito. Escríbenos por WhatsApp y te facilitamos las cuentas."
-      },
-      {
-          "pregunta": "¿Incluye materiales y simulacros?",
-          "respuesta": "Sí, incluye todos los PDF digitales de teoría, listas de ejercicios, simulacros semanales calificados y sus respectivos solucionarios explicados."
-      }
-  ],
+  faq: [],
 
   // ═══ 13. REDES SOCIALES ═══
   redes: {
