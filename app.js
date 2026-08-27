@@ -215,7 +215,9 @@
 
   window.PiApp.modulos.push(iniciarPestanasCursos);
 
-  // --- Test de nivel (preguntas generadas desde datos.js) -----  function iniciarTest(datos) {
+  // --- Test de nivel (preguntas generadas desde datos.js) -----------------
+
+  function iniciarTest(datos) {
     var contenedor = document.getElementById('preguntaTest');
     var quizStart   = document.getElementById('quizStart');
     var quizArea    = document.getElementById('quizArea');
@@ -321,7 +323,6 @@
       var esCorrecta = indiceElegido === indiceCorrecta;
       if (esCorrecta) aciertos++;
 
-      // Colorear todos los botones
       preguntas[paso].alternativas.forEach(function (_, i) {
         var btn = document.getElementById('alt-btn-' + i);
         if (!btn) return;
@@ -335,7 +336,6 @@
         }
       });
 
-      // Mostrar feedback
       if (feedback) {
         feedback.classList.remove('hidden', 'bg-emerald-900/40', 'border-emerald-500', 'text-emerald-300', 'bg-red-900/40', 'border-red-500', 'text-red-300');
         if (esCorrecta) {
@@ -351,7 +351,6 @@
 
       paso++;
       if (paso < total) {
-        // Mostrar botón Siguiente
         if (btnSiguiente) {
           var esUltima = paso === total - 1;
           btnSiguiente.innerHTML = esUltima
@@ -370,11 +369,11 @@
     function terminar(porTiempo) {
       if (timerInterval) clearInterval(timerInterval);
       if (quizArea) quizArea.classList.add('hidden');
-      if (progreso) progreso.textContent = porTiempo ? '\u00a1Tiempo agotado!' : 'Resultado final';
+      if (progreso) progreso.textContent = porTiempo ? '¡Tiempo agotado!' : 'Resultado final';
       document.getElementById('correctCount').textContent = aciertos;
       document.getElementById('totalCount').textContent = total;
 
-      var premios = datos.test.premios || [];
+      var premios = (datos.test && datos.test.premios) ? datos.test.premios : [];
       var premioGanado = null;
       for (var i = 0; i < premios.length; i++) {
         var p = premios[i];
@@ -417,7 +416,6 @@
       pintarPregunta();
     }
 
-    // Botón iniciar
     if (btnIniciar) {
       btnIniciar.addEventListener('click', function () {
         if (quizStart) quizStart.classList.add('hidden');
@@ -427,7 +425,6 @@
       });
     }
 
-    // Botón siguiente
     if (btnSiguiente) {
       btnSiguiente.addEventListener('click', function () {
         if (paso < total) {
@@ -440,9 +437,7 @@
 
     var btnRepetir = document.getElementById('btnRepetirTest');
     if (btnRepetir) {
-      btnRepetir.addEventListener('click', function () {
-        reiniciar();
-      });
+      btnRepetir.addEventListener('click', function () { reiniciar(); });
     }
   }
 
