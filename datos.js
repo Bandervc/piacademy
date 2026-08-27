@@ -49,9 +49,9 @@ window.DATOS = {
 
   // ═══ 6.1 ENCABEZADOS Y TÍTULOS EDITABLES ═══
   textos: {
-      "heroPildora": "PSDDA",
-      "heroTitulo": "TEXTO PRINCIPAL",
-      "heroSubtitulo": "SUBTITULO",
+      "heroPildora": "Aprende con especialistas en ingreso directo",
+      "heroTitulo": "Asegura tu Ingreso a la PUCP y tu Beca en Beca 18",
+      "heroSubtitulo": "Prepara tu camino al éxito con nuestro exclusivo Ciclo Integral. La metodología virtual más sólida de Perú con clases en vivo, simulacros tipo examen real y acompañamiento personalizado continuo.",
       "beneficiosTitulo": "METODOLOGÍA",
       "audienciaTitulo": "DIRIGIDO A",
       "cursosTitulo": "CURSOS",
