@@ -60,8 +60,8 @@ window.DATOS = {
 
   // ═══ 5. PRECIO ═══ (números SIN comillas)
   precio: {
-    normal: 380,
-    promocional: 220,
+    normal: 300,
+    promocional: 150,
     nota: "pago único",
   },
 
