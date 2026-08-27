@@ -59,13 +59,120 @@ window.DATOS = {
   },
 
   // ═══ 7. A QUIÉN ESTÁ DIRIGIDO ═══
-  audiencia: [],
+  audiencia: [
+    {
+      "etiqueta": "Modalidad 01",
+      "titulo": "Postulantes PUCP",
+      "icono": "fa-solid fa-university",
+      "descripcion": "Dirigido a alumnos que buscan ingresar a la Pontificia Universidad Católica del Perú en sus diversas modalidades (Evaluación del Talento, ITS, POP, Bachillerato).",
+      "puntos": [
+        "Dominio completo de <strong>Lectura Crítica</strong> y <strong>Redacción</strong> según las guías oficiales PUCP.",
+        "Resolución rápida de <strong>Matemática PUCP</strong> (Álgebra, Geometría, Trigonometría, Aritmética).",
+        "Simulacros ajustados a los tiempos y nivel de dificultad del Examen de Admisión."
+      ],
+      "textoBoton": "Ver Vacantes PUCP",
+      "mensaje": "interesPUCP"
+    },
+    {
+      "etiqueta": "Modalidad 02",
+      "titulo": "Beca 18 (PRONABEC)",
+      "icono": "fa-solid fa-award",
+      "descripcion": "Diseñado para estudiantes de secundaria y egresados que rendirán el <strong>Examen Nacional de Preselección (ENP)</strong> para asegurar su vacante becada integral.",
+      "puntos": [
+        "Estrategias de resolución veloz para <strong>Razonamiento Matemático</strong>.",
+        "Comprensión lectora avanzada y <strong>Razonamiento Verbal</strong> directo.",
+        "Estrategias de control de estrés y optimización de puntaje por pregunta."
+      ],
+      "textoBoton": "Ver Vacantes Beca 18",
+      "mensaje": "interesBeca18"
+    }
+  ],
 
   // ═══ 8. POR QUÉ ELEGIRTE ═══
-  beneficios: [],
+  beneficios: [
+    { "icono": "fa-solid fa-laptop-code", "titulo": "Clases En Vivo en HD", "texto": "Interactúa en tiempo real con docentes especialistas. Haz preguntas en vivo y resuelve ejercicios en directo con la pizarra digital HD." },
+    { "icono": "fa-solid fa-photo-film", "titulo": "Grabaciones 24/7", "texto": "¿No pudiste asistir a una sesión? Todas las clases quedan ordenadas en tu aula virtual para que las repases a tu propio ritmo cuantas veces quieras." },
+    { "icono": "fa-solid fa-chart-line", "titulo": "Simulacros Evaluativos", "texto": "Mide tu nivel semanalmente. Recibe estadísticas de rendimiento por materia para identificar y reforzar tus puntos débiles." },
+    { "icono": "fa-solid fa-file-pdf", "titulo": "Material Didáctico Exclusivo", "texto": "Descarga compendios teóricos, boletines de práctica guiada y claves resueltas paso a paso elaboradas por nuestro equipo pedagógico." },
+    { "icono": "fa-solid fa-comments", "titulo": "Asesoría Permanente", "texto": "Acceso a grupos de consultas académicas continuas. Ninguna duda queda sin resolver durante tu preparación." },
+    { "icono": "fa-solid fa-bullseye", "titulo": "Plana Docente Selecta", "texto": "Profesores con amplia trayectoria en la preparación de alumnos ingresantes a la PUCP y seleccionados de Beca 18." }
+  ],
 
   // ═══ 9. CURSOS ═══
-  cursos: [],
+  cursos: [
+    {
+      "clave": "rm",
+      "pestana": "Razonamiento Matemático",
+      "iconoPestana": "fa-solid fa-calculator",
+      "etiqueta": "Materia Clave",
+      "titulo": "Razonamiento Matemático",
+      "descripcion": "Desarrolla la rapidez de análisis lógico y resolución directa sin fórmulas extensas. Indispensable para los exámenes tipo admisión PUCP y evaluación Beca 18.",
+      "temas": [
+        "Planteo de Ecuaciones y Fracciones",
+        "Porcentajes, Razones y Proporciones",
+        "Lógica Recreativa e Inferencial",
+        "Sucesiones y Áreas Sombreadas"
+      ],
+      "tituloNota": "Técnica PiAcademy:",
+      "nota": "Enseñamos el \"Método de Descarte Veloz\" y atajos algebraicos aprobados para responder cada pregunta de RM en menos de 90 segundos.",
+      "iconoDestacado": "fa-solid fa-lightbulb",
+      "destacado": "Incluye Banco de 500+ Preguntas Resueltas en Video."
+    },
+    {
+      "clave": "lc",
+      "pestana": "Lectura Crítica (PUCP)",
+      "iconoPestana": "fa-solid fa-book-open",
+      "etiqueta": "Formato Exclusivo PUCP",
+      "titulo": "Lectura Crítica",
+      "descripcion": "Domina el formato más exigente del examen PUCP: análisis de argumentos, debilidades, reforzamientos, intenciones del autor y diálogos contrapuestos.",
+      "temas": [
+        "Estructura del Argumento (Tesis y Premisas)",
+        "Debilitamiento y Reforzamiento",
+        "Puntos de Acuerdo y Discrepancia",
+        "Falacias Argumentativas Comunes"
+      ],
+      "tituloNota": "Diferencial PiAcademy:",
+      "nota": "Descomponemos los textos largos en diagramas lógicos simples para que evites caer en las distractoras clásicas del examen PUCP.",
+      "iconoDestacado": "fa-solid fa-book-reader",
+      "destacado": "Guías teóricas actualizadas según el último prospecto."
+    },
+    {
+      "clave": "red",
+      "pestana": "Redacción y Ortografía",
+      "iconoPestana": "fa-solid fa-pen-nib",
+      "etiqueta": "Dominio del Lenguaje",
+      "titulo": "Redacción y Normativa",
+      "descripcion": "Aprende las reglas de acentuación, puntuación, conectores lógicos y concordancia exigidas en la prueba de Redacción de la PUCP y Beca 18.",
+      "temas": [
+        "Ortografía y Acentuación Diacrítica/Especial",
+        "Uso Correcto de la Coma, Punto y Coma y Dos Puntos",
+        "Cohesión y Conectores Textuales",
+        "Corrección Idiomática y Queísmo/Dequeísmo"
+      ],
+      "tituloNota": "Práctica Orientada:",
+      "nota": "Evaluaciones semanales de corrección de textos para automatizar las reglas clave sin aburrirte con teoría memorística.",
+      "iconoDestacado": "fa-solid fa-pen-fancy",
+      "destacado": "Talleres de aplicación directa con corrección personalizada."
+    },
+    {
+      "clave": "mat",
+      "pestana": "Matemática Académica",
+      "iconoPestana": "fa-solid fa-chart-pie",
+      "etiqueta": "Fundamentos Matemáticos",
+      "titulo": "Matemática Académica (Álgebra / Aritmética)",
+      "descripcion": "Consolida la base sólida en temas algebraicos, geométricos y numéricos para responder con exactitud sin titubear.",
+      "temas": [
+        "Productos Notables y Factorización",
+        "Funciones, Inecuaciones y Logaritmos",
+        "Geometría Plana y Geometría del Espacio",
+        "Trigonometría Fundamental"
+      ],
+      "tituloNota": "Acompañamiento Gradual:",
+      "nota": "Desde el nivel básico inicial hasta el nivel avanzado exigido en el examen de admisión, garantizando que nadie se quede atrás.",
+      "iconoDestacado": "fa-solid fa-square-root-variable",
+      "destacado": "Formularios en PDF y trucos algebraicos interactivos."
+    }
+  ],
 
   // ═══ 10. TEST DE NIVEL Y PREMIOS GAMIFICADOS ═══
   test: {
