@@ -10,7 +10,7 @@ window.DATOS = {
   // ═══ 2. TU CONTACTO ═══
   contacto: {
       "whatsapp": "934894501",
-      "telefonoVisible": "",
+      "telefonoVisible": "123458",
       "correo": ""
   },
 
@@ -69,7 +69,7 @@ window.DATOS = {
 
   // ═══ 10. TEST DE NIVEL Y PREMIOS GAMIFICADOS ═══
   test: {
-      "mostrar": false,
+      "mostrar": true,
       "tiempoSegundos": 1200,
       "premios": [
           {
@@ -105,6 +105,16 @@ window.DATOS = {
                   "x = 4, y = 1"
               ],
               "correcta": 0
+          },
+          {
+              "enunciado": "Halle el intervalo de todos los valores que puede tomar x si se cumple lo siguiente: \n\\[\n\\frac{3}{2}\\leq\\frac{2}{3x+1}+1<\\frac{5}{2}\n\\]",
+              "alternativas": [
+                  "\\left[ \\frac{1}{3}; \\frac{2}{3} \\right[",
+                  "\\left] \\frac{1}{3}; \\frac{2}{3} \\right]",
+                  "\\left[ \\frac{1}{9}; 1 \\right[",
+                  "\\left] \\frac{1}{9}; 1 \\right]"
+              ],
+              "correcta": 3
           }
       ]
   },
@@ -130,6 +140,18 @@ window.DATOS = {
           "descuento": 20,
           "vence": "2026-09-11",
           "descripcion": "CÓDIGO PARA LIVE DE TIKTOK"
+      },
+      {
+          "codigo": "POLLITO",
+          "descuento": 20,
+          "vence": "2026-11-14",
+          "descripcion": "PARA LOS QUE RESUELVES MAX 5 BUENAS"
+      },
+      {
+          "codigo": "GALACTICO",
+          "descuento": 50,
+          "vence": "",
+          "descripcion": "PARA LOS QUE RESUELVAN 5 A MÁS PREGUNTAS"
       }
   ],
 
