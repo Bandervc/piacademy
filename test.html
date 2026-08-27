@@ -193,12 +193,9 @@
         © PiAcademy — <a href="index.html" class="hover:text-slate-400 transition-colors">Volver al inicio</a>
     </footer>
 
-    <!-- Scripts principales con Cache Busting -->
-    <script>
-        document.write('<script src="datos.js?v=' + new Date().getTime() + '"><\\/script>');
-    </script>
-    <script src="nucleo.js?v=2"></script>
-    <script defer src="app.js?v=3"></script>
+    <script src="datos.js" charset="UTF-8"></script>
+    <script src="nucleo.js" charset="UTF-8"></script>
+    <script defer src="app.js" charset="UTF-8"></script>
     <script>
     (function () {
         'use strict';

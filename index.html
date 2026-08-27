@@ -964,12 +964,10 @@
         }
     </style>
 
-    <!-- Datos dinámicos con Cache Busting para evitar caché del navegador -->
-    <script>
-        document.write('<script src="datos.js?v=' + new Date().getTime() + '"><\\/script>');
-    </script>
+    <!-- Datos dinámicos -->
+    <script src="datos.js"></script>
     <!-- Core y Lógica -->
-    <script src="nucleo.js?v=2"></script>
-    <script defer src="app.js?v=3"></script>
+    <script src="nucleo.js"></script>
+    <script defer src="app.js"></script>
 </body>
 </html>
