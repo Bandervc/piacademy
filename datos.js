@@ -31,19 +31,19 @@ window.DATOS = {
   // Es el texto que YA APARECE ESCRITO en el chat cuando alguien te escribe
   // desde cada botón. Así sabes de qué parte de la página viene la consulta.
   mensajes: {
-    bannerSuperior: "Hola PiAcademy 👋 Vi el aviso de vacantes con descuento en su página. ¿Sigue vigente la promoción del Ciclo Integral?",
-    heroConsulta: "Hola PiAcademy 👋 Estoy interesado(a) en el Ciclo Integral. ¿Me pueden enviar el prospecto y los horarios disponibles?",
-    interesPUCP: "Hola PiAcademy 👋 Quiero postular a la PUCP. ¿Cómo es la preparación del Ciclo Integral y cuándo inicia el próximo grupo?",
-    interesBeca18: "Hola PiAcademy 👋 Voy a rendir el Examen Nacional de Preselección de Beca 18. ¿Cómo me prepara el Ciclo Integral?",
-    mediosDePago: "Hola PiAcademy 👋 ¿Qué medios de pago aceptan para el Ciclo Integral? (Yape, Plin o transferencia)",
+    bannerSuperior: "Hola PiAcademy, vi el aviso de vacantes con descuento en su página. ¿Sigue vigente la promoción del Ciclo Integral?",
+    heroConsulta: "Hola PiAcademy, estoy interesado(a) en el Ciclo Integral. ¿Me pueden enviar el prospecto y los horarios disponibles?",
+    interesPUCP: "Hola PiAcademy, quiero postular a la PUCP. ¿Cómo es la preparación del Ciclo Integral y cuándo inicia el próximo grupo?",
+    interesBeca18: "Hola PiAcademy, voy a rendir el Examen Nacional de Preselección de Beca 18. ¿Cómo me prepara el Ciclo Integral?",
+    mediosDePago: "Hola PiAcademy, ¿qué medios de pago aceptan para el Ciclo Integral? (Yape, Plin o transferencia)",
     // {aciertos} y {total} se reemplazan solos con el puntaje del alumno.
-    testCompletado: "Hola PiAcademy 👋 Acabo de hacer el test de nivel de su página y obtuve {aciertos} de {total}. ¿Me ayudan a saber qué debo reforzar?",
-    botonFlotante: "Hola PiAcademy 👋 Tengo una consulta sobre el Ciclo Integral PUCP y Beca 18.",
-    footer: "Hola PiAcademy 👋 Vengo desde su página web y quisiera más información.",
+    testCompletado: "Hola PiAcademy, acabo de hacer el test de nivel de su página y obtuve {aciertos} de {total}. ¿Me ayudan a saber qué debo reforzar?",
+    botonFlotante: "Hola PiAcademy, tengo una consulta sobre el Ciclo Integral PUCP y Beca 18.",
+    footer: "Hola PiAcademy, vengo desde su página web y quisiera más información.",
     // Mensaje del formulario. Lo que va entre llaves lo completa el alumno.
     // Si deja un campo vacío, esa línea desaparece del mensaje.
-    inscripcion: "Hola PiAcademy 👋 Deseo inscribirme al *Ciclo Integral*.\n\n*Mis datos:*\n• Nombre: {nombre}\n• Teléfono: {telefono}\n• Me preparo para: {modalidad}\n• Turno que prefiero: {turno}\n\n(Vengo de: {origen})",
-    confirmacionPago: "Hola PiAcademy 👋 Ya realicé el pago del *Ciclo Integral* por *{metodo}*.\n\n*Mis datos:*\n• Nombre: {nombre}\n• Teléfono: {telefono}\n• Me preparo para: {modalidad}\n• Turno: {turno}\n• Monto pagado: S/ {monto}\n• Código usado: {codigo}\n\nAdjunto mi comprobante de pago 📸",
+    inscripcion: "Hola PiAcademy, deseo inscribirme al *Ciclo Integral*.\n\n*Mis datos:*\n• Nombre: {nombre}\n• Teléfono: {telefono}\n• Me preparo para: {modalidad}\n• Turno que prefiero: {turno}\n\n(Vengo de: {origen})",
+    confirmacionPago: "Hola PiAcademy, ya realicé el pago del *Ciclo Integral* por *{metodo}*.\n\n*Mis datos:*\n• Nombre: {nombre}\n• Teléfono: {telefono}\n• Me preparo para: {modalidad}\n• Turno: {turno}\n• Monto pagado: S/ {monto}\n• Código usado: {codigo}\n\nAdjunto mi comprobante de pago.",
   },
 
   // ═══ 4. PROMOCIÓN Y CUENTA REGRESIVA ═══
@@ -289,14 +289,14 @@ window.DATOS = {
     yape: {
       numero: "934894501",
       numeroVisible: "934 894 501",
-      titular: "Nombre del Titular",
-      qrImagen: "",                    // pon la ruta a tu imagen QR, ej: "qr-yape.png"
+      titular: "Bander Emanuel Vargas Campos",
+      qrImagen: "qr-yape.png",
     },
     plin: {
       numero: "934894501",
       numeroVisible: "934 894 501",
-      titular: "Nombre del Titular",
-      qrImagen: "",                    // pon la ruta a tu imagen QR, ej: "qr-plin.png"
+      titular: "Bander Vargas",
+      qrImagen: "qr-plin.png",
     },
   },
 };
