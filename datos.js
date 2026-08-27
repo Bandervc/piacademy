@@ -5,7 +5,10 @@
 window.DATOS = {
 
   // ═══ 1. TU MARCA ═══
-  marca: {},
+  marca: {
+      "anioCopyright": "",
+      "descripcionPie": ""
+  },
 
   // ═══ 2. TU CONTACTO ═══
   contacto: {
@@ -38,12 +41,12 @@ window.DATOS = {
       {
           "nombre": "Turno Noche",
           "rango": "7:00 pm - 8:30 pm",
-          "disponible": false
+          "disponible": true
       },
       {
           "nombre": "Turno Tarde",
           "rango": "5:00 pm - 6:30 pm",
-          "disponible": true
+          "disponible": false
       }
   ],
 
