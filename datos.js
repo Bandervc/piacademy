@@ -49,7 +49,7 @@ window.DATOS = {
 
   // ═══ 6.1 ENCABEZADOS Y TÍTULOS EDITABLES ═══
   textos: {
-      "heroPildora": "PILDORA SUPERIOR DEL HERO",
+      "heroPildora": "PSDDA",
       "heroTitulo": "TEXTO PRINCIPAL",
       "heroSubtitulo": "SUBTITULO",
       "beneficiosTitulo": "TITULO BENEF",
