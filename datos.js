@@ -50,7 +50,7 @@ window.DATOS = {
   // ═══ 6.1 ENCABEZADOS Y TÍTULOS EDITABLES ═══
   textos: {
       "heroPildora": "PSDDA",
-      "heroTitulo": "TEXTO PRINCIPAL",
+      "heroTitulo": "TEXTO PRINCIPALhttps://pi-academy-kappa.vercel.app/index.html",
       "heroSubtitulo": "SUBTITULO",
       "beneficiosTitulo": "METODOLOGÍA",
       "audienciaTitulo": "DIRIGIDO A",
