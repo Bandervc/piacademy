@@ -265,6 +265,16 @@ window.DATOS = {
                   "\\left] \\frac{1}{9}; 1 \\right]"
               ],
               "correcta": 3
+          },
+          {
+              "enunciado": "\\text{Si: } A(x) = 2x^2 - 1 \\\\\nB(x) = 2x^2 + 1 \\\\\n\\text{halle } E(x) = A^2(x) - 2A(x)B(x) + B^2(x)",
+              "alternativas": [
+                  "\\ 4x^2",
+                  "\\ 4x^2 - 1",
+                  "4",
+                  "2"
+              ],
+              "correcta": 2
           }
       ]
   },
