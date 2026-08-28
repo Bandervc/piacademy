@@ -699,6 +699,13 @@
                     <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Descripción:</label>
                     <input type="text" id="modalInputDesc" required class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white">
                 </div>
+                <label class="flex items-start gap-3 bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 cursor-pointer">
+                    <input type="checkbox" id="modalInputSoloTest" class="mt-0.5 w-4 h-4 accent-brand-purple shrink-0">
+                    <span class="text-xs text-slate-300 leading-relaxed">
+                        <strong class="text-white">Solo se obtiene resolviendo el test.</strong>
+                        Si lo marcas, este código <u>no</u> podrá escribirse a mano en el formulario; únicamente se otorga al ganar el test de nivel.
+                    </span>
+                </label>
                 <div class="pt-2 flex gap-3">
                     <button type="button" id="btnCancelarCodigo" class="flex-1 bg-slate-800 text-slate-300 font-bold py-3 rounded-xl">Cancelar</button>
                     <button type="submit" class="flex-1 bg-brand-purple text-white font-extrabold py-3 rounded-xl">Guardar</button>
@@ -979,6 +986,7 @@
                             </div>
                             <p class="text-xs font-bold text-white mb-1">${item.descripcion}</p>
                             <p class="text-[10px] text-slate-400">${item.vence ? 'Vence: ' + item.vence : 'Sin fecha límite'}</p>
+                            ${item.soloTest ? '<span class="inline-block mt-2 text-[10px] font-black uppercase text-amber-300 bg-amber-400/10 border border-amber-400/30 px-2 py-0.5 rounded-full"><i class="fa-solid fa-lock mr-1"></i>Solo test</span>' : ''}
                         </div>
                         <div class="flex gap-2 pt-4 mt-3 border-t border-slate-800">
                             <button type="button" onclick="window.editCod(${index})" class="flex-1 bg-slate-800 text-xs font-bold py-2 rounded-xl text-slate-300">Editar</button>
@@ -996,6 +1004,8 @@
                 document.getElementById('modalInputDescuento').value = c.descuento;
                 document.getElementById('modalInputVence').value = c.vence || '';
                 document.getElementById('modalInputDesc').value = c.descripcion;
+                document.getElementById('modalInputSoloTest').checked = !!c.soloTest;
+                document.getElementById('modalCodigoTitulo').textContent = 'Editar Código';
                 document.getElementById('modalCodigo').classList.remove('hidden');
             };
 
@@ -1009,6 +1019,8 @@
             document.getElementById('btnAddCode').addEventListener('click', () => {
                 document.getElementById('editCodigoIndex').value = -1;
                 document.getElementById('formCodigo').reset();
+                document.getElementById('modalInputSoloTest').checked = false;
+                document.getElementById('modalCodigoTitulo').textContent = 'Nuevo Código';
                 document.getElementById('modalCodigo').classList.remove('hidden');
             });
             document.getElementById('btnCerrarModalCodigo').onclick = () => document.getElementById('modalCodigo').classList.add('hidden');
@@ -1022,6 +1034,7 @@
                     descuento: parseInt(document.getElementById('modalInputDescuento').value),
                     vence: document.getElementById('modalInputVence').value,
                     descripcion: document.getElementById('modalInputDesc').value.trim(),
+                    soloTest: document.getElementById('modalInputSoloTest').checked,
                 };
                 if (!stateDatos.codigos) stateDatos.codigos = [];
                 if (idx >= 0) stateDatos.codigos[idx] = nuevo;
