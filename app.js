@@ -41,9 +41,17 @@
     });
   }
 
+  // Valores que cualquier mensaje de WhatsApp puede insertar con {precio} o
+  // {precioNormal}. Se leen de datos.js, así el mensaje nunca se desincroniza
+  // del precio real aunque lo cambies desde el panel.
+  function valoresComunes(datos) {
+    var precio = datos.precio || {};
+    return { precio: precio.promocional, precioNormal: precio.normal };
+  }
+
   function bindWhatsApp(datos, raiz) {
     raiz.querySelectorAll('[data-wa]').forEach(function (el) {
-      var mensaje = datos.mensajes[el.dataset.wa] || '';
+      var mensaje = N.aplicarPlantilla(datos.mensajes[el.dataset.wa] || '', valoresComunes(datos));
       el.setAttribute('href', N.urlWhatsApp(datos.contacto.whatsapp, mensaje));
       el.setAttribute('target', '_blank');
       el.setAttribute('rel', 'noopener');
@@ -98,7 +106,7 @@
           subPlantilla.remove();
         });
         copia.querySelectorAll('[data-campo-wa]').forEach(function (el) {
-          var mensaje = datos.mensajes[item[el.dataset.campoWa]] || '';
+          var mensaje = N.aplicarPlantilla(datos.mensajes[item[el.dataset.campoWa]] || '', valoresComunes(datos));
           el.setAttribute('href', N.urlWhatsApp(datos.contacto.whatsapp, mensaje));
           el.setAttribute('target', '_blank');
           el.setAttribute('rel', 'noopener');

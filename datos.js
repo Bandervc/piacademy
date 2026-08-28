@@ -24,7 +24,17 @@ window.DATOS = {
   },
 
   // ═══ 3. MENSAJES DE WHATSAPP ═══
-  mensajes: {},
+  mensajes: {
+      "bannerSuperior": "¡Hola! 👋 Quiero acceder al descuento de S/ {precio} para el Ciclo Integral 🎓 ¿Cómo reservo mi cupo?",
+      "heroConsulta": "¡Hola! 👋 Me interesa el Ciclo Integral para PUCP y Beca 18 📚 ¿Me pueden dar más información? 😊",
+      "mediosDePago": "¡Hola! 👋 Quiero matricularme al Ciclo Integral 🎓 pero necesito los datos de una cuenta bancaria para hacer la transferencia 🏦 ¿Me los pueden pasar?",
+      "interesPUCP": "¡Hola! 👋 Quiero postular a la PUCP 🎓 ¿Cómo me prepara el Ciclo Integral y cuándo inicia el próximo grupo? 📅",
+      "interesBeca18": "¡Hola! 👋 Voy a rendir el examen de preselección de Beca 18 ✨ ¿Cómo me ayuda el Ciclo Integral a conseguirla? 💪",
+      "botonFlotante": "¡Hola! 👋 Tengo una consulta sobre el Ciclo Integral PUCP y Beca 18 😊",
+      "footer": "¡Hola! 👋 Vengo de su página web y me gustaría saber más sobre el Ciclo Integral 🎓",
+      "testCompletado": "¡Hola! 👋 Terminé el test de nivel 📝 y quiero recibir asesoría sobre el Ciclo Integral 🎓",
+      "confirmacionPago": "¡Hola! 👋 Acabo de realizar el pago de mi matrícula ✅ Les adjunto mi comprobante 🧾\n\n*Mis datos:*\n• Nombre: {nombre}\n• Método de pago: {metodo}\n• Monto: S/ {monto}\n• Modalidad: {modalidad}\n• Turno: {turno}\n• Código aplicado: {codigo}"
+  },
 
   // ═══ 4. PROMOCIÓN Y CUENTA REGRESIVA ═══
   promocion: {
