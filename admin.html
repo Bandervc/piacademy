@@ -748,6 +748,21 @@
                     </select>
                 </div>
 
+                <!-- Figura opcional de la pregunta -->
+                <div class="border-t border-slate-800 pt-4">
+                    <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Figura de la pregunta (opcional):</label>
+                    <div class="flex items-center gap-4">
+                        <img id="previewImgPregunta" src="" alt="Figura" class="hidden w-20 h-20 object-contain rounded-xl bg-white p-1 border border-slate-700">
+                        <label class="cursor-pointer bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs px-4 py-2.5 rounded-xl border border-slate-700 flex items-center gap-2 transition-colors">
+                            <i class="fa-solid fa-image"></i>
+                            <span>Subir figura</span>
+                            <input type="file" id="fileImgPregunta" accept="image/*" class="hidden">
+                        </label>
+                        <button type="button" id="btnQuitarImgPregunta" class="hidden text-xs text-red-400 hover:text-red-300 font-bold">Quitar</button>
+                    </div>
+                    <input type="hidden" id="imgPreguntaActual" value="">
+                </div>
+
                 <!-- Vista Previa LaTeX -->
                 <div class="border-t border-slate-800 pt-4">
                     <div class="flex items-center justify-between mb-2">
@@ -850,6 +865,7 @@
             let stateDatos = JSON.parse(JSON.stringify(window.DATOS || {}));
             let newQrYapeBase64 = null;
             let newQrPlinBase64 = null;
+            let imgsPreguntasPend = {}; // { nombreArchivo: dataUrl } figuras pendientes de subir a GitHub
 
             // --- 1. PIN & Security ---
             const pinScreen = document.getElementById('pinScreen');
@@ -1160,6 +1176,7 @@
             function renderPreguntasList() {
                 const container = document.getElementById('preguntasList');
                 container.innerHTML = '';
+                const totalPreg = (stateDatos.test?.preguntas || []).length;
                 (stateDatos.test?.preguntas || []).forEach((item, index) => {
                     const card = document.createElement('div');
                     card.className = 'bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-2';
@@ -1173,16 +1190,38 @@
                     card.innerHTML = `
                         <div class="flex items-start justify-between gap-3">
                             <h4 class="font-bold text-white text-sm leading-relaxed">${index + 1}. ${item.enunciado}</h4>
-                            <div class="flex gap-2 shrink-0">
-                                <button type="button" onclick="window.editPregunta(${index})" class="text-slate-400 hover:text-white"><i class="fa-solid fa-pen"></i></button>
-                                <button type="button" onclick="window.delPregunta(${index})" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button>
+                            <div class="flex gap-1 shrink-0 items-center">
+                                <button type="button" onclick="window.moverPregunta(${index},-1)" ${index === 0 ? 'disabled' : ''} title="Subir" class="p-1.5 text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"><i class="fa-solid fa-arrow-up"></i></button>
+                                <button type="button" onclick="window.moverPregunta(${index},1)" ${index === totalPreg - 1 ? 'disabled' : ''} title="Bajar" class="p-1.5 text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"><i class="fa-solid fa-arrow-down"></i></button>
+                                <button type="button" onclick="window.editPregunta(${index})" title="Editar" class="p-1.5 text-slate-400 hover:text-white"><i class="fa-solid fa-pen"></i></button>
+                                <button type="button" onclick="window.delPregunta(${index})" title="Eliminar" class="p-1.5 text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button>
                             </div>
                         </div>
+                        ${item.imagen ? '<div class="text-[10px] text-purple-300 font-bold"><i class="fa-solid fa-image mr-1"></i>Con figura</div>' : ''}
                         <div class="text-xs pt-1 border-t border-slate-900">${alts}</div>
                     `;
                     container.appendChild(card);
                 });
                 renderLatexAdmin(container);
+            }
+
+            // Muestra en el modal la figura actual de la pregunta (o la oculta).
+            function mostrarFiguraPregunta(nombre) {
+                const preview = document.getElementById('previewImgPregunta');
+                const btnQuitar = document.getElementById('btnQuitarImgPregunta');
+                const hidden = document.getElementById('imgPreguntaActual');
+                document.getElementById('fileImgPregunta').value = '';
+                if (nombre) {
+                    hidden.value = nombre;
+                    preview.src = imgsPreguntasPend[nombre] || nombre;  // base64 pendiente o archivo ya publicado
+                    preview.classList.remove('hidden');
+                    btnQuitar.classList.remove('hidden');
+                } else {
+                    hidden.value = '';
+                    preview.src = '';
+                    preview.classList.add('hidden');
+                    btnQuitar.classList.add('hidden');
+                }
             }
 
             window.editPregunta = (index) => {
@@ -1193,6 +1232,7 @@
                     if (document.getElementById('alt' + i)) document.getElementById('alt' + i).value = alt;
                 });
                 document.getElementById('modalPreguntaCorrecta').value = String(p.correcta || 0);
+                mostrarFiguraPregunta(p.imagen || '');
                 document.getElementById('modalPregunta').classList.remove('hidden');
             };
 
@@ -1201,6 +1241,15 @@
                     stateDatos.test.preguntas.splice(index, 1);
                     renderPreguntasList();
                 }
+            };
+
+            // Reordenar: intercambia la pregunta con su vecina (dir = -1 sube, +1 baja).
+            window.moverPregunta = (index, dir) => {
+                const arr = stateDatos.test.preguntas || [];
+                const j = index + dir;
+                if (j < 0 || j >= arr.length) return;
+                const tmp = arr[index]; arr[index] = arr[j]; arr[j] = tmp;
+                renderPreguntasList();
             };
 
             // --- 8. Render Lista de FAQ ---
@@ -1271,6 +1320,8 @@
             document.getElementById('btnAddPregunta').onclick = () => {
                 document.getElementById('editPreguntaIndex').value = -1;
                 document.getElementById('formPregunta').reset();
+                document.getElementById('modalPreguntaTitulo').textContent = 'Nueva Pregunta del Test';
+                mostrarFiguraPregunta('');
                 document.getElementById('modalPregunta').classList.remove('hidden');
             };
 
@@ -1322,6 +1373,8 @@
                     ],
                     correcta: parseInt(document.getElementById('modalPreguntaCorrecta').value),
                 };
+                const figura = document.getElementById('imgPreguntaActual').value;
+                if (figura) nueva.imagen = figura;  // conserva o asigna la figura; sin figura, no se agrega el campo
 
                 if (!stateDatos.test) stateDatos.test = {};
                 if (!stateDatos.test.preguntas) stateDatos.test.preguntas = [];
@@ -1405,6 +1458,49 @@
 
             configurarInputImagen('fileQrYape', 'previewQrYape', (base64) => { newQrYapeBase64 = base64; });
             configurarInputImagen('fileQrPlin', 'previewQrPlin', (base64) => { newQrPlinBase64 = base64; });
+
+            // Subida de figura para la pregunta del test (valida, optimiza y deja pendiente de subir)
+            (function () {
+                const input = document.getElementById('fileImgPregunta');
+                const preview = document.getElementById('previewImgPregunta');
+                const btnQuitar = document.getElementById('btnQuitarImgPregunta');
+                const hidden = document.getElementById('imgPreguntaActual');
+                if (!input) return;
+
+                input.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    if (!file.type || !file.type.startsWith('image/')) {
+                        showToast('Archivo no válido', 'Elige una imagen (PNG o JPG).', 'error');
+                        input.value = '';
+                        return;
+                    }
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                        redimensionarImagen(ev.target.result, 800).then((dataUrl) => {
+                            const nombre = 'preg-' + Date.now() + '.png';
+                            imgsPreguntasPend[nombre] = dataUrl;
+                            hidden.value = nombre;
+                            preview.src = dataUrl;
+                            preview.classList.remove('hidden');
+                            btnQuitar.classList.remove('hidden');
+                            showToast('Figura lista', 'Se subirá al hacer clic en "Guardar y Publicar".', 'info');
+                        }).catch((err) => {
+                            showToast('Error con la imagen', err.message, 'error');
+                            input.value = '';
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                });
+
+                btnQuitar.addEventListener('click', () => {
+                    hidden.value = '';
+                    preview.src = '';
+                    preview.classList.add('hidden');
+                    btnQuitar.classList.add('hidden');
+                    input.value = '';
+                });
+            })();
 
             // --- 9. Recolectar Todos los Datos ---
             // --- Mensajes de WhatsApp: editor dinámico ---
@@ -1633,6 +1729,15 @@ window.DATOS = {
                         await subirImagenAGitHub(repo, token, 'qr-plin.png', newQrPlinBase64);
                         newQrPlinBase64 = null;
                     }
+
+                    // Subir las figuras de las preguntas que realmente se usan.
+                    const figurasUsadas = new Set((stateDatos.test?.preguntas || []).map(p => p.imagen).filter(Boolean));
+                    for (const nombre in imgsPreguntasPend) {
+                        if (figurasUsadas.has(nombre)) {
+                            await subirImagenAGitHub(repo, token, nombre, imgsPreguntasPend[nombre]);
+                        }
+                    }
+                    imgsPreguntasPend = {};
 
                     showToast('¡Publicado con Éxito!', 'Vercel actualizará tu página en ~20 segundos.', 'success');
 
