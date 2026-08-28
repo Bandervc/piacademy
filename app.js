@@ -555,11 +555,25 @@
       }
     }
 
-    btnAplicar.addEventListener('click', function () {
-      var texto = inputCodigo.value.trim().toUpperCase();
+    // Deja el precio sin descuento y limpia el estado del código.
+    function resetearCodigo() {
+      estadoPago.codigoAplicado = '';
+      estadoPago.descuento = 0;
+      estadoPago.montoFinal = precioBase;
+      precioFinal.textContent = precioBase;
+      badge.classList.add('hidden');
+      document.getElementById('appliedCode').value = '';
+      document.getElementById('appliedDiscount').value = '0';
+    }
+
+    // Aplica un código. opciones.desdeTest = true permite usar los códigos
+    // "solo test" (los otorga el test); a mano esos códigos se rechazan.
+    function aplicarCodigo(texto, opciones) {
+      opciones = opciones || {};
+      texto = String(texto || '').trim().toUpperCase();
       if (!texto) {
         mostrarFeedback('Escribe un código primero.', false);
-        return;
+        return false;
       }
 
       var codigos = datos.codigos || [];
@@ -570,14 +584,15 @@
 
       if (!encontrado) {
         mostrarFeedback('Código "' + texto + '" no válido. Verifica e intenta de nuevo.', false);
-        estadoPago.codigoAplicado = '';
-        estadoPago.descuento = 0;
-        estadoPago.montoFinal = precioBase;
-        precioFinal.textContent = precioBase;
-        badge.classList.add('hidden');
-        document.getElementById('appliedCode').value = '';
-        document.getElementById('appliedDiscount').value = '0';
-        return;
+        resetearCodigo();
+        return false;
+      }
+
+      // Los códigos "solo test" únicamente se obtienen resolviendo el test.
+      if (encontrado.soloTest && !opciones.desdeTest) {
+        mostrarFeedback('El código "' + texto + '" solo se obtiene resolviendo el test de nivel 📝', false);
+        resetearCodigo();
+        return false;
       }
 
       if (encontrado.vence) {
@@ -585,14 +600,8 @@
         var vence = new Date(encontrado.vence + 'T23:59:59');
         if (hoy > vence) {
           mostrarFeedback('El código "' + texto + '" ya expiró. Solicita uno nuevo en nuestros lives.', false);
-          estadoPago.codigoAplicado = '';
-          estadoPago.descuento = 0;
-          estadoPago.montoFinal = precioBase;
-          precioFinal.textContent = precioBase;
-          badge.classList.add('hidden');
-          document.getElementById('appliedCode').value = '';
-          document.getElementById('appliedDiscount').value = '0';
-          return;
+          resetearCodigo();
+          return false;
         }
       }
 
@@ -607,12 +616,23 @@
       mostrarFeedback('¡Código aplicado! ' + encontrado.descripcion + ' — Ahorras S/' + encontrado.descuento, true);
       badge.classList.remove('hidden');
       badgeTexto.textContent = encontrado.descripcion + ' (código ' + texto + ')';
+      return true;
+    }
+
+    btnAplicar.addEventListener('click', function () {
+      aplicarCodigo(inputCodigo.value, { desdeTest: false });
     });
 
     // Permitir Enter en el campo de código
     inputCodigo.addEventListener('keydown', function (e) {
       if (e.key === 'Enter') { e.preventDefault(); btnAplicar.click(); }
     });
+
+    // Vía de confianza para el flujo del test (C-3): aplica un código otorgado
+    // aunque sea "solo test".
+    window.PiApp.aplicarCodigoDescuento = function (texto) {
+      return aplicarCodigo(texto, { desdeTest: true });
+    };
   }
 
   window.PiApp.modulos.push(iniciarCodigosDescuento);

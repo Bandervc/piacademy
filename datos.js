@@ -225,14 +225,14 @@ window.DATOS = {
           {
               "minAciertos": 1,
               "maxAciertos": 5,
-              "codigo": "LIVE20",
-              "mensaje": "¡Excelente! Ganaste el descuento especial LIVE20"
+              "codigo": "POLLITO",
+              "mensaje": "¡Muy bien! 🐣 Ganaste el código POLLITO con descuento para tu matrícula."
           },
           {
               "minAciertos": 6,
               "maxAciertos": 10,
-              "codigo": "LIVE20",
-              "mensaje": "¡Excelente! Ganaste el descuento especial LIVE20"
+              "codigo": "GALACTICO",
+              "mensaje": "¡Increíble! 🚀 Ganaste el código GALACTICO con el mejor descuento."
           }
       ],
       "preguntas": [
@@ -306,19 +306,22 @@ window.DATOS = {
           "codigo": "LIVE20",
           "descuento": 20,
           "vence": "2026-09-11",
-          "descripcion": "CÓDIGO PARA LIVE DE TIKTOK"
+          "descripcion": "CÓDIGO PARA LIVE DE TIKTOK",
+          "soloTest": false
       },
       {
           "codigo": "POLLITO",
           "descuento": 20,
           "vence": "2026-11-14",
-          "descripcion": "PARA LOS QUE RESUELVES MAX 5 BUENAS"
+          "descripcion": "PARA LOS QUE RESUELVEN MÁX 5 BUENAS",
+          "soloTest": true
       },
       {
           "codigo": "GALACTICO",
           "descuento": 50,
           "vence": "",
-          "descripcion": "PARA LOS QUE RESUELVAN 5 A MÁS PREGUNTAS"
+          "descripcion": "PARA LOS QUE RESUELVAN 6 A MÁS PREGUNTAS",
+          "soloTest": true
       }
   ],
 
