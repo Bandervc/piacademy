@@ -168,6 +168,10 @@
                 <i class="fa-solid fa-share-nodes text-emerald-400"></i>
                 <span>Contacto y Redes</span>
             </button>
+            <button type="button" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-slate-900 text-slate-400 border border-slate-800" data-tab="tab-mensajes">
+                <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                <span>Mensajes WhatsApp</span>
+            </button>
             <button type="button" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 bg-slate-900 text-slate-400 border border-slate-800" data-tab="tab-footer">
                 <i class="fa-solid fa-shoe-prints text-amber-400"></i>
                 <span>Pie de Página (Footer)</span>
@@ -535,6 +539,27 @@
                         <input type="text" id="inputEnlaceBanner" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none">
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- TAB MENSAJES DE WHATSAPP -->
+        <section id="tab-mensajes" class="tab-content hidden space-y-6">
+            <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6">
+                <h3 class="text-xl font-black text-white flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                    Mensajes de WhatsApp
+                </h3>
+                <p class="text-xs text-slate-400">
+                    Este es el texto que ya aparece escrito en el chat cuando alguien te escribe desde cada botón de la web.
+                    Puedes usar <code class="text-amber-300 bg-slate-950 px-1.5 py-0.5 rounded">{precio}</code> y se reemplazará solo con el precio promocional actual.
+                    En el mensaje del comprobante, <code class="text-amber-300 bg-slate-950 px-1.5 py-0.5 rounded">{nombre}</code>,
+                    <code class="text-amber-300 bg-slate-950 px-1.5 py-0.5 rounded">{metodo}</code>,
+                    <code class="text-amber-300 bg-slate-950 px-1.5 py-0.5 rounded">{monto}</code>,
+                    <code class="text-amber-300 bg-slate-950 px-1.5 py-0.5 rounded">{modalidad}</code>,
+                    <code class="text-amber-300 bg-slate-950 px-1.5 py-0.5 rounded">{turno}</code> y
+                    <code class="text-amber-300 bg-slate-950 px-1.5 py-0.5 rounded">{codigo}</code> se rellenan con los datos del alumno.
+                </p>
+                <div id="mensajesContainer" class="space-y-5"></div>
             </div>
         </section>
 
@@ -913,6 +938,9 @@
                 document.getElementById('inputContactoCorreo').value = d.contacto?.correo || '';
                 document.getElementById('inputAvisoBanner').value = d.promocion?.avisoBanner || '';
                 document.getElementById('inputEnlaceBanner').value = d.promocion?.enlaceBanner || '';
+
+                // Mensajes de WhatsApp (pestaña dedicada)
+                renderMensajesEditor(d.mensajes || {});
 
                 document.getElementById('inputRedesTiktok').value = d.redes?.tiktok || '';
                 document.getElementById('inputRedesFacebook').value = d.redes?.facebook || '';
@@ -1366,6 +1394,49 @@
             configurarInputImagen('fileQrPlin', 'previewQrPlin', (base64) => { newQrPlinBase64 = base64; });
 
             // --- 9. Recolectar Todos los Datos ---
+            // --- Mensajes de WhatsApp: editor dinámico ---
+            // Cada clave coincide con un botón de la web; la etiqueta dice dónde aparece.
+            const MENSAJES_INFO = [
+                { clave: 'bannerSuperior',   label: 'Banner superior — "¡Reserva tu cupo con descuento!"' },
+                { clave: 'heroConsulta',     label: 'Botón "Consultar por WhatsApp" (portada)' },
+                { clave: 'mediosDePago',     label: 'Enlace "¿Prefieres transferencia bancaria?"' },
+                { clave: 'interesPUCP',      label: 'Tarjeta "Postulantes PUCP"' },
+                { clave: 'interesBeca18',    label: 'Tarjeta "Beca 18 (PRONABEC)"' },
+                { clave: 'botonFlotante',    label: 'Botón flotante de WhatsApp (esquina)' },
+                { clave: 'footer',           label: 'Ícono de WhatsApp del pie de página' },
+                { clave: 'testCompletado',   label: 'Al terminar el test de nivel' },
+                { clave: 'confirmacionPago', label: 'Botón "Enviar comprobante" (después de pagar)' },
+            ];
+
+            function renderMensajesEditor(mensajes) {
+                const cont = document.getElementById('mensajesContainer');
+                if (!cont) return;
+                cont.innerHTML = '';
+                MENSAJES_INFO.forEach((info) => {
+                    const wrap = document.createElement('div');
+                    const label = document.createElement('label');
+                    label.className = 'block text-xs font-bold uppercase text-slate-400 mb-2';
+                    label.textContent = info.label;
+                    const ta = document.createElement('textarea');
+                    ta.rows = 3;
+                    ta.dataset.mensajeClave = info.clave;
+                    ta.className = 'w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-purple';
+                    ta.value = mensajes[info.clave] || '';
+                    wrap.appendChild(label);
+                    wrap.appendChild(ta);
+                    cont.appendChild(wrap);
+                });
+            }
+
+            function recolectarMensajes() {
+                const out = {};
+                document.querySelectorAll('#mensajesContainer [data-mensaje-clave]').forEach((ta) => {
+                    const v = ta.value.trim();
+                    if (v) out[ta.dataset.mensajeClave] = v;
+                });
+                return out;
+            }
+
             function recolectarDatosDeFormularios() {
                 stateDatos.precio = {
                     normal: parseInt(document.getElementById('inputPrecioNormal').value) || 300,
@@ -1409,6 +1480,8 @@
                 stateDatos.contacto.whatsapp = document.getElementById('inputContactoWhatsapp').value.trim();
                 stateDatos.contacto.telefonoVisible = document.getElementById('inputContactoVisible').value.trim();
                 stateDatos.contacto.correo = document.getElementById('inputContactoCorreo').value.trim();
+
+                stateDatos.mensajes = recolectarMensajes();
 
                 if (!stateDatos.redes) stateDatos.redes = {};
                 stateDatos.redes.tiktok = document.getElementById('inputRedesTiktok').value.trim();
