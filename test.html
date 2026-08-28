@@ -303,6 +303,15 @@
                 }, 1000);
             }
 
+            // Si un texto trae LaTeX "pelado" (ej. \frac, \left) pero sin delimitadores,
+            // lo envuelve en \( ... \) para que KaTeX lo renderice. El texto normal no se toca.
+            function autoLatex(texto) {
+                var t = String(texto == null ? '' : texto);
+                if (/\$|\\\(|\\\[/.test(t)) return t;          // ya tiene delimitadores
+                if (/\\[a-zA-Z]/.test(t)) return '\\(' + t + '\\)';  // LaTeX sin envolver
+                return t;
+            }
+
             function pintarPregunta() {
                 yaRespondida = false;
                 var pregunta = preguntas[paso];
@@ -324,7 +333,7 @@
                     boton.type = 'button';
                     boton.id = 'alt-btn-' + indice;
                     boton.className = 'w-full text-left bg-slate-800 hover:bg-purple-900/40 p-4 rounded-xl border border-slate-700 transition-colors text-sm font-medium';
-                    boton.innerHTML = '<strong class="text-amber-400 mr-2">' + letras[indice] + ')</strong>' + texto;
+                    boton.innerHTML = '<strong class="text-amber-400 mr-2">' + letras[indice] + ')</strong>' + autoLatex(texto);
                     boton.addEventListener('click', function () { responder(indice, pregunta.correcta); });
                     lista.appendChild(boton);
                 });
@@ -336,49 +345,29 @@
             function responder(indiceElegido, indiceCorrecta) {
                 if (yaRespondida) return;
                 yaRespondida = true;
-                var esCorrecta = indiceElegido === indiceCorrecta;
-                if (esCorrecta) aciertos++;
+                if (indiceElegido === indiceCorrecta) aciertos++;
 
+                // Resalta SOLO la alternativa elegida (neutral) y deshabilita todas.
+                // No se revela cuál era la correcta; el resultado se ve al final.
                 preguntas[paso].alternativas.forEach(function (_, i) {
                     var btn = document.getElementById('alt-btn-' + i);
                     if (!btn) return;
                     btn.disabled = true;
-                    if (i === indiceCorrecta) {
-                        btn.className = 'w-full text-left bg-emerald-900/60 border border-emerald-500 p-4 rounded-xl text-sm font-bold text-emerald-300';
-                    } else if (i === indiceElegido) {
-                        btn.className = 'w-full text-left bg-red-900/60 border border-red-500 p-4 rounded-xl text-sm font-bold text-red-300';
+                    if (i === indiceElegido) {
+                        btn.className = 'w-full text-left bg-purple-900/50 border border-brand-purple p-4 rounded-xl text-sm font-bold text-white';
                     } else {
                         btn.className = 'w-full text-left bg-slate-800/40 border border-slate-700 p-4 rounded-xl text-sm font-medium text-slate-500';
                     }
                 });
 
-                if (feedback) {
-                    feedback.className = 'mt-4 p-4 rounded-xl border text-sm font-semibold';
-                    if (esCorrecta) {
-                        feedback.classList.add('bg-emerald-900/40', 'border-emerald-500', 'text-emerald-300');
-                        feedback.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> ¡Correcto!';
-                    } else {
-                        var txtCorrecta = preguntas[paso].alternativas[indiceCorrecta];
-                        feedback.classList.add('bg-red-900/40', 'border-red-500', 'text-red-300');
-                        feedback.innerHTML = '<i class="fa-solid fa-circle-xmark mr-2"></i> Incorrecto. La respuesta correcta es: <strong>' + letras[indiceCorrecta] + ') ' + txtCorrecta + '</strong>';
-                        renderLatex(feedback);
-                    }
-                }
+                if (feedback) { feedback.classList.add('hidden'); feedback.innerHTML = ''; }
 
                 paso++;
-                if (paso < total) {
-                    if (btnSiguiente) {
-                        var esUltima = paso === total - 1;
-                        btnSiguiente.innerHTML = esUltima
-                            ? '<span>Ver Resultado Final</span><i class="fa-solid fa-flag-checkered ml-2"></i>'
-                            : '<span>Siguiente Pregunta</span><i class="fa-solid fa-arrow-right ml-2"></i>';
-                        btnSiguiente.classList.remove('hidden');
-                    }
-                } else {
-                    if (btnSiguiente) {
-                        btnSiguiente.innerHTML = '<span>Ver Resultado Final</span><i class="fa-solid fa-flag-checkered ml-2"></i>';
-                        btnSiguiente.classList.remove('hidden');
-                    }
+                if (btnSiguiente) {
+                    btnSiguiente.innerHTML = (paso < total)
+                        ? '<span>Siguiente Pregunta</span><i class="fa-solid fa-arrow-right ml-2"></i>'
+                        : '<span>Ver Resultado Final</span><i class="fa-solid fa-flag-checkered ml-2"></i>';
+                    btnSiguiente.classList.remove('hidden');
                 }
             }
 
