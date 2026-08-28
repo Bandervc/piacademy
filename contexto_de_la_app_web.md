@@ -91,15 +91,17 @@ La web está diseñada bajo una arquitectura **Serverless Jamstack ligera** sin 
 
 ## 6. Tareas Pendientes y Mejoras Futuras Recomendadas
 
-### Prioridad Alta:
-1. **Control de Inicio del Test (`test.html`):**
-   - Implementar un botón explícito de **"Comenzar Test"** para evitar que el cronómetro inicie automáticamente al cargar la página.
-2. **Formato del Temporizador del Test:**
-   - Asegurar que la visualización del tiempo restante sea estrictamente en formato `hh:mm:ss`.
-3. **Conversión de Tiempo en el Administrador:**
-   - Permitir ingresar el tiempo del test en minutos en `admin.html` y almacenarlo automáticamente en segundos dentro de `datos.js`.
+### ✅ Completadas (verificadas en vivo, posteriores a la primera versión de este documento):
+1. **Control de Inicio del Test (`test.html`):** ✅ HECHO
+   - Existe la pantalla de inicio con el botón **"INICIAR TEST"** (`#btnIniciarTest`). El cronómetro permanece en `00:00:00` y **solo arranca al hacer clic**; no se inicia automáticamente al cargar la página (`test.html`, listener de `btnIniciarTest`).
+2. **Formato del Temporizador del Test:** ✅ HECHO
+   - La función `formatHHMMSS()` (`test.html`) muestra el tiempo estrictamente como `hh:mm:ss` (verificado: `00:20:00` → `00:19:58`), tanto en la pantalla de inicio como en el badge del cronómetro.
+3. **Conversión de Tiempo en el Administrador:** ✅ HECHO
+   - En `admin.html` el campo "Tiempo Límite del Test (en minutos)" carga dividiendo entre 60 (`tiempoSegundos / 60`, línea ~889) y guarda multiplicando por 60 (`× 60`, línea ~1333). Verificado: 1200 s ⇄ 20 min, 30 min → 1800 s.
 
-### Prioridad Media / Mejoras de UX:
+> Nota: estas tres correcciones están en los archivos de código (`test.html`, `admin.html`). El panel de administración solo publica `datos.js`, así que para que aparezcan en `profemanu.vercel.app` el código debe haberse subido a GitHub por separado (verificar en producción).
+
+### Prioridad Media / Mejoras de UX (pendientes):
 4. **Optimización de Caché en Navegadores Móviles:**
    - Añadir meta tags de control de caché HTTP para que los dispositivos móviles no retengan `datos.js` antiguo tras guardar en el panel.
 5. **Validación de Subida de Imágenes QR:**
@@ -110,3 +112,4 @@ La web está diseñada bajo una arquitectura **Serverless Jamstack ligera** sin 
 ---
 
 *Documento generado el 27 de Agosto de 2026 para el equipo de desarrollo de PiAcademy.*
+*Actualización: las 3 tareas de Prioridad Alta del test se marcaron como completadas tras verificarlas en vivo.*
