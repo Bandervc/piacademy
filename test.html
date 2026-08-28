@@ -536,8 +536,8 @@
             // lo envuelve en \( ... \) para que KaTeX lo renderice. El texto normal no se toca.
             function autoLatex(texto) {
                 var t = String(texto == null ? '' : texto);
-                if (/\$|\\\(|\\\[/.test(t)) return t;          // ya tiene delimitadores
-                if (/\\[a-zA-Z]/.test(t)) return '\\(' + t + '\\)';  // LaTeX sin envolver
+                if (/\$|\\\(|\\\[/.test(t)) return t;                        // ya tiene delimitadores
+                if (/\\[a-zA-Z]|\^[\w{]|_[\w{]/.test(t)) return '\\(' + t + '\\)';  // comando LaTeX, exponente o subíndice sin envolver
                 return t;
             }
 
@@ -551,7 +551,7 @@
 
                 var titulo = document.createElement('h3');
                 titulo.className = 'text-base sm:text-lg font-bold text-white mb-5 leading-relaxed';
-                titulo.innerHTML = (paso + 1) + '. ' + pregunta.enunciado;
+                titulo.innerHTML = (paso + 1) + '. ' + autoLatex(pregunta.enunciado);
                 contenedor.appendChild(titulo);
 
                 // Figura opcional de la pregunta (entre enunciado y alternativas)

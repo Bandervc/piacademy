@@ -1149,6 +1149,17 @@
                 renderPremiosList();
             };
 
+            // Si un texto trae LaTeX "pelado" (ej. \frac, \text) pero sin delimitadores,
+            // lo envuelve en \( ... \) para que KaTeX lo renderice. El texto normal no se toca.
+            // Debe coincidir con autoLatex() de test.html para que la vista previa del admin
+            // se vea igual que lo que verá el alumno.
+            function autoLatex(texto) {
+                const t = String(texto == null ? '' : texto);
+                if (/\$|\\\(|\\\[/.test(t)) return t;                        // ya tiene delimitadores
+                if (/\\[a-zA-Z]|\^[\w{]|_[\w{]/.test(t)) return '\\(' + t + '\\)';  // comando LaTeX, exponente o subíndice sin envolver
+                return t;
+            }
+
             function renderLatexAdmin(elemento) {
                 if (!elemento) return;
                 function ejecutar() {
@@ -1181,15 +1192,11 @@
                     const card = document.createElement('div');
                     card.className = 'bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-2';
                     const alts = (item.alternativas || []).map((a, i) => {
-                        let txt = a;
-                        if (txt.includes('\\') && !txt.includes('\\(') && !txt.includes('\\[') && !txt.includes('$$')) {
-                            txt = '\\(' + txt + '\\)';
-                        }
-                        return `<span class="${i === item.correcta ? 'text-emerald-400 font-bold' : 'text-slate-400'}">${['A','B','C','D'][i]}) ${txt}</span>`;
+                        return `<span class="${i === item.correcta ? 'text-emerald-400 font-bold' : 'text-slate-400'}">${['A','B','C','D'][i]}) ${autoLatex(a)}</span>`;
                     }).join(' &nbsp;|&nbsp; ');
                     card.innerHTML = `
                         <div class="flex items-start justify-between gap-3">
-                            <h4 class="font-bold text-white text-sm leading-relaxed">${index + 1}. ${item.enunciado}</h4>
+                            <h4 class="font-bold text-white text-sm leading-relaxed">${index + 1}. ${autoLatex(item.enunciado)}</h4>
                             <div class="flex gap-1 shrink-0 items-center">
                                 <button type="button" onclick="window.moverPregunta(${index},-1)" ${index === 0 ? 'disabled' : ''} title="Subir" class="p-1.5 text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"><i class="fa-solid fa-arrow-up"></i></button>
                                 <button type="button" onclick="window.moverPregunta(${index},1)" ${index === totalPreg - 1 ? 'disabled' : ''} title="Bajar" class="p-1.5 text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"><i class="fa-solid fa-arrow-down"></i></button>
@@ -1344,14 +1351,10 @@
                 const previewEnunciado = document.getElementById('latexPreviewEnunciado');
                 const previewAlts = document.getElementById('latexPreviewAlts');
 
-                previewEnunciado.innerHTML = enunciado;
+                previewEnunciado.innerHTML = autoLatex(enunciado);
                 previewAlts.innerHTML = alts.map((a, i) => {
-                    let txt = a;
-                    if (txt.includes('\\') && !txt.includes('\\(') && !txt.includes('\\[') && !txt.includes('$$')) {
-                        txt = '\\(' + txt + '\\)';
-                    }
                     return `<div class="${i === correcta ? 'text-emerald-400 font-bold' : 'text-slate-300'}">
-                        <strong>${letras[i]})</strong> ${txt}
+                        <strong>${letras[i]})</strong> ${autoLatex(a)}
                      </div>`;
                 }).join('');
 
