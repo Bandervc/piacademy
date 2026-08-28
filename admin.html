@@ -1293,17 +1293,70 @@
             };
 
             // --- 8. QR Upload Previews ---
+
+            // Calcula el tamaño destino conservando la proporción, sin agrandar,
+            // de modo que el lado más largo nunca supere "max" píxeles.
+            function calcularDimensiones(w, h, max) {
+                if (w <= max && h <= max) return { width: w, height: h };
+                const escala = Math.min(max / w, max / h);
+                return { width: Math.round(w * escala), height: Math.round(h * escala) };
+            }
+
+            // Reduce cualquier imagen a un tamaño apto para un QR (máx "maxLado" px)
+            // y la devuelve como PNG sobre fondo blanco. Así una foto pesada del
+            // celular queda liviana y siempre cabe en el límite de la API de GitHub.
+            function redimensionarImagen(dataUrl, maxLado) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const dim = calcularDimensiones(img.naturalWidth, img.naturalHeight, maxLado);
+                        const canvas = document.createElement('canvas');
+                        canvas.width = dim.width;
+                        canvas.height = dim.height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.fillStyle = '#ffffff';           // fondo blanco: el QR se escanea mejor
+                        ctx.fillRect(0, 0, dim.width, dim.height);
+                        ctx.drawImage(img, 0, 0, dim.width, dim.height);
+                        resolve(canvas.toDataURL('image/png'));
+                    };
+                    img.onerror = () => reject(new Error('El archivo no parece una imagen válida.'));
+                    img.src = dataUrl;
+                });
+            }
+
+            function pesoKbDeDataUrl(dataUrl) {
+                const base64 = (dataUrl.split(',')[1]) || '';
+                return Math.max(1, Math.round((base64.length * 3 / 4) / 1024));
+            }
+
             function configurarInputImagen(inputId, previewId, callback) {
                 const input = document.getElementById(inputId);
                 const preview = document.getElementById(previewId);
                 input.addEventListener('change', (e) => {
                     const file = e.target.files[0];
                     if (!file) return;
+
+                    // Validación: debe ser una imagen.
+                    if (!file.type || !file.type.startsWith('image/')) {
+                        showToast('Archivo no válido', 'Elige una imagen (PNG o JPG).', 'error');
+                        input.value = '';
+                        return;
+                    }
+
                     const reader = new FileReader();
                     reader.onload = (event) => {
-                        preview.src = event.target.result;
-                        callback(event.target.result);
-                        showToast('Imagen cargada', 'Se actualizará cuando hagas clic en "Guardar y Publicar".', 'info');
+                        redimensionarImagen(event.target.result, 600).then((dataUrlReducida) => {
+                            preview.src = dataUrlReducida;
+                            callback(dataUrlReducida);
+                            showToast('Imagen lista', 'QR optimizado (~' + pesoKbDeDataUrl(dataUrlReducida) + ' KB). Se subirá al hacer clic en "Guardar y Publicar".', 'info');
+                        }).catch((err) => {
+                            showToast('Error con la imagen', err.message, 'error');
+                            input.value = '';
+                        });
+                    };
+                    reader.onerror = () => {
+                        showToast('Error al leer', 'No se pudo leer el archivo. Intenta con otra imagen.', 'error');
+                        input.value = '';
                     };
                     reader.readAsDataURL(file);
                 });
@@ -1512,11 +1565,14 @@ window.DATOS = {
                     if (res.ok) sha = (await res.json()).sha;
                 } catch(e) {}
 
-                await fetch(url, {
+                const putRes = await fetch(url, {
                     method: 'PUT',
                     headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify({ message: `Actualizar imagen ${fileName}`, content: base64Data, sha: sha || undefined })
                 });
+                if (!putRes.ok) {
+                    throw new Error(`No se pudo subir ${fileName} (error ${putRes.status}). Revisa el tamaño de la imagen o los permisos del token de GitHub.`);
+                }
             }
 
             document.getElementById('btnDeployTop').onclick = publicarEnGitHub;
