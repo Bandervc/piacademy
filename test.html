@@ -195,6 +195,8 @@
 
     <script src="datos.js" charset="UTF-8"></script>
     <script src="nucleo.js" charset="UTF-8"></script>
+    <!-- Esta página controla su propio test (abajo); evita que app.js lo duplique. -->
+    <script>window.PI_TEST_PROPIO = true;</script>
     <script defer src="app.js" charset="UTF-8"></script>
     <script>
     (function () {

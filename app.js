@@ -226,6 +226,10 @@
   // --- Test de nivel (preguntas generadas desde datos.js) -----------------
 
   function iniciarTest(datos) {
+    // La página test.html tiene su propio controlador dedicado del test
+    // (con cronómetro y KaTeX). Si está presente, este módulo no debe correr
+    // para no duplicar la lógica ni romper el conteo de aciertos.
+    if (window.PI_TEST_PROPIO) return;
     var contenedor = document.getElementById('preguntaTest');
     var quizStart   = document.getElementById('quizStart');
     var quizArea    = document.getElementById('quizArea');
