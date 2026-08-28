@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   ESTE ES EL UNICO ARCHIVO QUE NECESITAS EDITAR
+   ✏️  ESTE ES EL ÚNICO ARCHIVO QUE NECESITAS EDITAR
    ═══════════════════════════════════════════════════════════════ */
 
 window.DATOS = {
@@ -33,7 +33,7 @@ window.DATOS = {
       "botonFlotante": "¡Hola! Tengo una consulta sobre el Ciclo Integral PUCP y Beca 18.",
       "footer": "¡Hola! Vengo de su página web y me gustaría saber más sobre el Ciclo Integral.",
       "testCompletado": "¡Hola! Terminé el test de nivel y quiero recibir asesoría sobre el Ciclo Integral.",
-      "confirmacionPago": "¡Hola! Acabo de realizar el pago de mi matrícula. Les adjunto mi comprobante.\n\n*Mis datos:*\n- Nombre: {nombre}\n- Método de pago: {metodo}\n- Monto: S/ {monto}\n- Modalidad: {modalidad}\n- Turno: {turno}\n- Código aplicado: {codigo}"
+      "confirmacionPago": "¡Hola! Acabo de realizar el pago de mi matrícula. \n\n*Mis datos:*\n- Nombre: {nombre}\n- Método de pago: {metodo}\n- Monto: S/ {monto}\n- Modalidad: {modalidad}\n- Turno: {turno}\n- Código aplicado: {codigo}\n\nAhora le adjunto mi comprobante para culminar la matrícula."
   },
 
   // ═══ 4. PROMOCIÓN Y CUENTA REGRESIVA ═══
