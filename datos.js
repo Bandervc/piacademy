@@ -38,7 +38,7 @@ window.DATOS = {
 
   // ═══ 4. PROMOCIÓN Y CUENTA REGRESIVA ═══
   promocion: {
-      "fechaLimite": "2026-09-15T23:59",
+      "fechaLimite": "2026-09-06T23:59",
       "textoContador": "!No dejes pasar esta oportunidad!",
       "mostrarContador": true,
       "avisoBanner": "Ciclo Integral PUCP & Beca 18 — Vacantes Limitadas.",
@@ -47,8 +47,8 @@ window.DATOS = {
 
   // ═══ 5. PRECIO ═══
   precio: {
-      "normal": 300,
-      "promocional": 150,
+      "normal": 200,
+      "promocional": 100,
       "nota": "pago único"
   },
 
@@ -56,12 +56,12 @@ window.DATOS = {
   horarios: [
       {
           "nombre": "Turno Noche",
-          "rango": "7:00 pm - 8:30 pm",
+          "rango": "6:00 pm - 07:30 pm",
           "disponible": true
       },
       {
           "nombre": "Turno Tarde",
-          "rango": "5:00 pm - 6:30 pm",
+          "rango": "4:00 pm - 5:00 pm",
           "disponible": false
       }
   ],
