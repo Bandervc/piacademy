@@ -964,8 +964,9 @@
         }
     </style>
 
-    <!-- Datos dinámicos -->
-    <script charset="UTF-8" src="datos.js"></script>
+    <!-- Datos dinámicos (con "cache-bust" para que el celular no se quede
+         con una versión vieja de datos.js tras guardar en el panel) -->
+    <script charset="UTF-8">document.write('<script charset="UTF-8" src="datos.js?v=' + Date.now() + '"></scr' + 'ipt>');</script>
     <!-- Core y Lógica -->
     <script charset="UTF-8" src="nucleo.js"></script>
     <script charset="UTF-8" defer src="app.js"></script>

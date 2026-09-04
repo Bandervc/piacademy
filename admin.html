@@ -415,13 +415,19 @@
                     <div class="pt-2 border-t border-slate-800">
                         <label class="block text-xs font-bold uppercase text-slate-400 mb-2">QR Yape Actual:</label>
                         <div class="flex items-center gap-4">
-                            <img id="previewQrYape" src="qr-yape.png" alt="QR Yape" class="w-24 h-24 object-contain rounded-xl bg-white p-1 border border-slate-700">
+                            <button type="button" id="btnZoomQrYape" title="Ver en grande" class="shrink-0 rounded-xl bg-white p-1 border border-slate-700 hover:border-purple-400 transition-colors">
+                                <img id="previewQrYape" src="qr-yape.png" alt="QR Yape" class="w-24 h-24 object-contain">
+                            </button>
                             <div>
                                 <label class="cursor-pointer inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-slate-700 transition-colors">
                                     <i class="fa-solid fa-camera text-purple-400"></i>
                                     <span>Cambiar QR</span>
                                     <input type="file" id="fileQrYape" accept="image/*" class="hidden">
                                 </label>
+                                <p id="estadoQrYape" class="hidden text-xs font-bold text-amber-400 mt-2">
+                                    <i class="fa-solid fa-triangle-exclamation"></i> <span></span>
+                                    · <button type="button" id="btnDeshacerQrYape" class="underline hover:text-amber-300">Deshacer</button>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -452,13 +458,19 @@
                     <div class="pt-2 border-t border-slate-800">
                         <label class="block text-xs font-bold uppercase text-slate-400 mb-2">QR Plin Actual:</label>
                         <div class="flex items-center gap-4">
-                            <img id="previewQrPlin" src="qr-plin.png" alt="QR Plin" class="w-24 h-24 object-contain rounded-xl bg-white p-1 border border-slate-700">
+                            <button type="button" id="btnZoomQrPlin" title="Ver en grande" class="shrink-0 rounded-xl bg-white p-1 border border-slate-700 hover:border-teal-400 transition-colors">
+                                <img id="previewQrPlin" src="qr-plin.png" alt="QR Plin" class="w-24 h-24 object-contain">
+                            </button>
                             <div>
                                 <label class="cursor-pointer inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-slate-700 transition-colors">
                                     <i class="fa-solid fa-camera text-teal-400"></i>
                                     <span>Cambiar QR</span>
                                     <input type="file" id="fileQrPlin" accept="image/*" class="hidden">
                                 </label>
+                                <p id="estadoQrPlin" class="hidden text-xs font-bold text-amber-400 mt-2">
+                                    <i class="fa-solid fa-triangle-exclamation"></i> <span></span>
+                                    · <button type="button" id="btnDeshacerQrPlin" class="underline hover:text-amber-300">Deshacer</button>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -840,6 +852,17 @@
         </div>
     </div>
 
+    <!-- ZOOM DE QR: para verificar que el código se vea nítido antes de publicar -->
+    <div id="modalQrZoom" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl relative text-center">
+            <button type="button" id="btnCerrarQrZoom" class="absolute -top-3 -right-3 bg-slate-900 text-white w-9 h-9 rounded-full flex items-center justify-center shadow-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="imgQrZoom" src="" alt="QR ampliado" class="w-full aspect-square object-contain">
+            <p id="qrZoomLeyenda" class="text-slate-500 text-xs font-bold mt-3"></p>
+        </div>
+    </div>
+
     <!-- TOAST NOTIFICACIONES -->
     <div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-slate-800 border border-slate-700 text-white px-5 py-4 rounded-2xl shadow-2xl flex items-center gap-3 transition-all">
         <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-xl"></i>
@@ -849,7 +872,8 @@
         </div>
     </div>
 
-    <script charset="UTF-8" src="datos.js"></script>
+    <!-- "Cache-bust": el admin siempre debe editar sobre la última versión publicada -->
+    <script charset="UTF-8">document.write('<script charset="UTF-8" src="datos.js?v=' + Date.now() + '"></scr' + 'ipt>');</script>
 
     <!-- LÓGICA COMPLETA DEL PANEL -->
     <script>
@@ -1426,9 +1450,14 @@
                 return Math.max(1, Math.round((base64.length * 3 / 4) / 1024));
             }
 
-            function configurarInputImagen(inputId, previewId, callback) {
+            function configurarInputImagen(inputId, previewId, estadoId, btnDeshacerId, callback) {
                 const input = document.getElementById(inputId);
                 const preview = document.getElementById(previewId);
+                const estado = document.getElementById(estadoId);
+                const estadoTexto = estado ? estado.querySelector('span') : null;
+                const btnDeshacer = document.getElementById(btnDeshacerId);
+                const srcOriginal = preview.src;
+
                 input.addEventListener('change', (e) => {
                     const file = e.target.files[0];
                     if (!file) return;
@@ -1445,7 +1474,10 @@
                         redimensionarImagen(event.target.result, 600).then((dataUrlReducida) => {
                             preview.src = dataUrlReducida;
                             callback(dataUrlReducida);
-                            showToast('Imagen lista', 'QR optimizado (~' + pesoKbDeDataUrl(dataUrlReducida) + ' KB). Se subirá al hacer clic en "Guardar y Publicar".', 'info');
+                            const msg = 'Pendiente de guardar (~' + pesoKbDeDataUrl(dataUrlReducida) + ' KB)';
+                            if (estadoTexto) estadoTexto.textContent = msg;
+                            if (estado) estado.classList.remove('hidden');
+                            showToast('Imagen lista', 'QR optimizado (~' + pesoKbDeDataUrl(dataUrlReducida) + ' KB). Haz clic en el QR para verlo en grande, o en "Guardar y Publicar" para subirlo.', 'info');
                         }).catch((err) => {
                             showToast('Error con la imagen', err.message, 'error');
                             input.value = '';
@@ -1457,10 +1489,39 @@
                     };
                     reader.readAsDataURL(file);
                 });
+
+                if (btnDeshacer) {
+                    btnDeshacer.addEventListener('click', () => {
+                        preview.src = srcOriginal;
+                        input.value = '';
+                        callback(null);
+                        if (estado) estado.classList.add('hidden');
+                        showToast('Cambio deshecho', 'Se mantiene el QR que ya está publicado.', 'info');
+                    });
+                }
             }
 
-            configurarInputImagen('fileQrYape', 'previewQrYape', (base64) => { newQrYapeBase64 = base64; });
-            configurarInputImagen('fileQrPlin', 'previewQrPlin', (base64) => { newQrPlinBase64 = base64; });
+            configurarInputImagen('fileQrYape', 'previewQrYape', 'estadoQrYape', 'btnDeshacerQrYape', (base64) => { newQrYapeBase64 = base64; });
+            configurarInputImagen('fileQrPlin', 'previewQrPlin', 'estadoQrPlin', 'btnDeshacerQrPlin', (base64) => { newQrPlinBase64 = base64; });
+
+            // Zoom: ver el QR en grande para confirmar que se lea bien antes de publicar
+            (function () {
+                const modal = document.getElementById('modalQrZoom');
+                const imgZoom = document.getElementById('imgQrZoom');
+                const leyenda = document.getElementById('qrZoomLeyenda');
+
+                function abrirZoom(previewId, nombre) {
+                    const preview = document.getElementById(previewId);
+                    imgZoom.src = preview.src;
+                    leyenda.textContent = nombre;
+                    modal.classList.remove('hidden');
+                }
+
+                document.getElementById('btnZoomQrYape').addEventListener('click', () => abrirZoom('previewQrYape', 'QR Yape'));
+                document.getElementById('btnZoomQrPlin').addEventListener('click', () => abrirZoom('previewQrPlin', 'QR Plin'));
+                document.getElementById('btnCerrarQrZoom').addEventListener('click', () => modal.classList.add('hidden'));
+                modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.add('hidden'); });
+            })();
 
             // Subida de figura para la pregunta del test (valida, optimiza y deja pendiente de subir)
             (function () {
@@ -1727,10 +1788,12 @@ window.DATOS = {
                     if (newQrYapeBase64) {
                         await subirImagenAGitHub(repo, token, 'qr-yape.png', newQrYapeBase64);
                         newQrYapeBase64 = null;
+                        document.getElementById('estadoQrYape').classList.add('hidden');
                     }
                     if (newQrPlinBase64) {
                         await subirImagenAGitHub(repo, token, 'qr-plin.png', newQrPlinBase64);
                         newQrPlinBase64 = null;
+                        document.getElementById('estadoQrPlin').classList.add('hidden');
                     }
 
                     // Subir las figuras de las preguntas que realmente se usan.
