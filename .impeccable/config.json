@@ -1,0 +1,56 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-05T22:16:47.543Z"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "test.html"
+        ],
+        "createdAt": "2026-09-05T22:16:47.623Z"
+      },
+      {
+        "rule": "single-font",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-05T22:17:09.929Z"
+      },
+      {
+        "rule": "single-font",
+        "value": "*",
+        "files": [
+          "test.html"
+        ],
+        "createdAt": "2026-09-05T22:17:10.016Z"
+      },
+      {
+        "rule": "gray-on-color",
+        "value": "*",
+        "files": [
+          "test.html"
+        ],
+        "createdAt": "2026-09-05T22:17:10.101Z"
+      },
+      {
+        "rule": "layout-transition",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-05T22:17:10.198Z"
+      }
+    ]
+  }
+}

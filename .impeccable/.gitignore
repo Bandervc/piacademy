@@ -1,0 +1,4 @@
+# Cache local del revisor de diseño: se regenera solo, no se versiona.
+hook.cache.json
+# Config personal de cada quien (config.json sí se comparte).
+config.local.json
