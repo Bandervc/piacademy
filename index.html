@@ -103,6 +103,30 @@
             opacity: 0;
             pointer-events: none;
         }
+        /* En reposo solo se ve el icono; al pasar el mouse el boton crece
+           hacia la izquierda (esta anclado a la derecha) y revela su texto.
+           Expandir un pill desde un circulo obliga a animar el ancho; como el
+           boton es position:fixed y ademas lleva contain, el recalculo queda
+           encerrado en el propio boton y no re-dibuja el resto de la pagina. */
+        .flotante {
+            contain: layout style;
+        }
+        .flotante .etiqueta {
+            max-width: 0;
+            opacity: 0;
+            padding-left: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            transition: max-width .3s ease, opacity .2s ease, padding-left .3s ease;
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .flotante:hover .etiqueta,
+            .flotante:focus-visible .etiqueta {
+                max-width: 260px;
+                opacity: 1;
+                padding-left: .6rem;
+            }
+        }
         @media (prefers-reduced-motion: reduce) {
             .flotante, .animate-float, .pulse-subtle { animation: none; transition: none; }
         }
@@ -779,16 +803,16 @@
 
     <!-- Floating Sticky Community Button -->
     <a data-attr="href:redes.comunidadWhatsApp" target="_blank" rel="noopener" aria-label="Únete a mi Comunidad de WhatsApp"
-       class="flotante fixed bottom-20 right-4 sm:bottom-24 sm:right-6 z-50 bg-sky-500 hover:bg-sky-600 text-white p-3 sm:p-4 rounded-full shadow-2xl hover:scale-110 flex items-center gap-3 border-2 border-white">
-        <i class="fa-solid fa-users text-xl sm:text-3xl" aria-hidden="true"></i>
-        <span class="hidden md:inline font-bold text-sm pr-2">Únete a mi Comunidad</span>
+       class="flotante fixed bottom-20 right-4 sm:bottom-24 sm:right-6 z-50 bg-sky-500 hover:bg-sky-600 text-white p-3 sm:p-4 rounded-full shadow-2xl flex items-center border-2 border-white">
+        <i class="fa-solid fa-users fa-fw text-xl sm:text-2xl" aria-hidden="true"></i>
+        <span class="etiqueta font-bold text-sm">Únete a mi Comunidad</span>
     </a>
 
     <!-- Floating Sticky WhatsApp Button -->
     <a data-wa="botonFlotante" aria-label="Escríbenos por WhatsApp"
-       class="flotante fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white p-3 sm:p-4 rounded-full shadow-2xl hover:scale-110 flex items-center gap-3 border-2 border-white">
-        <i class="fa-brands fa-whatsapp text-xl sm:text-3xl" aria-hidden="true"></i>
-        <span class="hidden md:inline font-bold text-sm pr-2">¿Consultas? Escríbenos</span>
+       class="flotante fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white p-3 sm:p-4 rounded-full shadow-2xl flex items-center border-2 border-white">
+        <i class="fa-brands fa-whatsapp fa-fw text-xl sm:text-2xl" aria-hidden="true"></i>
+        <span class="etiqueta font-bold text-sm">¿Consultas? Escríbenos</span>
     </a>
 
     <!-- Enrollment / Inscription Modal Popup (Paso 1) -->
