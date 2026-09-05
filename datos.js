@@ -332,6 +332,20 @@ window.DATOS = {
           "vence": "",
           "descripcion": "PARA LOS QUE RESUELVAN 6 A MÁS PREGUNTAS",
           "soloTest": true
+      },
+      {
+          "codigo": "BECA18",
+          "descuento": 35,
+          "vence": "2026-11-15",
+          "descripcion": "CODIGO PUBLICITARIO",
+          "soloTest": false
+      },
+      {
+          "codigo": "PUCPAD",
+          "descuento": 35,
+          "vence": "2026-11-15",
+          "descripcion": "CODIGO PUBLICITARIO",
+          "soloTest": false
       }
   ],
 
