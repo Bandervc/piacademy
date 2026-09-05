@@ -2,7 +2,8 @@
 <html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#5B21B6">
     <title>PiAcademy | Ciclo Integral PUCP & Beca 18</title>
 
     <!-- ══════════════════════════════════════════════════════════
@@ -91,6 +92,20 @@
         .pulse-subtle {
             animation: pulseSubtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
+        /* Botones flotantes: respetan la barra de gestos del iPhone y se
+           ocultan mientras el usuario baja, para no tapar el contenido. */
+        .flotante {
+            margin-bottom: env(safe-area-inset-bottom, 0px);
+            transition: transform .25s ease, opacity .25s ease;
+        }
+        .flotante.oculto {
+            transform: translateY(140%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .flotante, .animate-float, .pulse-subtle { animation: none; transition: none; }
+        }
         @keyframes pulseSubtle {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.03); opacity: 0.95; }
@@ -117,17 +132,19 @@
         }, 1300);
     </script>
 
-    <!-- Sticky Navigation Container (Announcement Banner + Header Pinned Together) -->
+    <!-- Announcement Top Banner (se desplaza con la página: en celular el
+         header fijo ocupaba el 19% de la pantalla y quitaba espacio de lectura) -->
+    <div class="bg-brand-navy text-white text-xs md:text-sm py-2 px-4 text-center font-medium flex flex-wrap items-center justify-center gap-2 border-b border-purple-900/40">
+        <span class="inline-flex items-center bg-brand-amber text-slate-950 text-xs font-bold px-2.5 py-0.5 rounded-full uppercase">
+            <i class="fa-solid fa-fire mr-1"></i> ¡Inicios Confirmados!
+        </span>
+        <span class="hidden sm:inline" data-dato="promocion.avisoBanner"></span>
+        <a data-wa="bannerSuperior" class="underline text-amber-300 font-bold hover:text-white transition-colors min-h-[32px] inline-flex items-center px-1"
+           data-dato="promocion.enlaceBanner"></a>
+    </div>
+
+    <!-- Sticky Navigation Container (solo el header queda fijo) -->
     <div class="sticky top-0 z-40">
-        <!-- Announcement Top Banner -->
-        <div class="bg-brand-navy text-white text-xs md:text-sm py-2 px-4 text-center font-medium flex flex-wrap items-center justify-center gap-2 border-b border-purple-900/40">
-            <span class="inline-flex items-center bg-brand-amber text-slate-950 text-xs font-bold px-2.5 py-0.5 rounded-full uppercase">
-                <i class="fa-solid fa-fire mr-1"></i> ¡Inicios Confirmados!
-            </span>
-            <span data-dato="promocion.avisoBanner"></span>
-            <a data-wa="bannerSuperior" class="underline text-amber-300 font-bold hover:text-white transition-colors"
-               data-dato="promocion.enlaceBanner"></a>
-        </div>
 
         <!-- Navigation Header -->
         <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
@@ -167,7 +184,7 @@
                 </div>
 
                 <!-- Mobile menu button -->
-                <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-700 hover:text-brand-purple focus:outline-none">
+                <button id="mobileMenuBtn" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobileMenu" class="md:hidden p-2 -mr-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-700 hover:text-brand-purple focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-purple rounded-lg">
                     <i class="fa-solid fa-bars text-2xl"></i>
                 </button>
             </div>
@@ -181,10 +198,13 @@
                 <a href="#inversion" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Inversión y Horarios</a>
                 <a href="#faq" class="block py-2 text-slate-700 font-medium border-b border-slate-100">Preguntas Frecuentes</a>
                 <div class="pt-2 flex flex-col gap-2">
-                    <a data-attr="href:contacto.enlaceTelefono" class="flex items-center justify-center gap-2 bg-slate-100 text-slate-800 font-semibold py-2.5 rounded-xl text-sm">
+                    <a data-attr="href:redes.comunidadWhatsApp" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 bg-sky-50 text-sky-700 font-bold min-h-[44px] py-2.5 rounded-xl text-sm border border-sky-200">
+                        <i class="fa-solid fa-users" aria-hidden="true"></i> Únete a mi Comunidad
+                    </a>
+                    <a data-attr="href:contacto.enlaceTelefono" class="flex items-center justify-center gap-2 bg-slate-100 text-slate-800 font-semibold min-h-[44px] py-2.5 rounded-xl text-sm">
                         <i class="fa-solid fa-phone text-brand-purple" aria-hidden="true"></i> Llamar al <span data-dato="contacto.telefonoVisible"></span>
                     </a>
-                    <button onclick="abrirInscripcion('Menú móvil')" class="bg-brand-purple text-white font-bold py-3 rounded-xl text-center shadow-md">
+                    <button onclick="abrirInscripcion('Menú móvil')" class="bg-brand-purple text-white font-bold min-h-[48px] py-3 rounded-xl text-center shadow-md">
                         ¡Inscribirme Ahora!
                     </button>
                 </div>
@@ -579,7 +599,7 @@
                         </h4>
                         <div class="grid grid-cols-2 gap-3 text-xs text-slate-300" data-lista="horarios">
                           <template>
-                            <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800">
+                            <div class="js-turno-caja bg-slate-900/80 p-2.5 rounded-xl border border-slate-800" data-campo-attr="data-disponible:disponible">
                               <span class="font-bold text-white block" data-campo="nombre"></span>
                               <span data-campo="rango"></span>
                             </div>
@@ -685,7 +705,7 @@
                     <div class="pt-2 space-y-2 text-sm text-slate-300 font-medium">
                         <p class="flex items-center gap-3">
                             <i class="fa-solid fa-phone text-brand-amber" aria-hidden="true"></i>
-                            <span>Teléfono / WhatsApp: <a data-attr="href:contacto.enlaceTelefono" class="hover:text-amber-300 font-bold" data-dato="contacto.telefonoVisible"></a></span>
+                            <span>Teléfono / WhatsApp: <a data-attr="href:contacto.enlaceTelefono" class="inline-flex items-center min-h-[44px] hover:text-amber-300 font-bold" data-dato="contacto.telefonoVisible"></a></span>
                         </p>
                         <p class="flex items-center gap-3">
                             <i class="fa-solid fa-envelope text-brand-amber" aria-hidden="true"></i>
@@ -697,12 +717,12 @@
                 <!-- Quick Links Column -->
                 <div class="md:col-span-3 space-y-3">
                     <h4 class="text-sm font-bold uppercase tracking-wider text-amber-400">Navegación</h4>
-                    <ul class="space-y-2 text-sm text-slate-400">
-                        <li><a href="#beneficios" class="hover:text-white transition-colors" data-dato="marca.nav1">Metodología PiAcademy</a></li>
-                        <li><a href="#audiencia" class="hover:text-white transition-colors" data-dato="marca.nav2">Enfoque PUCP & Beca 18</a></li>
-                        <li><a href="#temario" class="hover:text-white transition-colors" data-dato="marca.nav3">Plan de Cursos</a></li>
-                        <li><a href="#inversion" class="hover:text-white transition-colors" data-dato="marca.nav4">Ciclo Integral & Inversión</a></li>
-                        <li><a href="#diagnostico" class="hover:text-white transition-colors" data-dato="marca.nav5">Test de Nivel Gratuito</a></li>
+                    <ul class="text-sm text-slate-400">
+                        <li><a href="#beneficios" class="flex items-center min-h-[44px] hover:text-white transition-colors" data-dato="marca.nav1">Metodología PiAcademy</a></li>
+                        <li><a href="#audiencia" class="flex items-center min-h-[44px] hover:text-white transition-colors" data-dato="marca.nav2">Enfoque PUCP & Beca 18</a></li>
+                        <li><a href="#temario" class="flex items-center min-h-[44px] hover:text-white transition-colors" data-dato="marca.nav3">Plan de Cursos</a></li>
+                        <li><a href="#inversion" class="flex items-center min-h-[44px] hover:text-white transition-colors" data-dato="marca.nav4">Ciclo Integral & Inversión</a></li>
+                        <li><a href="#diagnostico" class="flex items-center min-h-[44px] hover:text-white transition-colors" data-dato="marca.nav5">Test de Nivel Gratuito</a></li>
                     </ul>
                 </div>
 
@@ -758,15 +778,15 @@
     </footer>
 
     <!-- Floating Sticky Community Button -->
-    <a data-attr="href:redes.comunidadWhatsApp" target="_blank" rel="noopener"
-       class="fixed bottom-20 right-4 sm:bottom-24 sm:right-6 z-50 bg-sky-500 hover:bg-sky-600 text-white p-3 sm:p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 flex items-center gap-3 border-2 border-white">
+    <a data-attr="href:redes.comunidadWhatsApp" target="_blank" rel="noopener" aria-label="Únete a mi Comunidad de WhatsApp"
+       class="flotante fixed bottom-20 right-4 sm:bottom-24 sm:right-6 z-50 bg-sky-500 hover:bg-sky-600 text-white p-3 sm:p-4 rounded-full shadow-2xl hover:scale-110 flex items-center gap-3 border-2 border-white">
         <i class="fa-solid fa-users text-xl sm:text-3xl" aria-hidden="true"></i>
         <span class="hidden md:inline font-bold text-sm pr-2">Únete a mi Comunidad</span>
     </a>
 
     <!-- Floating Sticky WhatsApp Button -->
-    <a data-wa="botonFlotante"
-       class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white p-3 sm:p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 flex items-center gap-3 border-2 border-white">
+    <a data-wa="botonFlotante" aria-label="Escríbenos por WhatsApp"
+       class="flotante fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white p-3 sm:p-4 rounded-full shadow-2xl hover:scale-110 flex items-center gap-3 border-2 border-white">
         <i class="fa-brands fa-whatsapp text-xl sm:text-3xl" aria-hidden="true"></i>
         <span class="hidden md:inline font-bold text-sm pr-2">¿Consultas? Escríbenos</span>
     </a>
@@ -790,17 +810,17 @@
             <form id="enrollForm" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Nombre Completo del Estudiante:</label>
-                    <input type="text" id="studentName" required placeholder="Ej. Carlos Mendoza" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-purple">
+                    <input type="text" id="studentName" required autocomplete="name" placeholder="Ej. Carlos Mendoza" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-base sm:text-sm focus:outline-none focus:border-brand-purple">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Teléfono WhatsApp de Contacto:</label>
-                    <input type="tel" id="studentPhone" required placeholder="Ej. 912345678" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-purple">
+                    <input type="tel" id="studentPhone" required inputmode="numeric" autocomplete="tel" placeholder="Ej. 912345678" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-base sm:text-sm focus:outline-none focus:border-brand-purple">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Modalidad de Interés Principal:</label>
-                    <select id="studentTarget" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-purple font-medium">
+                    <select id="studentTarget" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-base sm:text-sm focus:outline-none focus:border-brand-purple font-medium">
                         <option value="Ingreso PUCP">Postulante a la PUCP</option>
                         <option value="Beca 18 PRONABEC">Postulante a Beca 18 (ENP)</option>
                         <option value="Ambos (PUCP y Beca 18)">Ambos exámenes (PUCP &amp; Beca 18)</option>
@@ -825,7 +845,7 @@
                         <i class="fa-solid fa-tag text-brand-amber mr-1"></i>¿Tienes un código de descuento?
                     </label>
                     <div class="flex gap-2">
-                        <input type="text" id="discountCode" placeholder="Ej. LIVE20" class="flex-1 bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-bold uppercase focus:outline-none focus:border-brand-purple tracking-wider">
+                        <input type="text" id="discountCode" placeholder="Ej. LIVE20" autocapitalize="characters" autocomplete="off" class="flex-1 min-w-0 bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-base sm:text-sm font-bold uppercase focus:outline-none focus:border-brand-purple tracking-wider">
                         <button type="button" id="btnApplyCode" class="bg-brand-purple hover:bg-brand-darkPurple text-white font-bold text-sm px-5 py-3 rounded-xl transition-colors shadow-sm flex items-center gap-1.5 whitespace-nowrap">
                             <i class="fa-solid fa-check"></i> Aplicar
                         </button>

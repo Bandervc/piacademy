@@ -893,6 +893,76 @@
 
   window.PiApp.modulos.push(iniciarMenuMovil);
 
+  // --- Botones flotantes: se esconden al bajar para no tapar el contenido ---
+  // En celular los flotantes se cruzan con títulos y textos. Se ocultan
+  // mientras el usuario baja y reaparecen al subir o al detenerse.
+  function iniciarFlotantes() {
+    var flotantes = document.querySelectorAll('.flotante');
+    if (!flotantes.length) return;
+
+    var ultimoY = window.scrollY;
+    var temporizador = null;
+
+    function mostrar(ocultar) {
+      flotantes.forEach(function (el) { el.classList.toggle('oculto', ocultar); });
+    }
+
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY;
+      // Bajando más de 8px y ya fuera del inicio de la página: esconder.
+      if (y > ultimoY + 8 && y > 300) mostrar(true);
+      else if (y < ultimoY - 8) mostrar(false);
+      ultimoY = y;
+
+      // Al dejar de hacer scroll, vuelven a aparecer.
+      clearTimeout(temporizador);
+      temporizador = setTimeout(function () { mostrar(false); }, 700);
+    }, { passive: true });
+  }
+
+  window.PiApp.modulos.push(iniciarFlotantes);
+
+  // --- Bloquea el scroll del fondo mientras un modal está abierto ----------
+  // Sin esto, en celular el fondo se desplaza detrás del modal al hacer
+  // scroll dentro de él (scroll chaining), y el usuario pierde su posición.
+  function iniciarBloqueoScrollModales() {
+    var modales = ['enrollModal', 'paymentModal']
+      .map(function (id) { return document.getElementById(id); })
+      .filter(Boolean);
+    if (!modales.length) return;
+
+    function algunoAbierto() {
+      return modales.some(function (m) { return !m.classList.contains('hidden'); });
+    }
+
+    function sincronizar() {
+      document.body.style.overflow = algunoAbierto() ? 'hidden' : '';
+    }
+
+    modales.forEach(function (modal) {
+      new MutationObserver(sincronizar)
+        .observe(modal, { attributes: true, attributeFilter: ['class'] });
+    });
+  }
+
+  window.PiApp.modulos.push(iniciarBloqueoScrollModales);
+
+  // --- Marca los turnos llenos también en la sección de Inversión ----------
+  // Antes solo el formulario avisaba "Cupos Llenos", así que el usuario elegía
+  // un turno aquí y recién en el modal descubría que ya no había vacantes.
+  function iniciarTurnosLlenos() {
+    document.querySelectorAll('.js-turno-caja[data-disponible="false"]').forEach(function (caja) {
+      caja.classList.add('opacity-60');
+      if (caja.querySelector('.js-turno-lleno')) return;
+      var badge = document.createElement('span');
+      badge.className = 'js-turno-lleno mt-1 inline-block text-[10px] font-black uppercase text-rose-300 bg-rose-900/40 px-1.5 py-0.5 rounded';
+      badge.textContent = 'Cupos Llenos';
+      caja.appendChild(badge);
+    });
+  }
+
+  window.PiApp.modulos.push(iniciarTurnosLlenos);
+
   // --- Preguntas Frecuentes (Acordeón) ---
   function iniciarFaq() {
     var botones = document.querySelectorAll('.faq-boton');
