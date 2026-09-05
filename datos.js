@@ -220,7 +220,7 @@ window.DATOS = {
   // ═══ 10. TEST DE NIVEL Y PREMIOS GAMIFICADOS ═══
   test: {
       "mostrar": false,
-      "tiempoSegundos": 1200,
+      "tiempoSegundos": 1800,
       "premios": [
           {
               "minAciertos": 1,
@@ -236,6 +236,68 @@ window.DATOS = {
           }
       ],
       "preguntas": [
+          {
+              "enunciado": "Reducir \n\n\n E = 8^{-1/3} + 9^{-1/2} + \\left(\\dfrac{27}{8}\\right)^{-1/3} - 32^{-1/5}",
+              "alternativas": [
+                  "1",
+                  "2",
+                  "8",
+                  "4"
+              ],
+              "correcta": 0
+          },
+          {
+              "enunciado": "En la figura calcular la longitud del segmento AB. Si CD = 3, BD = 5 y AD = 1.",
+              "alternativas": [
+                  "2",
+                  "3",
+                  "4\\sqrt{2}",
+                  "4"
+              ],
+              "correcta": 2,
+              "imagen": "preg-1788584963746.png"
+          },
+          {
+              "enunciado": "A un paseo van 53 personas entre adultos y niños.\nSi el precio del pasaje de un adulto es S/ 10, el de un niño es S/ 7.5 y el costo del paseo es S/ 480, calcule la diferencia entre la cantidad de adultos y niños.",
+              "alternativas": [
+                  "11",
+                  "12",
+                  "13",
+                  "14"
+              ],
+              "correcta": 2
+          },
+          {
+              "enunciado": "Las edades de un padre y sus dos hijos son 33 años, 17 años y 15 años respectivamente. ¿Cuál será la edad del padre en el momento que sea igual a la suma de las edades de sus hijos?",
+              "alternativas": [
+                  "36",
+                  "35",
+                  "34",
+                  "37"
+              ],
+              "correcta": 2
+          },
+          {
+              "enunciado": "En la figura calcular “x”.",
+              "alternativas": [
+                  "2",
+                  "3",
+                  "\\sqrt{3}",
+                  "2\\sqrt{3}"
+              ],
+              "correcta": 3,
+              "imagen": "preg-1788585340150.png"
+          },
+          {
+              "enunciado": "¿De cuántas formas se pueden ordenar 6 personas en una fila?",
+              "alternativas": [
+                  "24",
+                  "120",
+                  "720",
+                  "5760"
+              ],
+              "correcta": 2
+          },
           {
               "enunciado": "Un camión transporta 50 cajas que contienen botellas llenas de agua. Cada caja contiene 20 botellas de 1,5 litros cada una. Si cada caja vacía pesa 0,04 kg, cada botella vacía pesa 0,05 kg y 1 litro de agua pesa 1 kg, ¿cuánto pesa, en total, la carga que transporta el camión?",
               "alternativas": [
@@ -275,28 +337,6 @@ window.DATOS = {
                   "2"
               ],
               "correcta": 2
-          },
-          {
-              "enunciado": "En la figura calcular la longitud del segmento AB. Si CD = 3, BD = 5 y AD = 1.",
-              "alternativas": [
-                  "2",
-                  "3",
-                  "4\\sqrt{2}",
-                  "4"
-              ],
-              "correcta": 2,
-              "imagen": "preg-1788584963746.png"
-          },
-          {
-              "enunciado": "En la figura calcular “x”.",
-              "alternativas": [
-                  "2",
-                  "3",
-                  "\\sqrt{3}",
-                  "2\\sqrt{3}"
-              ],
-              "correcta": 3,
-              "imagen": "preg-1788585340150.png"
           }
       ]
   },
