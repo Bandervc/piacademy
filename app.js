@@ -500,27 +500,6 @@
 
   window.PiApp.modulos.push(aplicarTextos);
 
-
-  // --- Acordeón de preguntas frecuentes (FAQ generadas desde datos.js) ----
-
-  function iniciarFaq() {
-    document.querySelectorAll('.faq-boton').forEach(function (boton) {
-      boton.addEventListener('click', function () {
-        var tarjeta = boton.parentElement;
-        var respuesta = tarjeta.querySelector('.faq-respuesta');
-        var icono = tarjeta.querySelector('.faq-icono');
-        var abierta = !respuesta.classList.contains('hidden');
-
-        respuesta.classList.toggle('hidden', abierta);
-        boton.setAttribute('aria-expanded', abierta ? 'false' : 'true');
-        icono.classList.toggle('fa-plus', abierta);
-        icono.classList.toggle('fa-minus', !abierta);
-      });
-    });
-  }
-
-  window.PiApp.modulos.push(iniciarFaq);
-
   // --- Códigos de descuento --------------------------------------------------
 
   var estadoPago = {
