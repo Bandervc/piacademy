@@ -99,6 +99,24 @@
 </head>
 <body class="bg-slate-50 text-slate-900 antialiased selection:bg-brand-amber selection:text-white">
 
+    <!-- Splash de bienvenida (se muestra al cargar y se oculta solo) -->
+    <div id="piSplash" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gradient-to-br from-brand-purple to-brand-darkPurple transition-opacity duration-700 ease-out">
+        <div class="w-20 h-20 sm:w-24 sm:h-24 bg-white/10 rounded-2xl flex items-center justify-center shadow-xl mb-5">
+            <span class="text-white font-serif font-black text-5xl tracking-tighter">π</span>
+        </div>
+        <p class="text-white text-lg sm:text-xl font-bold tracking-wide">¡Bienvenido a PiAcademy!</p>
+    </div>
+    <script>
+        // Oculta el splash de bienvenida solo, sin depender de que datos.js cargue bien.
+        setTimeout(function () {
+            var splash = document.getElementById('piSplash');
+            if (!splash) return;
+            splash.style.opacity = '0';
+            splash.setAttribute('aria-hidden', 'true');
+            setTimeout(function () { splash.style.display = 'none'; }, 700);
+        }, 1300);
+    </script>
+
     <!-- Sticky Navigation Container (Announcement Banner + Header Pinned Together) -->
     <div class="sticky top-0 z-40">
         <!-- Announcement Top Banner -->
