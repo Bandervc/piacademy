@@ -158,7 +158,10 @@
     function terminar() {
       bloque.remove();
       if (vencido) {
-        vencido.textContent = datos.promocion.mensajeVencido;
+        // Con texto de respaldo: si mensajeVencido falta o queda vacío en
+        // datos.js, antes se mostraba un recuadro vacío en plena portada.
+        vencido.textContent = datos.promocion.mensajeVencido ||
+          '¡Inscripciones abiertas! Escríbenos y te contamos la fecha del próximo grupo.';
         vencido.classList.remove('hidden');
       }
     }

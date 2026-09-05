@@ -40,6 +40,9 @@ window.DATOS = {
   promocion: {
       "fechaLimite": "2026-09-09T23:59",
       "textoContador": "!No dejes pasar esta oportunidad!",
+      // Lo que se muestra cuando la fecha de arriba ya pasó, en lugar del
+      // contador. Si lo dejas vacío se usa un mensaje por defecto.
+      "mensajeVencido": "¡Inscripciones abiertas! Escríbenos y te contamos la fecha del próximo grupo.",
       "mostrarContador": true,
       "avisoBanner": "Ciclo Integral PUCP & Beca 18 — Vacantes Limitadas.",
       "enlaceBanner": "¡Reserva tu cupo con descuento aquí!"
