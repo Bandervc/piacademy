@@ -38,7 +38,7 @@ window.DATOS = {
 
   // ═══ 4. PROMOCIÓN Y CUENTA REGRESIVA ═══
   promocion: {
-      "fechaLimite": "2026-09-06T23:59",
+      "fechaLimite": "2026-09-09T23:59",
       "textoContador": "!No dejes pasar esta oportunidad!",
       "mostrarContador": true,
       "avisoBanner": "Ciclo Integral PUCP & Beca 18 — Vacantes Limitadas.",
