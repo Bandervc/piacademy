@@ -47,9 +47,9 @@ window.DATOS = {
 
   // ═══ 5. PRECIO ═══
   precio: {
-      "normal": 200,
-      "promocional": 100,
-      "nota": "pago único"
+      "normal": 240,
+      "promocional": 150,
+      "nota": "pago único (duración 3 meses)"
   },
 
   // ═══ 6. TURNOS Y HORARIOS ═══
