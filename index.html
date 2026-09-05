@@ -759,15 +759,15 @@
 
     <!-- Floating Sticky Community Button -->
     <a data-attr="href:redes.comunidadWhatsApp" target="_blank" rel="noopener"
-       class="fixed bottom-24 right-6 z-50 bg-sky-500 hover:bg-sky-600 text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 flex items-center gap-3 border-2 border-white">
-        <i class="fa-solid fa-users text-3xl" aria-hidden="true"></i>
+       class="fixed bottom-20 right-4 sm:bottom-24 sm:right-6 z-50 bg-sky-500 hover:bg-sky-600 text-white p-3 sm:p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 flex items-center gap-3 border-2 border-white">
+        <i class="fa-solid fa-users text-xl sm:text-3xl" aria-hidden="true"></i>
         <span class="hidden md:inline font-bold text-sm pr-2">Únete a mi Comunidad</span>
     </a>
 
     <!-- Floating Sticky WhatsApp Button -->
     <a data-wa="botonFlotante"
-       class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 flex items-center gap-3 border-2 border-white">
-        <i class="fa-brands fa-whatsapp text-3xl" aria-hidden="true"></i>
+       class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white p-3 sm:p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 flex items-center gap-3 border-2 border-white">
+        <i class="fa-brands fa-whatsapp text-xl sm:text-3xl" aria-hidden="true"></i>
         <span class="hidden md:inline font-bold text-sm pr-2">¿Consultas? Escríbenos</span>
     </a>
 
@@ -811,8 +811,8 @@
                     <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Turno Preferido:</label>
                     <div class="grid grid-cols-2 gap-3" data-lista="horarios">
                       <template>
-                        <label class="flex items-center gap-2 border border-slate-200 p-3 rounded-xl cursor-pointer hover:bg-purple-50">
-                          <input type="radio" name="turno" data-campo-attr="value:nombre" class="accent-brand-purple">
+                        <label class="flex flex-wrap items-center gap-x-2 gap-y-1 border border-slate-200 p-3 rounded-xl cursor-pointer hover:bg-purple-50">
+                          <input type="radio" name="turno" data-campo-attr="value:nombre" class="accent-brand-purple shrink-0">
                           <span class="text-xs font-bold text-slate-800"><span data-campo="nombre"></span> <span data-campo="rango"></span></span>
                         </label>
                       </template>

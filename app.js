@@ -687,7 +687,7 @@
           parentLabel.classList.remove('hover:bg-purple-50', 'cursor-pointer');
           if (!parentLabel.querySelector('.js-cupo-lleno')) {
             var badge = document.createElement('span');
-            badge.className = 'js-cupo-lleno ml-auto text-[10px] font-black uppercase text-rose-600 bg-rose-100 px-1.5 py-0.5 rounded shrink-0';
+            badge.className = 'js-cupo-lleno w-full text-right text-[10px] font-black uppercase text-rose-600 bg-rose-100 px-1.5 py-0.5 rounded';
             badge.textContent = 'Cupos Llenos';
             parentLabel.appendChild(badge);
           }
