@@ -55,14 +55,14 @@ window.DATOS = {
   // ═══ 6. TURNOS Y HORARIOS ═══
   horarios: [
       {
-          "nombre": "Turno Noche",
-          "rango": "6:00 pm - 07:30 pm",
-          "disponible": true
-      },
-      {
           "nombre": "Turno Tarde",
           "rango": "4:00 pm - 5:00 pm",
           "disponible": false
+      },
+      {
+          "nombre": "Turno Noche",
+          "rango": "7:30 pm - 9:00 pm",
+          "disponible": true
       }
   ],
 
@@ -275,6 +275,28 @@ window.DATOS = {
                   "2"
               ],
               "correcta": 2
+          },
+          {
+              "enunciado": "En la figura calcular la longitud del segmento AB. Si CD = 3, BD = 5 y AD = 1.",
+              "alternativas": [
+                  "2",
+                  "3",
+                  "4\\sqrt{2}",
+                  "4"
+              ],
+              "correcta": 2,
+              "imagen": "preg-1788584963746.png"
+          },
+          {
+              "enunciado": "En la figura calcular “x”.",
+              "alternativas": [
+                  "2",
+                  "3",
+                  "\\sqrt{3}",
+                  "2\\sqrt{3}"
+              ],
+              "correcta": 3,
+              "imagen": "preg-1788585340150.png"
           }
       ]
   },
