@@ -223,6 +223,27 @@
     </div>
 
     <style>
+        /* Los campos llevan su color de texto propio en vez de heredarlo del
+           body. El body pinta la selección con texto blanco, y en Chrome de
+           Android eso dejaba el texto del select invisible al enfocarlo.
+           El text-fill-color cubre el autorrelleno, que impone su propio color. */
+        #enrollModal input,
+        #enrollModal select,
+        #enrollModal textarea,
+        #paymentModal input {
+            color: #0F172A;
+            -webkit-text-fill-color: #0F172A;
+        }
+        #enrollModal input:-webkit-autofill,
+        #enrollModal select:-webkit-autofill {
+            -webkit-text-fill-color: #0F172A;
+        }
+        #enrollModal ::selection,
+        #paymentModal ::selection {
+            background: #DDD6FE;
+            color: #0F172A;
+        }
+
         /* Copy feedback animation */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(8px); }
