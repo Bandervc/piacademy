@@ -379,14 +379,14 @@ window.DATOS = {
       {
           "codigo": "LIVE20",
           "descuento": 20,
-          "vence": "2026-09-11",
+          "vence": "2026-10-11",
           "descripcion": "CÓDIGO PARA LIVE DE TIKTOK",
           "soloTest": false
       },
       {
           "codigo": "POLLITO",
           "descuento": 20,
-          "vence": "2026-11-14",
+          "vence": "",
           "descripcion": "PARA LOS QUE RESUELVEN MÁX 5 BUENAS",
           "soloTest": true
       },
