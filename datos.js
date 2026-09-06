@@ -428,4 +428,12 @@ window.DATOS = {
           "qrImagen": "qr-plin.png"
       }
   },
+
+  // ═══ 16. PÍXEL DE META (Facebook e Instagram) ═══
+  // Pega aquí el ID que aparece en Meta Business Suite → Administrador de
+  // eventos → Orígenes de datos (son solo números, ej. "1234567890123456").
+  // Mientras esté vacío no se carga nada: la web funciona igual.
+  meta: {
+      "pixelId": ""
+  },
 };

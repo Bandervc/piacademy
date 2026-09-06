@@ -672,6 +672,16 @@
         estadoPago.montoFinal = datos.precio.promocional;
       }
 
+      // Meta: el alumno dejó sus datos. Este es el evento por el que conviene
+      // optimizar una campaña, no la simple visita.
+      if (window.PiApp.evento) {
+        window.PiApp.evento('Lead', {
+          content_name: 'Ciclo Integral',
+          value: estadoPago.montoFinal,
+          currency: 'PEN'
+        });
+      }
+
       // Cerrar modal de inscripción y abrir modal de pago
       cerrar();
       abrirModalPago(datos);
@@ -734,6 +744,15 @@
     actualizarLinkVoucher(datos);
 
     modal.classList.remove('hidden');
+
+    // Meta: llegó a la pantalla de pago, el paso más cercano a la matrícula.
+    if (window.PiApp.evento) {
+      window.PiApp.evento('InitiateCheckout', {
+        content_name: 'Ciclo Integral',
+        value: estadoPago.montoFinal,
+        currency: 'PEN'
+      });
+    }
   }
 
   function activarTab(tab, datos) {
@@ -965,6 +984,39 @@
   }
 
   window.PiApp.modulos.push(iniciarTurnosLlenos);
+
+  // --- Píxel de Meta (Facebook / Instagram) -------------------------------
+  // Se carga solo si hay un pixelId en datos.js. Sin ID no se pide nada a
+  // Meta y la web queda igual, así que se puede dejar vacío sin romper nada.
+  function iniciarPixelMeta(datos) {
+    var id = datos.meta && datos.meta.pixelId;
+    if (!id) return;
+
+    /* eslint-disable */
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0; t.src = v;
+      s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    /* eslint-enable */
+
+    window.fbq('init', String(id));
+    window.fbq('track', 'PageView');
+  }
+
+  window.PiApp.modulos.push(iniciarPixelMeta);
+
+  // Envía un evento al píxel solo si está activo. Los eventos de abajo son
+  // los que sirven para optimizar campañas: sin ellos Meta solo sabe quién
+  // entró, no quién estuvo a punto de matricularse.
+  function evento(nombre, extra) {
+    if (window.fbq) window.fbq('track', nombre, extra || {});
+  }
+
+  window.PiApp.evento = evento;
 
   // --- Preguntas Frecuentes (Acordeón) ---
   function iniciarFaq() {
