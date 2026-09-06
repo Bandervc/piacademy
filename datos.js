@@ -38,10 +38,8 @@ window.DATOS = {
 
   // ═══ 4. PROMOCIÓN Y CUENTA REGRESIVA ═══
   promocion: {
-      "fechaLimite": "2026-09-09T23:59",
+      "fechaLimite": "2026-09-15T23:59",
       "textoContador": "!No dejes pasar esta oportunidad!",
-      // Lo que se muestra cuando la fecha de arriba ya pasó, en lugar del
-      // contador. Si lo dejas vacío se usa un mensaje por defecto.
       "mensajeVencido": "¡Inscripciones abiertas! Escríbenos y te contamos la fecha del próximo grupo.",
       "mostrarContador": true,
       "avisoBanner": "Ciclo Integral PUCP & Beca 18 — Vacantes Limitadas.",
@@ -401,14 +399,14 @@ window.DATOS = {
       },
       {
           "codigo": "BECA18",
-          "descuento": 35,
+          "descuento": 30,
           "vence": "2026-11-15",
           "descripcion": "CODIGO PUBLICITARIO",
           "soloTest": false
       },
       {
           "codigo": "PUCPAD",
-          "descuento": 35,
+          "descuento": 30,
           "vence": "2026-11-15",
           "descripcion": "CODIGO PUBLICITARIO",
           "soloTest": false
