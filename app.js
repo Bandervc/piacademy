@@ -989,7 +989,11 @@
   // Se carga solo si hay un pixelId en datos.js. Sin ID no se pide nada a
   // Meta y la web queda igual, así que se puede dejar vacío sin romper nada.
   function iniciarPixelMeta(datos) {
-    var id = datos.meta && datos.meta.pixelId;
+    // El ID vive en config.js, no en datos.js: el panel de administrador
+    // regenera datos.js desde una plantilla fija y borraría esta clave.
+    // Se mantiene datos.meta como respaldo por si quedó configurado ahí.
+    var id = (window.PI_CONFIG && window.PI_CONFIG.metaPixelId) ||
+             (datos.meta && datos.meta.pixelId);
     if (!id) return;
 
     /* eslint-disable */
