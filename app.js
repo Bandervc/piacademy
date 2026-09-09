@@ -1053,6 +1053,135 @@
 
   window.PiApp.modulos.push(iniciarFaq);
 
+  // --- Avisos sugeridos (test de nivel y comunidad) -----------------------
+  // Tarjetas que aparecen solas al entrar a la portada, EN ORDEN y de a una:
+  // primero se sugiere medir el nivel con el test y, una vez atendida esa
+  // tarjeta, se invita a la comunidad. Dos a la vez se leerían como
+  // publicidad insistente.
+  //
+  // Cada aviso: sale tras su demora (o antes, si el visitante ya bajó lo
+  // suficiente), se aparta mientras su propia sección está a la vista —ahí
+  // el mensaje sobra— y al cerrarlo no vuelve durante unos días. Si el
+  // visitante entra al enlace, descansa mucho más: ya hizo lo que pedíamos.
+  function iniciarAvisos() {
+    var DIA = 24 * 60 * 60 * 1000;
+
+    var definiciones = [
+      {
+        id: 'avisoTest',
+        clave: 'piAvisoTest',
+        demora: 5000,             // deja pasar el splash de bienvenida
+        scrollMinimo: 500,
+        seccion: 'diagnostico',
+        silencioAlCerrar: DIA,
+        silencioAlEntrar: 7 * DIA,
+        evento: 'ViewContent',
+        eventoExtra: { content_name: 'Test de nivel', content_category: 'Diagnostico' },
+      },
+      {
+        id: 'avisoComunidad',
+        clave: 'piAvisoComunidad',
+        demora: 20000,
+        scrollMinimo: 2500,
+        seccion: null,
+        silencioAlCerrar: 3 * DIA,
+        silencioAlEntrar: 30 * DIA,
+        evento: 'Lead',
+        eventoExtra: { content_name: 'Comunidad WhatsApp' },
+      },
+    ];
+
+    // localStorage puede lanzar error (modo privado, cookies bloqueadas):
+    // si falla, los avisos se comportan como si fuera la primera visita.
+    function silenciadoHasta(clave) {
+      try { return Number(localStorage.getItem(clave)) || 0; } catch (e) { return 0; }
+    }
+    function silenciar(clave, milisegundos) {
+      try { localStorage.setItem(clave, String(Date.now() + milisegundos)); } catch (e) { /* sin memoria */ }
+    }
+
+    var cola = [];
+    definiciones.forEach(function (aviso) {
+      aviso.elemento = document.getElementById(aviso.id);
+      if (!aviso.elemento) return;                    // esta página no lo lleva
+      if (Date.now() < silenciadoHasta(aviso.clave)) { aviso.elemento.remove(); return; }
+      aviso.seccionEl = aviso.seccion ? document.getElementById(aviso.seccion) : null;
+      aviso.listo = false;
+      cola.push(aviso);
+    });
+    if (!cola.length) return;
+
+    var activo = null;
+    var PAUSA = 8000;        // respiro entre un aviso y el siguiente
+    var descansarHasta = 0;
+
+    function seccionALaVista(aviso) {
+      if (!aviso.seccionEl) return false;
+      var caja = aviso.seccionEl.getBoundingClientRect();
+      return caja.top < window.innerHeight && caja.bottom > 0;
+    }
+
+    function mostrar(aviso) {
+      if (activo || seccionALaVista(aviso)) return;
+      activo = aviso;
+      aviso.elemento.classList.remove('oculto');
+    }
+
+    // Saca el primero de la cola que ya cumplió su demora o su scroll.
+    function siguienteEnLaCola() {
+      if (activo || Date.now() < descansarHasta) return;
+      for (var i = 0; i < cola.length; i++) {
+        if (cola[i].listo) { mostrar(cola[i]); return; }
+      }
+    }
+
+    function despedir(aviso, milisegundos) {
+      silenciar(aviso.clave, milisegundos);
+      cola.splice(cola.indexOf(aviso), 1);
+      aviso.elemento.classList.add('oculto');
+      if (activo === aviso) activo = null;
+      // Deja respirar antes de proponer lo siguiente, aunque el visitante
+      // siga haciendo scroll (el scroll también pide turno).
+      descansarHasta = Date.now() + PAUSA;
+      setTimeout(siguienteEnLaCola, PAUSA);
+    }
+
+    function alHacerScroll() {
+      // Si el visitante baja rápido, adelantamos el turno en vez de esperar.
+      cola.forEach(function (aviso) {
+        if (!aviso.listo && window.scrollY > aviso.scrollMinimo) aviso.listo = true;
+      });
+      // El aviso en pantalla se aparta mientras su sección está a la vista,
+      // y vuelve al salir de ella. Sigue siendo el activo: no cede el turno.
+      if (activo) {
+        activo.elemento.classList.toggle('oculto', seccionALaVista(activo));
+        return;
+      }
+      siguienteEnLaCola();
+    }
+
+    window.addEventListener('scroll', alHacerScroll, { passive: true });
+
+    cola.forEach(function (aviso) {
+      setTimeout(function () { aviso.listo = true; siguienteEnLaCola(); }, aviso.demora);
+
+      var cerrar = document.getElementById(aviso.id + 'Cerrar');
+      if (cerrar) {
+        cerrar.addEventListener('click', function () { despedir(aviso, aviso.silencioAlCerrar); });
+      }
+
+      var cta = document.getElementById(aviso.id + 'Cta');
+      if (cta) {
+        cta.addEventListener('click', function () {
+          despedir(aviso, aviso.silencioAlEntrar);
+          if (window.PiApp.evento) window.PiApp.evento(aviso.evento, aviso.eventoExtra);
+        });
+      }
+    });
+  }
+
+  window.PiApp.modulos.push(iniciarAvisos);
+
   // --- Arranque ----------------------------------------------------------
 
   document.addEventListener('DOMContentLoaded', function () {
