@@ -1054,10 +1054,11 @@
   window.PiApp.modulos.push(iniciarFaq);
 
   // --- Flyer de la comunidad ----------------------------------------------
-  // Sale al centro de la pantalla apenas carga la página, cada vez que se
-  // entra o se refresca. La ÚNICA forma de cerrarlo es la ✕: ni el clic en
-  // el fondo ni Escape lo cierran, a propósito. La excepción es quien ya
-  // entró al grupo: a ese no se le vuelve a mostrar en un mes.
+  // Sale al centro de la pantalla apenas carga la portada, UNA VEZ AL DÍA
+  // por persona: al cerrarlo no vuelve hasta el día siguiente, aunque el
+  // visitante refresque o navegue por toda la web. La ÚNICA forma de
+  // cerrarlo es la ✕: ni el clic en el fondo ni Escape lo cierran, a
+  // propósito. A quien ya entró al grupo no se le muestra en un mes.
   //
   // Mientras esté abierto avisa a iniciarAvisos para que la tarjeta del
   // test espere su turno y no salgan las dos cosas encima.
@@ -1066,14 +1067,21 @@
     if (!modal) return;
 
     var CLAVE = 'piModalComunidad';
-    var MES = 30 * 24 * 60 * 60 * 1000;
+    var DIA = 24 * 60 * 60 * 1000;
+    var MES = 30 * DIA;
     // Espera a que el splash de bienvenida termine de irse (1.3 s + 0.7 s
     // de desvanecido); si sale antes, aparece detrás de la portada morada.
     var DEMORA = 2300;
 
-    var yaEntro = false;
-    try { yaEntro = Date.now() < (Number(localStorage.getItem(CLAVE)) || 0); } catch (e) { /* sin memoria */ }
-    if (yaEntro) { modal.remove(); return; }
+    // localStorage puede lanzar error (modo privado, cookies bloqueadas):
+    // si falla, el flyer se comporta como si fuera la primera visita.
+    function silenciar(milisegundos) {
+      try { localStorage.setItem(CLAVE, String(Date.now() + milisegundos)); } catch (e) { /* sin memoria */ }
+    }
+
+    var descansando = false;
+    try { descansando = Date.now() < (Number(localStorage.getItem(CLAVE)) || 0); } catch (e) { /* sin memoria */ }
+    if (descansando) { modal.remove(); return; }
 
     // Bandera que lee iniciarAvisos, que corre después de este módulo.
     window.PiApp.flyerPendiente = true;
@@ -1087,7 +1095,8 @@
       if (cerrar) cerrar.focus();
     }
 
-    function cerrarFlyer() {
+    function cerrarFlyer(silencio) {
+      silenciar(silencio);
       modal.classList.add('hidden');
       window.PiApp.flyerPendiente = false;
       document.dispatchEvent(new CustomEvent('pi:flyerCerrado'));
@@ -1095,12 +1104,15 @@
 
     setTimeout(abrir, DEMORA);
 
-    if (cerrar) cerrar.addEventListener('click', cerrarFlyer);
+    // Con la ✕ descansa un día; si entró al grupo, ya no hay nada que
+    // pedirle en un buen rato.
+    if (cerrar) {
+      cerrar.addEventListener('click', function () { cerrarFlyer(DIA); });
+    }
 
     if (cta) {
       cta.addEventListener('click', function () {
-        try { localStorage.setItem(CLAVE, String(Date.now() + MES)); } catch (e) { /* sin memoria */ }
-        cerrarFlyer();
+        cerrarFlyer(MES);
         if (window.PiApp.evento) {
           window.PiApp.evento('Lead', { content_name: 'Comunidad WhatsApp' });
         }
