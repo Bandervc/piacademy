@@ -948,7 +948,7 @@
   // Sin esto, en celular el fondo se desplaza detrás del modal al hacer
   // scroll dentro de él (scroll chaining), y el usuario pierde su posición.
   function iniciarBloqueoScrollModales() {
-    var modales = ['enrollModal', 'paymentModal']
+    var modales = ['enrollModal', 'paymentModal', 'modalComunidad']
       .map(function (id) { return document.getElementById(id); })
       .filter(Boolean);
     if (!modales.length) return;
@@ -1053,10 +1053,67 @@
 
   window.PiApp.modulos.push(iniciarFaq);
 
-  // --- Avisos sugeridos (test de nivel y comunidad) -----------------------
-  // Tarjetas que aparecen solas al entrar a la portada, EN ORDEN y de a una:
-  // primero se sugiere medir el nivel con el test y después se invita a la
-  // comunidad. Dos a la vez se leerían como publicidad insistente.
+  // --- Flyer de la comunidad ----------------------------------------------
+  // Sale al centro de la pantalla apenas carga la página, cada vez que se
+  // entra o se refresca. La ÚNICA forma de cerrarlo es la ✕: ni el clic en
+  // el fondo ni Escape lo cierran, a propósito. La excepción es quien ya
+  // entró al grupo: a ese no se le vuelve a mostrar en un mes.
+  //
+  // Mientras esté abierto avisa a iniciarAvisos para que la tarjeta del
+  // test espere su turno y no salgan las dos cosas encima.
+  function iniciarModalComunidad() {
+    var modal = document.getElementById('modalComunidad');
+    if (!modal) return;
+
+    var CLAVE = 'piModalComunidad';
+    var MES = 30 * 24 * 60 * 60 * 1000;
+    // Espera a que el splash de bienvenida termine de irse (1.3 s + 0.7 s
+    // de desvanecido); si sale antes, aparece detrás de la portada morada.
+    var DEMORA = 2300;
+
+    var yaEntro = false;
+    try { yaEntro = Date.now() < (Number(localStorage.getItem(CLAVE)) || 0); } catch (e) { /* sin memoria */ }
+    if (yaEntro) { modal.remove(); return; }
+
+    // Bandera que lee iniciarAvisos, que corre después de este módulo.
+    window.PiApp.flyerPendiente = true;
+
+    var cerrar = document.getElementById('modalComunidadCerrar');
+    var cta = document.getElementById('modalComunidadCta');
+
+    function abrir() {
+      modal.classList.remove('hidden');
+      // El foco arranca en la ✕: quien navega con teclado la cierra de una.
+      if (cerrar) cerrar.focus();
+    }
+
+    function cerrarFlyer() {
+      modal.classList.add('hidden');
+      window.PiApp.flyerPendiente = false;
+      document.dispatchEvent(new CustomEvent('pi:flyerCerrado'));
+    }
+
+    setTimeout(abrir, DEMORA);
+
+    if (cerrar) cerrar.addEventListener('click', cerrarFlyer);
+
+    if (cta) {
+      cta.addEventListener('click', function () {
+        try { localStorage.setItem(CLAVE, String(Date.now() + MES)); } catch (e) { /* sin memoria */ }
+        cerrarFlyer();
+        if (window.PiApp.evento) {
+          window.PiApp.evento('Lead', { content_name: 'Comunidad WhatsApp' });
+        }
+      });
+    }
+  }
+
+  window.PiApp.modulos.push(iniciarModalComunidad);
+
+  // --- Avisos sugeridos (tarjeta del test en la esquina) ------------------
+  // Tarjetas discretas en la esquina, de a una. Hoy solo la del test: la
+  // invitación a la comunidad se mudó al flyer central de arriba. La lista
+  // queda preparada por si mañana hay que sumar otra.
   //
   // Cada aviso: sale tras su demora (o antes, si el visitante ya bajó lo
   // suficiente), se aparta mientras su propia sección está a la vista —ahí
@@ -1071,26 +1128,14 @@
       {
         id: 'avisoTest',
         clave: 'piAvisoTest',
-        demora: 5000,             // deja pasar el splash de bienvenida
+        demora: 5000,
         scrollMinimo: 500,
-        enPantalla: 20000,        // luego se retira y le toca a la comunidad
+        enPantalla: 25000,
         seccion: 'diagnostico',
         silencioAlCerrar: DIA,
         silencioAlEntrar: 7 * DIA,
         evento: 'ViewContent',
         eventoExtra: { content_name: 'Test de nivel', content_category: 'Diagnostico' },
-      },
-      {
-        id: 'avisoComunidad',
-        clave: 'piAvisoComunidad',
-        demora: 20000,
-        scrollMinimo: 2500,
-        enPantalla: 30000,
-        seccion: null,
-        silencioAlCerrar: 3 * DIA,
-        silencioAlEntrar: 30 * DIA,
-        evento: 'Lead',
-        eventoExtra: { content_name: 'Comunidad WhatsApp' },
       },
     ];
 
@@ -1177,11 +1222,22 @@
       siguienteEnLaCola();
     }
 
-    window.addEventListener('scroll', alHacerScroll, { passive: true });
+    // Los botones se enganchan ya; los relojes recién cuando el flyer de la
+    // comunidad se haya ido, para no tapar una cosa con la otra.
+    function arrancarRelojes() {
+      window.addEventListener('scroll', alHacerScroll, { passive: true });
+      cola.forEach(function (aviso) {
+        setTimeout(function () { aviso.listo = true; siguienteEnLaCola(); }, aviso.demora);
+      });
+    }
+
+    if (window.PiApp.flyerPendiente) {
+      document.addEventListener('pi:flyerCerrado', arrancarRelojes, { once: true });
+    } else {
+      arrancarRelojes();
+    }
 
     cola.forEach(function (aviso) {
-      setTimeout(function () { aviso.listo = true; siguienteEnLaCola(); }, aviso.demora);
-
       var cerrar = document.getElementById(aviso.id + 'Cerrar');
       if (cerrar) {
         cerrar.addEventListener('click', function () { despedir(aviso, aviso.silencioAlCerrar); });
