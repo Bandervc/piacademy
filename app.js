@@ -1055,14 +1055,15 @@
 
   // --- Avisos sugeridos (test de nivel y comunidad) -----------------------
   // Tarjetas que aparecen solas al entrar a la portada, EN ORDEN y de a una:
-  // primero se sugiere medir el nivel con el test y, una vez atendida esa
-  // tarjeta, se invita a la comunidad. Dos a la vez se leerían como
-  // publicidad insistente.
+  // primero se sugiere medir el nivel con el test y después se invita a la
+  // comunidad. Dos a la vez se leerían como publicidad insistente.
   //
   // Cada aviso: sale tras su demora (o antes, si el visitante ya bajó lo
   // suficiente), se aparta mientras su propia sección está a la vista —ahí
-  // el mensaje sobra— y al cerrarlo no vuelve durante unos días. Si el
-  // visitante entra al enlace, descansa mucho más: ya hizo lo que pedíamos.
+  // el mensaje sobra— y se retira solo pasado su tiempo en pantalla, para
+  // ceder el turno al siguiente y para no quedarse tapando los botones de
+  // la portada. Al cerrarlo no vuelve durante unos días; si el visitante
+  // entra al enlace descansa mucho más, porque ya hizo lo que pedíamos.
   function iniciarAvisos() {
     var DIA = 24 * 60 * 60 * 1000;
 
@@ -1072,6 +1073,7 @@
         clave: 'piAvisoTest',
         demora: 5000,             // deja pasar el splash de bienvenida
         scrollMinimo: 500,
+        enPantalla: 20000,        // luego se retira y le toca a la comunidad
         seccion: 'diagnostico',
         silencioAlCerrar: DIA,
         silencioAlEntrar: 7 * DIA,
@@ -1083,6 +1085,7 @@
         clave: 'piAvisoComunidad',
         demora: 20000,
         scrollMinimo: 2500,
+        enPantalla: 30000,
         seccion: null,
         silencioAlCerrar: 3 * DIA,
         silencioAlEntrar: 30 * DIA,
@@ -1125,6 +1128,10 @@
       if (activo || seccionALaVista(aviso)) return;
       activo = aviso;
       aviso.elemento.classList.remove('oculto');
+      // Se retira solo: así el siguiente aviso llega aunque el visitante no
+      // toque nada, y ninguna tarjeta se queda encima de los botones.
+      clearTimeout(aviso.relevo);
+      aviso.relevo = setTimeout(function () { retirar(aviso); }, aviso.enPantalla);
     }
 
     // Saca el primero de la cola que ya cumplió su demora o su scroll.
@@ -1135,15 +1142,25 @@
       }
     }
 
-    function despedir(aviso, milisegundos) {
-      silenciar(aviso.clave, milisegundos);
-      cola.splice(cola.indexOf(aviso), 1);
+    // Lo baja y le pasa el turno al siguiente. Sin silenciar: si se fue solo,
+    // el visitante ni lo miró, así que en la próxima visita vuelve a salir.
+    function retirar(aviso) {
+      clearTimeout(aviso.relevo);
+      var puesto = cola.indexOf(aviso);
+      if (puesto !== -1) cola.splice(puesto, 1);
       aviso.elemento.classList.add('oculto');
       if (activo === aviso) activo = null;
       // Deja respirar antes de proponer lo siguiente, aunque el visitante
       // siga haciendo scroll (el scroll también pide turno).
       descansarHasta = Date.now() + PAUSA;
       setTimeout(siguienteEnLaCola, PAUSA);
+    }
+
+    // Lo cierra el visitante (con la ✕ o entrando al enlace): además de
+    // bajarlo, no vuelve a aparecer durante unos días.
+    function despedir(aviso, milisegundos) {
+      silenciar(aviso.clave, milisegundos);
+      retirar(aviso);
     }
 
     function alHacerScroll() {
