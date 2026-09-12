@@ -269,7 +269,7 @@
 
     <!-- "Cache-bust" para que el celular no se quede con una versión vieja de datos.js -->
     <script charset="UTF-8">document.write('<script charset="UTF-8" src="datos.js?v=' + Date.now() + '"></scr' + 'ipt>');</script>
-    <script src="config.js" charset="UTF-8"></script>
+    <script charset="UTF-8">document.write('<script charset="UTF-8" src="config.js?v=' + Date.now() + '"></scr' + 'ipt>');</script>
     <script src="nucleo.js" charset="UTF-8"></script>
     <script src="modales.js" charset="UTF-8"></script>
     <!-- Esta página controla su propio test (abajo); evita que app.js lo duplique. -->
@@ -584,6 +584,9 @@
                         return;
                     }
                     if (quizDatosError) quizDatosError.classList.add('hidden');
+                    if (window.PiApp && window.PiApp.evento) {
+                        window.PiApp.evento('Lead', { content_name: 'Test de Nivel', content_category: 'Diagnostico' });
+                    }
                     if (datos.contacto && datos.contacto.whatsapp) {
                         var msg = 'Hola, soy ' + nombre + ' (cel. ' + celular + '). Completé el Test de Nivel con ' + aciertos + '/' + total + ' respuestas correctas. Quiero saber más sobre el Ciclo Integral.';
                         window.open('https://wa.me/' + datos.contacto.whatsapp + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');

@@ -16,6 +16,6 @@ window.PI_CONFIG = {
   // Píxel de Meta (Facebook / Instagram).
   // Meta Business Suite → Administrador de eventos → Conjuntos de datos.
   // Déjalo vacío ("") para desactivar el seguimiento por completo.
-  metaPixelId: "2187537422179786"
+  metaPixelId: "2268623923895732"
 
 };
