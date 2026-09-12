@@ -27,6 +27,7 @@ window.DATOS = {
   mensajes: {
       "bannerSuperior": "¡Hola! Quiero acceder al descuento de S/ {precio} para el Ciclo Integral. ¿Cómo reservo mi cupo?",
       "heroConsulta": "¡Hola! Me interesa el Ciclo Integral para PUCP y Beca 18. ¿Me pueden dar más información?",
+      "consultaPadres": "¡Hola! Soy papá/mamá de un postulante y quisiera información sobre el Ciclo Integral: precios, horarios y metodología. ¿Podrían orientarme?",
       "mediosDePago": "¡Hola! Quiero matricularme al Ciclo Integral, pero necesito los datos de una cuenta bancaria para hacer la transferencia. ¿Me los pueden pasar?",
       "interesPUCP": "¡Hola! Quiero postular a la PUCP. ¿Cómo me prepara el Ciclo Integral y cuándo inicia el próximo grupo?",
       "interesBeca18": "¡Hola! Voy a rendir el examen de preselección de Beca 18. ¿Cómo me ayuda el Ciclo Integral a conseguirla?",

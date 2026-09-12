@@ -1138,6 +1138,19 @@
 
     var definiciones = [
       {
+        id: 'avisoPadres',
+        clave: 'piAvisoPadres',
+        demora: 4000,
+        scrollMinimo: 300,
+        // Sin enPantalla a propósito: este aviso no se retira solo. Es para
+        // padres de familia, así que se queda hasta que lo cierren con la ✕
+        // o escriban por WhatsApp (mientras esté activo, el del test espera).
+        silencioAlCerrar: 3 * DIA,
+        silencioAlEntrar: 30 * DIA,
+        evento: 'Lead',
+        eventoExtra: { content_name: 'Consulta de Padres', content_category: 'Padres' },
+      },
+      {
         id: 'avisoTest',
         clave: 'piAvisoTest',
         demora: 5000,
@@ -1186,9 +1199,13 @@
       activo = aviso;
       aviso.elemento.classList.remove('oculto');
       // Se retira solo: así el siguiente aviso llega aunque el visitante no
-      // toque nada, y ninguna tarjeta se queda encima de los botones.
+      // toque nada, y ninguna tarjeta se queda encima de los botones. Los
+      // avisos sin enPantalla (p.ej. el de padres) se quedan hasta que los
+      // cierren o hagan clic en el CTA.
       clearTimeout(aviso.relevo);
-      aviso.relevo = setTimeout(function () { retirar(aviso); }, aviso.enPantalla);
+      if (aviso.enPantalla) {
+        aviso.relevo = setTimeout(function () { retirar(aviso); }, aviso.enPantalla);
+      }
     }
 
     // Saca el primero de la cola que ya cumplió su demora o su scroll.

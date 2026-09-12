@@ -833,11 +833,47 @@
 
     <!-- ══════════ AVISOS SUGERIDOS ══════════
          Primero sale el flyer de la comunidad al centro (más abajo) y,
-         al cerrarlo, esta tarjeta en la esquina invita a medir el nivel.
-         Nunca salen las dos a la vez; la demora, el tiempo en pantalla y
-         el silencio tras cerrarla los maneja app.js.
+         al cerrarlo, salen estas tarjetas en la esquina, de a una: primero
+         la de padres de familia y luego la del test de nivel.
+         Nunca salen dos a la vez; la demora, el tiempo en pantalla y el
+         silencio tras cerrarlas los maneja app.js.
          Va abajo a la izquierda para no chocar con los botones flotantes,
          que están anclados a la derecha. -->
+
+    <!-- Aviso en la esquina: consulta para padres de familia. A diferencia
+         del aviso del test, este NO se retira solo (así lo pidió el dueño
+         del sitio): se queda hasta que lo cierren con la ✕ o escriban por
+         WhatsApp (ver app.js, definición sin "enPantalla"). -->
+    <aside id="avisoPadres" aria-labelledby="avisoPadresTitulo"
+           class="aviso-flotante oculto fixed z-40 bottom-4 left-4 right-[4.75rem] sm:right-auto sm:left-6 sm:bottom-6 sm:w-[22rem]">
+        <div class="relative bg-white rounded-2xl shadow-2xl shadow-purple-950/25 border border-purple-100 overflow-hidden">
+            <div class="h-1 bg-emerald-500"></div>
+
+            <button type="button" id="avisoPadresCerrar" aria-label="Cerrar aviso"
+                    class="absolute top-2.5 right-2.5 z-10 w-7 h-7 rounded-full text-slate-400 hover:text-slate-800 hover:bg-slate-100 flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark text-sm" aria-hidden="true"></i>
+            </button>
+
+            <div class="flex items-start gap-3 p-4 pr-9">
+                <span class="w-11 h-11 shrink-0 bg-emerald-500 text-white rounded-xl flex items-center justify-center text-lg shadow-lg shadow-emerald-600/20">
+                    <i class="fa-solid fa-people-roof" aria-hidden="true"></i>
+                </span>
+                <span class="min-w-0">
+                    <span id="avisoPadresTitulo" class="block text-sm font-black text-slate-900 leading-tight">
+                        ¿Eres papá o mamá de un postulante?
+                    </span>
+                    <span class="block text-xs text-slate-600 leading-snug mt-1">
+                        Cuéntanos qué necesita tu hijo(a) y te explicamos el <strong class="text-slate-800">Ciclo Integral</strong>: precios, horarios y metodología, sin compromiso.
+                    </span>
+                    <a data-wa="consultaPadres" id="avisoPadresCta"
+                       class="mt-3 inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black px-3.5 py-2 rounded-xl shadow-md transition-colors">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                        Conversar por WhatsApp
+                    </a>
+                </span>
+            </div>
+        </div>
+    </aside>
 
     <!-- Aviso en la esquina: test de diagnóstico -->
     <aside id="avisoTest" aria-labelledby="avisoTestTitulo"

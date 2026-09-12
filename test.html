@@ -83,8 +83,57 @@
             <!-- Quiz Box -->
             <div class="bg-slate-900 border border-purple-800/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
 
+                <!-- Pantalla de Audiencia: pregunta si es el postulante o su padre/madre -->
+                <div id="quizAudiencia" class="text-center py-10 space-y-6">
+                    <div class="w-24 h-24 bg-brand-purple/20 border-2 border-brand-purple rounded-full flex items-center justify-center text-5xl mx-auto shadow-lg shadow-purple-900/30">
+                        <i class="fa-solid fa-users text-brand-purple" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-black text-white mb-2">¿Quién va a rendir el test?</h2>
+                        <p class="text-slate-300 text-sm max-w-md mx-auto">Así te mostramos lo que corresponde: el examen para el postulante, o cómo ayudar si eres su papá o mamá.</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <button type="button" id="btnSoyAlumno"
+                            class="w-full sm:w-auto bg-brand-amber hover:bg-brand-amberHover text-slate-950 font-black text-base px-8 py-4 rounded-2xl shadow-xl transition-all transform hover:-translate-y-1 active:translate-y-0 flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-graduation-cap text-lg"></i>
+                            <span>Soy el postulante</span>
+                        </button>
+                        <button type="button" id="btnSoyPadre"
+                            class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold text-base px-8 py-4 rounded-2xl shadow-md transition-all flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-people-roof text-lg"></i>
+                            <span>Soy papá o mamá</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pantalla para padres de familia: aquí no se rinde el examen -->
+                <div id="quizPadres" class="hidden text-center py-10 space-y-6">
+                    <div class="w-24 h-24 bg-emerald-500/15 border-2 border-emerald-500 rounded-full flex items-center justify-center text-5xl mx-auto shadow-lg shadow-emerald-900/20">
+                        <i class="fa-solid fa-people-roof text-emerald-400" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-black text-white mb-2">Este test lo rinde tu hijo(a)</h2>
+                        <p class="text-slate-300 text-sm max-w-md mx-auto">Compártele el enlace para que mida su nivel y desbloquee un código de descuento para el Ciclo Integral. Si prefieres, escríbenos directo por WhatsApp.</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <button type="button" id="btnCompartirHijo"
+                            class="w-full sm:w-auto bg-sky-500 hover:bg-sky-600 text-white font-black text-base px-8 py-4 rounded-2xl shadow-xl transition-all flex items-center justify-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Compartir con mi hijo(a)</span>
+                        </button>
+                        <a id="btnSolicitarInfoPadre" data-wa="consultaPadres"
+                           class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white font-black text-base px-8 py-4 rounded-2xl shadow-xl transition-all flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-comments text-lg"></i>
+                            <span>Solicitar información</span>
+                        </a>
+                    </div>
+                    <button type="button" id="btnVolverAudiencia" class="text-slate-400 hover:text-white underline text-xs sm:text-sm font-semibold">
+                        <i class="fa-solid fa-arrow-left mr-1"></i>Volver
+                    </button>
+                </div>
+
                 <!-- Pantalla de Inicio -->
-                <div id="quizStart" class="text-center py-10 space-y-6">
+                <div id="quizStart" class="hidden text-center py-10 space-y-6">
                     <div class="w-24 h-24 bg-brand-purple/20 border-2 border-brand-purple rounded-full flex items-center justify-center text-5xl mx-auto shadow-lg shadow-purple-900/30">
                         <i class="fa-solid fa-brain text-brand-purple" aria-hidden="true"></i>
                     </div>
@@ -167,12 +216,30 @@
                         ¡El Ciclo Integral de PiAcademy te dará el método de resolución rápida exacto para asegurar tu puntaje máximo!
                     </p>
 
+                    <!-- Datos para poder enviar el resultado por WhatsApp -->
+                    <div class="max-w-md mx-auto text-left space-y-3 bg-slate-800/60 border border-slate-700 rounded-2xl p-5">
+                        <p class="text-xs font-bold uppercase text-slate-400 text-center mb-1">
+                            <i class="fa-solid fa-paper-plane text-emerald-400 mr-1"></i> Para enviarte tu resultado, cuéntanos quién eres
+                        </p>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Nombre completo</label>
+                            <input type="text" id="alumnoNombre" autocomplete="name" placeholder="Ej. Carlos Mendoza"
+                                   class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Celular / WhatsApp</label>
+                            <input type="tel" id="alumnoCelular" inputmode="numeric" autocomplete="tel" placeholder="Ej. 912345678"
+                                   class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500">
+                        </div>
+                        <p id="quizDatosError" class="hidden text-xs font-semibold text-red-400 text-center">Completa tu nombre y celular para continuar.</p>
+                    </div>
+
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-                        <a id="btnAsesoriaTest" href="#" target="_blank" rel="noopener"
+                        <button type="button" id="btnAsesoriaTest"
                            class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-3 rounded-xl transition-colors text-xs sm:text-sm flex items-center gap-2">
                             <i class="fa-brands fa-whatsapp text-base"></i>
-                            Consultar con un asesor
-                        </a>
+                            Enviar mis resultados por WhatsApp
+                        </button>
                         <button type="button" id="btnRepetirTest"
                                 class="text-slate-400 hover:text-white underline text-xs sm:text-sm font-semibold px-4 py-3">
                             Repetir el test
@@ -288,6 +355,15 @@
             var rewardMsg    = document.getElementById('quizRewardMsg');
             var rewardCode   = document.getElementById('quizRewardCode');
             var btnAsesoria  = document.getElementById('btnAsesoriaTest');
+            var quizAudiencia      = document.getElementById('quizAudiencia');
+            var quizPadres         = document.getElementById('quizPadres');
+            var btnSoyAlumno       = document.getElementById('btnSoyAlumno');
+            var btnSoyPadre        = document.getElementById('btnSoyPadre');
+            var btnCompartirHijo   = document.getElementById('btnCompartirHijo');
+            var btnVolverAudiencia = document.getElementById('btnVolverAudiencia');
+            var alumnoNombre       = document.getElementById('alumnoNombre');
+            var alumnoCelular      = document.getElementById('alumnoCelular');
+            var quizDatosError     = document.getElementById('quizDatosError');
 
             function iniciarTemporizador() {
                 if (!tiempoLimite || tiempoLimite <= 0) {
@@ -412,11 +488,6 @@
                     rewardCard.classList.add('hidden');
                 }
 
-                if (btnAsesoria && datos.contacto && datos.contacto.whatsapp) {
-                    var msg = 'Hola, completé el Test de Nivel con ' + aciertos + '/' + total + ' respuestas correctas. Quiero saber más sobre el Ciclo Integral.';
-                    btnAsesoria.setAttribute('href', 'https://wa.me/' + datos.contacto.whatsapp + '?text=' + encodeURIComponent(msg));
-                }
-
                 quizResult.classList.remove('hidden');
             }
 
@@ -424,10 +495,60 @@
                 paso = 0; aciertos = 0; yaRespondida = false;
                 quizResult.classList.add('hidden');
                 if (rewardCard) rewardCard.classList.add('hidden');
+                if (quizDatosError) quizDatosError.classList.add('hidden');
+                if (alumnoNombre) alumnoNombre.classList.remove('border-red-500');
+                if (alumnoCelular) alumnoCelular.classList.remove('border-red-500');
                 quizArea.classList.remove('hidden');
                 iniciarTemporizador();
                 pintarPregunta();
             }
+
+            // ----- Filtro padre/alumno ----------------------------------------
+            // Un padre no debe ver el examen: se le sugiere compartir el enlace
+            // con su hijo(a) o escribir directo por WhatsApp. La elección se
+            // recuerda con sessionStorage para no volver a preguntar si repite
+            // el test en la misma visita.
+            var CLAVE_AUDIENCIA = 'piTestAudiencia';
+
+            function mostrarAlumno() {
+                if (quizAudiencia) quizAudiencia.classList.add('hidden');
+                if (quizPadres) quizPadres.classList.add('hidden');
+                quizStart.classList.remove('hidden');
+                try { sessionStorage.setItem(CLAVE_AUDIENCIA, 'alumno'); } catch (e) { /* sin memoria */ }
+            }
+
+            function mostrarPadres() {
+                if (quizAudiencia) quizAudiencia.classList.add('hidden');
+                quizStart.classList.add('hidden');
+                if (quizPadres) quizPadres.classList.remove('hidden');
+                try { sessionStorage.setItem(CLAVE_AUDIENCIA, 'padre'); } catch (e) { /* sin memoria */ }
+            }
+
+            if (btnSoyAlumno) btnSoyAlumno.addEventListener('click', mostrarAlumno);
+            if (btnSoyPadre) btnSoyPadre.addEventListener('click', mostrarPadres);
+
+            if (btnVolverAudiencia) {
+                btnVolverAudiencia.addEventListener('click', function () {
+                    if (quizPadres) quizPadres.classList.add('hidden');
+                    if (quizAudiencia) quizAudiencia.classList.remove('hidden');
+                    try { sessionStorage.removeItem(CLAVE_AUDIENCIA); } catch (e) { /* sin memoria */ }
+                });
+            }
+
+            // Comparte el enlace de este mismo test por WhatsApp, sin número
+            // fijo, para que el padre elija a quién enviárselo.
+            if (btnCompartirHijo) {
+                btnCompartirHijo.addEventListener('click', function () {
+                    var url = window.location.origin + window.location.pathname;
+                    var msg = '¡Hola! Te comparto este test de nivel de PiAcademy para el examen PUCP y Beca 18. Al terminarlo desbloqueas un código de descuento para el Ciclo Integral: ' + url;
+                    window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+                });
+            }
+
+            var audienciaGuardada = null;
+            try { audienciaGuardada = sessionStorage.getItem(CLAVE_AUDIENCIA); } catch (e) { /* sin memoria */ }
+            if (audienciaGuardada === 'alumno') mostrarAlumno();
+            else if (audienciaGuardada === 'padre') mostrarPadres();
 
             // Botón iniciar
             btnIniciar.addEventListener('click', function () {
@@ -444,6 +565,31 @@
 
             // Botón repetir
             document.getElementById('btnRepetirTest').addEventListener('click', reiniciar);
+
+            // Quita el aviso de error apenas el alumno empieza a corregir el campo.
+            if (alumnoNombre) alumnoNombre.addEventListener('input', function () { alumnoNombre.classList.remove('border-red-500'); });
+            if (alumnoCelular) alumnoCelular.addEventListener('input', function () { alumnoCelular.classList.remove('border-red-500'); });
+
+            // Botón "Enviar mis resultados por WhatsApp": exige nombre y
+            // celular antes de armar el mensaje, para que llegue con quién
+            // contactar y no solo el puntaje pelado.
+            if (btnAsesoria) {
+                btnAsesoria.addEventListener('click', function () {
+                    var nombre = ((alumnoNombre && alumnoNombre.value) || '').trim();
+                    var celular = ((alumnoCelular && alumnoCelular.value) || '').trim();
+                    if (!nombre || !celular) {
+                        if (quizDatosError) quizDatosError.classList.remove('hidden');
+                        if (!nombre && alumnoNombre) alumnoNombre.classList.add('border-red-500');
+                        if (!celular && alumnoCelular) alumnoCelular.classList.add('border-red-500');
+                        return;
+                    }
+                    if (quizDatosError) quizDatosError.classList.add('hidden');
+                    if (datos.contacto && datos.contacto.whatsapp) {
+                        var msg = 'Hola, soy ' + nombre + ' (cel. ' + celular + '). Completé el Test de Nivel con ' + aciertos + '/' + total + ' respuestas correctas. Quiero saber más sobre el Ciclo Integral.';
+                        window.open('https://wa.me/' + datos.contacto.whatsapp + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+                    }
+                });
+            }
 
             // Botón "Inscribirme con este descuento": abre el formulario de
             // inscripción en ESTA misma página con el código del test ya
