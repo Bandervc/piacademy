@@ -18,7 +18,7 @@ window.DATOS = {
 
   // ═══ 2. TU CONTACTO ═══
   contacto: {
-      "whatsapp": "934894501",
+      "whatsapp": "51934894501",
       "telefonoVisible": "+51934894501",
       "correo": ""
   },
@@ -357,7 +357,7 @@ window.DATOS = {
       },
       {
           "pregunta": "¿Cuáles son los medios de pago disponible?",
-          "respuesta": "Aceptamos transferencias bancarias (BCP, Interbank, BBVA), Yape, Plin y tarjetas de débito/crédito. Escríbenos a nuestro WhatsApp +51 93489450 para facilitarte las cuentas."
+          "respuesta": "Aceptamos transferencias bancarias (BCP, Interbank, BBVA), Yape, Plin y tarjetas de débito/crédito. Escríbenos a nuestro WhatsApp +51 934 894 501 para facilitarte las cuentas."
       },
       {
           "pregunta": "¿Incluye materiales y simulacros?",

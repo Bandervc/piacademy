@@ -74,3 +74,9 @@ test('no quedan textos con los errores de escritura corregidos', () => {
   assert.ok(!serializado.includes('postura o postura'), 'quedó el typo "postura o postura"');
   assert.ok(!/PI ACADEMY/.test(serializado), 'la marca debe escribirse "PiAcademy"');
 });
+
+test('ningun texto contiene el telefono con un digito de menos', () => {
+  const serializado = JSON.stringify(D);
+  assert.ok(!/(?<!\d)93489450(?!\d)/.test(serializado),
+    'hay un teléfono incompleto (93489450): falta el último dígito, debe ser 934 894 501');
+});
