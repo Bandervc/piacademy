@@ -531,6 +531,12 @@
                         <label class="block text-xs font-bold uppercase text-slate-400 mb-2"><i class="fa-brands fa-youtube mr-1"></i> YouTube URL:</label>
                         <input type="text" id="inputRedesYoutube" placeholder="https://youtube.com/@tu_canal" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none">
                     </div>
+
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-bold uppercase text-slate-400 mb-2"><i class="fa-solid fa-users mr-1"></i> Comunidad de WhatsApp (botones "Únete a mi Comunidad"):</label>
+                        <input type="text" id="inputRedesComunidad" placeholder="https://chat.whatsapp.com/XXXXXXXXXXXX" class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none">
+                        <p class="text-xs text-slate-500 mt-2">Es el enlace al que lleva el flyer "Unirme a la comunidad" y los demás botones de la comunidad en toda la web. Si lo dejas vacío se mantiene el enlace actual.</p>
+                    </div>
                 </div>
 
                 <hr class="border-slate-800 my-6">
@@ -993,6 +999,7 @@
                 document.getElementById('inputRedesFacebook').value = d.redes?.facebook || '';
                 document.getElementById('inputRedesInstagram').value = d.redes?.instagram || '';
                 document.getElementById('inputRedesYoutube').value = d.redes?.youtube || '';
+                document.getElementById('inputRedesComunidad').value = d.redes?.comunidadWhatsApp || '';
 
                 // Footer
                 document.getElementById('inputFooterNombre').value = d.marca?.nombre || '';
@@ -1661,6 +1668,9 @@
                 stateDatos.redes.facebook = document.getElementById('inputRedesFacebook').value.trim();
                 stateDatos.redes.instagram = document.getElementById('inputRedesInstagram').value.trim();
                 stateDatos.redes.youtube = document.getElementById('inputRedesYoutube').value.trim();
+                // Vacío dejaría los botones de la comunidad sin destino: se conserva el enlace actual.
+                const enlaceComunidad = document.getElementById('inputRedesComunidad').value.trim();
+                if (enlaceComunidad) stateDatos.redes.comunidadWhatsApp = enlaceComunidad;
 
                 if (!stateDatos.marca) stateDatos.marca = {};
                 stateDatos.marca.nombre = document.getElementById('inputFooterNombre').value.trim();
