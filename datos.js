@@ -371,7 +371,7 @@ window.DATOS = {
       "facebook": "https://www.facebook.com/profile.php?id=61575697357110",
       "instagram": "https://www.instagram.com/piacademy314",
       "youtube": "https://www.youtube.com/@ElProfeManu30/videos",
-      "comunidadWhatsApp": "https://chat.whatsapp.com/CGjK0SxGrwH2juy3SZDSN8"
+      "comunidadWhatsApp": "https://chat.whatsapp.com/G7m8weelFg3HSNwIFbKWJ9"
   },
 
   // ═══ 14. CÓDIGOS DE DESCUENTO ═══
